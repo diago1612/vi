@@ -4,4 +4,6 @@ import org.springframework.stereotype.Service;
 
 
 public interface VirtualInterlineService {
+
+    String getHealthStatus();
 }

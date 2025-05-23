@@ -10,5 +10,4 @@ public class ViApplication {
 		SpringApplication.run(ViApplication.class, args);
 	}
 
-
 }
