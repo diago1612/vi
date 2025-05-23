@@ -8,6 +8,7 @@ public class ViApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ViApplication.class, args);
+		//hello;
 	}
 
 }
