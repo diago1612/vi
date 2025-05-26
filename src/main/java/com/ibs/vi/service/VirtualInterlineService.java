@@ -11,9 +11,9 @@ public interface VirtualInterlineService {
 
     String getHealthStatus();
 
-    List<List<Flight>> generateItineraries(String origin, String destination, LocalDate departureDate) throws Exception;
+    List<List<Flight>> generateItineraries(String origin, String destination, LocalDate departureDate, int pax) throws Exception;
 
-    List<Flights> generateNewItineraries(String origin, String destination, LocalDate departureDate) throws Exception;
+    List<Flights> generateNewItineraries(String origin, String destination, LocalDate departureDate, int pax) throws Exception;
 
 
 }

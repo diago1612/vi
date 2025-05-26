@@ -26,6 +26,16 @@ public class Flight {
 
     public int fare;
 
+    public int availableSeats;
+
+    public int getAvailableSeats() {
+        return availableSeats;
+    }
+
+    public void setAvailableSeats(int availableSeats) {
+        this.availableSeats = availableSeats;
+    }
+
     public LocalDateTime getArrivalTime() {
         return arrivalTime;
     }

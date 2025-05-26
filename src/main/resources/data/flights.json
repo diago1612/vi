@@ -7,7 +7,8 @@
       "arrivalAirport": "MAA",
       "departureTime": "2025-06-01T09:30:00",
       "arrivalTime": "2025-06-01T21:00:00",
-      "fare": "1900"
+      "fare": "1900",
+      "availableSeats": 15
     },
     {
       "flightNumber": "QR707",
@@ -16,7 +17,8 @@
       "arrivalAirport": "DEL",
       "departureTime": "2025-06-01T23:00:00",
       "arrivalTime": "2025-06-02T00:30:00",
-      "fare": "12000"
+      "fare": "12000",
+      "availableSeats": 10
     },
     {
       "flightNumber": "LM505",
@@ -25,7 +27,8 @@
       "arrivalAirport": "BLR",
       "departureTime": "2025-06-01T02:30:00",
       "arrivalTime": "2025-06-01T05:00:00",
-      "fare": "1800"
+      "fare": "1800",
+      "availableSeats": 12
     },
     {
       "flightNumber": "QR707",
@@ -34,7 +37,8 @@
       "arrivalAirport": "SXR",
       "departureTime": "2025-06-01T23:00:00",
       "arrivalTime": "2025-06-02T00:30:00",
-      "fare": "2200"
+      "fare": "2200",
+      "availableSeats": 8
     },
     {
       "flightNumber": "LM505",
@@ -43,7 +47,8 @@
       "arrivalAirport": "SXR",
       "departureTime": "2025-06-02T05:30:00",
       "arrivalTime": "2025-06-02T07:00:00",
-      "fare": "2000"
+      "fare": "2000",
+      "availableSeats": 20
     },
     {
       "flightNumber": "LA505",
@@ -52,7 +57,48 @@
       "arrivalAirport": "SXR",
       "departureTime": "2025-06-01T09:30:00",
       "arrivalTime": "2025-06-01T21:00:00",
-      "fare": "1200"
+      "fare": "1200",
+      "availableSeats": 9
+    },
+    {
+      "flightNumber": "DX100",
+      "airline": "SkyFly",
+      "departureAirport": "DXB",
+      "arrivalAirport": "AUH",
+      "departureTime": "2025-07-01T08:00:00",
+      "arrivalTime": "2025-07-01T09:00:00",
+      "fare": "300",
+      "availableSeats": 7
+    },
+    {
+      "flightNumber": "AU200",
+      "airline": "GulfWings",
+      "departureAirport": "AUH",
+      "arrivalAirport": "DOH",
+      "departureTime": "2025-07-01T11:00:00",
+      "arrivalTime": "2025-07-01T13:00:00",
+      "fare": "500",
+      "availableSeats": 6
+    },
+    {
+      "flightNumber": "QTR300",
+      "airline": "QatarConnect",
+      "departureAirport": "DOH",
+      "arrivalAirport": "COK",
+      "departureTime": "2025-07-01T15:00:00",
+      "arrivalTime": "2025-07-01T22:00:00",
+      "fare": "1100",
+      "availableSeats": 14
+    },
+    {
+      "flightNumber": "DXC400",
+      "airline": "JetExpress",
+      "departureAirport": "DXB",
+      "arrivalAirport": "COK",
+      "departureTime": "2025-07-01T07:00:00",
+      "arrivalTime": "2025-07-01T16:00:00",
+      "fare": "1800",
+      "availableSeats": 11
     }
   ]
 }

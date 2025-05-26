@@ -37,24 +37,25 @@ public class VirtualInterlineImplementation implements VirtualInterlineService {
     }
 
     @Override
-    public List<List<Flight>> generateItineraries(String origin, String destination, LocalDate departureDate) throws Exception {
+    public List<List<Flight>> generateItineraries(String origin, String destination, LocalDate departureDate, int pax) throws Exception {
         List<Flight> flights = loadFlightsFromJson();
         List<List<Flight>> itineraries = new ArrayList<>();
 
         for (Flight flight : flights) {
             if (flight.departureAirport.equalsIgnoreCase(origin)
-                    && flight.departureTime.toLocalDate().equals(departureDate)) {
+                    && flight.departureTime.toLocalDate().equals(departureDate)
+                     && flight.availableSeats>=pax) {
                 System.out.println("Matched flight: " + flight);
                 List<Flight> path = new ArrayList<>();
                 path.add(flight);
-                buildItineraries(path, flights, itineraries, destination);
+                buildItineraries(path, flights, itineraries, destination, pax);
             }
         }
         return itineraries;
     }
 
     private void buildItineraries(List<Flight> currentPath, List<Flight> allFlights,
-                                  List<List<Flight>> allItineraries, String destination) {
+                                  List<List<Flight>> allItineraries, String destination, int pax) {
         Flight lastFlight = currentPath.get(currentPath.size() - 1);
 
         if (lastFlight.arrivalAirport.equalsIgnoreCase(destination)) {
@@ -68,16 +69,17 @@ public class VirtualInterlineImplementation implements VirtualInterlineService {
 
             Duration layover = Duration.between(lastFlight.arrivalTime, nextFlight.departureTime);
             if (layover.compareTo(MIN_LAYOVER) < 0) continue;
+            if (nextFlight.availableSeats < pax ) continue;
 
             List<Flight> newPath = new ArrayList<>(currentPath);
             newPath.add(nextFlight);
-            buildItineraries(newPath, allFlights, allItineraries, destination);
+            buildItineraries(newPath, allFlights, allItineraries, destination, pax);
         }
     }
 
     @Override
-    public List<Flights> generateNewItineraries(String origin, String destination, LocalDate departureDate) throws Exception {
-        List<List<Flight>> rawData = generateItineraries(origin, destination, departureDate);
+    public List<Flights> generateNewItineraries(String origin, String destination, LocalDate departureDate, int pax) throws Exception {
+        List<List<Flight>> rawData = generateItineraries(origin, destination, departureDate, pax);
         return convertToNewFormat(rawData);
     }
 
