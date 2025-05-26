@@ -1,9 +1,12 @@
 package com.ibs.vi.service;
 
-import org.springframework.stereotype.Service;
+import com.ibs.vi.model.VirtualInterlineDataModel;
+import java.util.List;
 
 
 public interface VirtualInterlineService {
 
     String getHealthStatus();
+    
+    public List<List<VirtualInterlineDataModel>> fetchFlightDetails(String source, String destination, String startDate) throws Exception;
 }
