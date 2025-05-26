@@ -3,42 +3,42 @@
     {
       "flightNumber": "LM505",
       "airline": "JetExpress",
-      "departureAirport": "cok",
-      "arrivalAirport": "chennai",
+      "departureAirport": "COK",
+      "arrivalAirport": "MAA",
       "departureTime": "2025-06-01T09:30:00",
       "arrivalTime": "2025-06-01T21:00:00"
     },
     {
       "flightNumber": "QR707",
       "airline": "EuroAir",
-      "departureAirport": "cok",
-      "arrivalAirport": "delhi",
+      "departureAirport": "COK",
+      "arrivalAirport": "DEL",
       "departureTime": "2025-06-01T23:00:00",
       "arrivalTime": "2025-06-02T00:30:00"
     },
     {
       "flightNumber": "LM505",
       "airline": "JetExpress",
-      "departureAirport": "chennai",
-      "arrivalAirport": "bangalore",
+      "departureAirport": "MAA",
+      "arrivalAirport": "BLR",
       "departureTime": "2025-06-01T02:30:00",
       "arrivalTime": "2025-06-01T05:00:00"
     },
     {
       "flightNumber": "QR707",
       "airline": "EuroAir",
-      "departureAirport": "bangalore",
-      "arrivalAirport": "srinagar",
+      "departureAirport": "BLR",
+      "arrivalAirport": "SXR",
       "departureTime": "2025-06-01T23:00:00",
       "arrivalTime": "2025-06-02T00:30:00"
     },
     {
       "flightNumber": "LM505",
       "airline": "JetExpress",
-      "departureAirport": "delhi",
-      "arrivalAirport": "srinagar",
-      "departureTime": "2025-06-01T09:30:00",
-      "arrivalTime": "2025-06-01T21:00:00"
+      "departureAirport": "DEL",
+      "arrivalAirport": "SXR",
+      "departureTime": "2025-06-02T05:30:00",
+      "arrivalTime": "2025-06-02T07:00:00"
     }
   ]
 }
