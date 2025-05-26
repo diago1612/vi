@@ -2,6 +2,8 @@ package com.ibs.vi.serviceImpl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ibs.vi.model.Flight;
+import com.ibs.vi.model.FlightPoint;
+import com.ibs.vi.model.Flights;
 import com.ibs.vi.service.VirtualInterlineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,10 +11,13 @@ import org.springframework.stereotype.Service;
 import java.io.InputStream;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class VirtualInterlineImplementation implements VirtualInterlineService {
@@ -45,8 +50,6 @@ public class VirtualInterlineImplementation implements VirtualInterlineService {
                 buildItineraries(path, flights, itineraries, destination);
             }
         }
-
-        System.out.println(itineraries);
         return itineraries;
     }
 
@@ -71,6 +74,72 @@ public class VirtualInterlineImplementation implements VirtualInterlineService {
             buildItineraries(newPath, allFlights, allItineraries, destination);
         }
     }
+
+    @Override
+    public List<Flights> generateNewItineraries(String origin, String destination, LocalDate departureDate) throws Exception {
+        List<List<Flight>> rawData = generateItineraries(origin, destination, departureDate);
+        return convertToNewFormat(rawData);
+    }
+
+    public List<Flights> convertToNewFormat(List<List<Flight>> rawItineraries) {
+        List<Flights> result = new ArrayList<>();
+        int idCounter = 1;
+
+        for (List<Flight> itinerary : rawItineraries) {
+            if (itinerary.isEmpty()) continue;
+
+            Flight first = itinerary.get(0);
+            Flight last = itinerary.get(itinerary.size() - 1);
+
+            Flights flight = new Flights();
+            flight.setId(idCounter++);
+
+            // Departure
+            LocalDateTime depTime = first.getDepartureTime();
+            FlightPoint departure = new FlightPoint();
+            departure.setTime(depTime.format(DateTimeFormatter.ofPattern("HH:mm")));
+            departure.setDate(depTime.format(DateTimeFormatter.ofPattern("d MMM")));
+            departure.setAirport(first.getDepartureAirport());
+            flight.setDeparture(departure);
+
+            // Arrival
+            LocalDateTime arrTime = last.getArrivalTime();
+            FlightPoint arrival = new FlightPoint();
+            arrival.setTime(arrTime.format(DateTimeFormatter.ofPattern("HH:mm")));
+            arrival.setDate(arrTime.format(DateTimeFormatter.ofPattern("d MMM")));
+            arrival.setAirport(last.getArrivalAirport());
+            flight.setArrival(arrival);
+
+            // General Info
+            flight.setStops(itinerary.size() - 1);
+            flight.setDuration(calculateDuration(depTime, arrTime));
+            flight.setFareType("Included: personal item, cabin bag");
+            double totalPrice = itinerary.stream()
+                    .mapToDouble(Flight::getFare)
+                    .sum();
+            flight.setPrice(totalPrice);
+            flight.setCurrency("INR");
+            flight.setSegments(itinerary);
+
+            List<String> airlineNames = itinerary.stream()
+                    .map(Flight::getAirline)
+                    .distinct()
+                    .collect(Collectors.toList());
+            flight.setAirlines(airlineNames);
+
+            result.add(flight);
+        }
+
+        return result;
+    }
+
+    private String calculateDuration(LocalDateTime start, LocalDateTime end) {
+        Duration duration = Duration.between(start, end);
+        long hours = duration.toHours();
+        long minutes = duration.toMinutesPart();
+        return hours + "h " + minutes + "m";
+    }
+
 
     private List<Flight> loadFlightsFromJson() throws Exception {
         InputStream is = getClass().getClassLoader().getResourceAsStream("data/flights.json");

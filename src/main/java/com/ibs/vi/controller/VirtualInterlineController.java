@@ -1,10 +1,14 @@
 package com.ibs.vi.controller;
 
 import com.ibs.vi.model.Flight;
+import com.ibs.vi.model.Flights;
+import com.ibs.vi.model.SearchRequest;
 import com.ibs.vi.service.VirtualInterlineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,6 +37,24 @@ public class VirtualInterlineController {
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate departureDate) throws Exception {
 
         return virtualInterlineService.generateItineraries(origin, destination, departureDate);
+    }
+
+    @PostMapping("/flights/search2")
+    public List<List<Flight>> getItineraries(@RequestBody SearchRequest request) throws Exception {
+        return virtualInterlineService.generateItineraries(
+                request.getOrigin(),
+                request.getDestination(),
+                request.getDepartureDate()
+        );
+    }
+
+    @PostMapping("/flights/search3")
+    public List<Flights> getNewItineraries(@RequestBody SearchRequest request) throws Exception {
+        return virtualInterlineService.generateNewItineraries(
+                request.getOrigin(),
+                request.getDestination(),
+                request.getDepartureDate()
+        );
     }
 
 }
