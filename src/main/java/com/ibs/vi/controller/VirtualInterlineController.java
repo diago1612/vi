@@ -30,21 +30,22 @@ public class VirtualInterlineController {
         return virtualInterlineService.getHealthStatus();
     }
 
-    @GetMapping("/flights/search")
+   /* @GetMapping("/flights/search")
     public List<List<Flight>> getItineraries(
             @RequestParam String origin,
             @RequestParam String destination,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate departureDate) throws Exception {
 
         return virtualInterlineService.generateItineraries(origin, destination, departureDate);
-    }
+    }*/
 
     @PostMapping("/flights/search2")
     public List<List<Flight>> getItineraries(@RequestBody SearchRequest request) throws Exception {
         return virtualInterlineService.generateItineraries(
                 request.getOrigin(),
                 request.getDestination(),
-                request.getDepartureDate()
+                request.getDepartureDate(),
+                request.getPax()
         );
     }
 
@@ -53,7 +54,8 @@ public class VirtualInterlineController {
         return virtualInterlineService.generateNewItineraries(
                 request.getOrigin(),
                 request.getDestination(),
-                request.getDepartureDate()
+                request.getDepartureDate(),
+                request.getPax()
         );
     }
 

@@ -12,6 +12,8 @@ public class SearchRequest {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate departureDate;
 
+    private int pax;
+
     public String getOrigin() {
         return origin;
     }
@@ -34,6 +36,14 @@ public class SearchRequest {
 
     public void setDepartureDate(LocalDate departureDate) {
         this.departureDate = departureDate;
+    }
+
+    public int getPax() {
+        return pax;
+    }
+
+    public void setPax(int pax) {
+        this.pax = pax;
     }
 }
 
