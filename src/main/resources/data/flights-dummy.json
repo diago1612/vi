@@ -1,0 +1,58 @@
+{
+  "flights": [
+    {
+      "flightNumber": "LM505",
+      "airline": "JetExpress",
+      "departureAirport": "COK",
+      "arrivalAirport": "MAA",
+      "departureTime": "2025-06-01T09:30:00",
+      "arrivalTime": "2025-06-01T21:00:00",
+      "fare": "1900"
+    },
+    {
+      "flightNumber": "QR707",
+      "airline": "EuroAir",
+      "departureAirport": "COK",
+      "arrivalAirport": "DEL",
+      "departureTime": "2025-06-01T23:00:00",
+      "arrivalTime": "2025-06-02T00:30:00",
+      "fare": "12000"
+    },
+    {
+      "flightNumber": "LM505",
+      "airline": "JetExpress",
+      "departureAirport": "MAA",
+      "arrivalAirport": "BLR",
+      "departureTime": "2025-06-01T02:30:00",
+      "arrivalTime": "2025-06-01T05:00:00",
+      "fare": "1800"
+    },
+    {
+      "flightNumber": "QR707",
+      "airline": "EuroAir",
+      "departureAirport": "BLR",
+      "arrivalAirport": "SXR",
+      "departureTime": "2025-06-01T23:00:00",
+      "arrivalTime": "2025-06-02T00:30:00",
+      "fare": "2200"
+    },
+    {
+      "flightNumber": "LM505",
+      "airline": "JetExpress",
+      "departureAirport": "DEL",
+      "arrivalAirport": "SXR",
+      "departureTime": "2025-06-02T05:30:00",
+      "arrivalTime": "2025-06-02T07:00:00",
+      "fare": "2000"
+    },
+    {
+      "flightNumber": "LA505",
+      "airline": "JetExpress",
+      "departureAirport": "COK",
+      "arrivalAirport": "SXR",
+      "departureTime": "2025-06-01T09:30:00",
+      "arrivalTime": "2025-06-01T21:00:00",
+      "fare": "1200"
+    }
+  ]
+}

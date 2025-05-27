@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 @Service
 public class VirtualInterlineImplementation implements VirtualInterlineService {
 
-    private static final Duration MIN_LAYOVER = Duration.ofHours(2);
+    private static final Duration MIN_LAYOVER = Duration.ofHours(1);
 
     private final ObjectMapper mapper;
 
