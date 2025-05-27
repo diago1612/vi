@@ -1,104 +1,184 @@
 {
   "flights": [
     {
-      "flightNumber": "LM505",
-      "airline": "JetExpress",
-      "departureAirport": "COK",
-      "arrivalAirport": "MAA",
-      "departureTime": "2025-06-01T09:30:00",
-      "arrivalTime": "2025-06-01T21:00:00",
-      "fare": "1900",
+      "flightNumber": "F8609",
+      "airline": "Flair Airlines",
+      "departureAirport": "YYZ",
+      "arrivalAirport": "YVR",
+      "departureTime": "2025-09-08T07:40:00",
+      "arrivalTime": "2025-09-08T09:50:00",
+      "fare": "78",
+      "availableSeats": 11
+    },
+    {
+      "flightNumber": "PR117",
+      "airline": "Philippine Airlines",
+      "departureAirport": "YVR",
+      "arrivalAirport": "MNL",
+      "departureTime": "2025-09-09T00:40:00",
+      "arrivalTime": "2025-09-09T05:30:00",
+      "fare": "516",
+      "availableSeats": 11
+    },
+    {
+      "flightNumber": "PR509",
+      "airline": "Philippine Airlines",
+      "departureAirport": "MNL",
+      "arrivalAirport": "SIN",
+      "departureTime": "2025-09-10T19:45:00",
+      "arrivalTime": "2025-09-10T23:20:00",
+      "fare": "76",
+      "availableSeats": 11
+    },
+    {
+      "flightNumber": "UA2462-EXP",
+      "airline": "United",
+      "departureAirport": "YYZ",
+      "arrivalAirport": "SFO",
+      "departureTime": "2025-09-08T19:40:00",
+      "arrivalTime": "2025-09-08T21:32:00",
+      "fare": "262",
+      "availableSeats": 11
+    },
+    {
+      "flightNumber": "UA1-EXP",
+      "airline": "United",
+      "departureAirport": "SFO",
+      "arrivalAirport": "SIN",
+      "departureTime": "2025-09-08T22:40:00",
+      "arrivalTime": "2025-09-10T06:15:00",
+      "fare": "262",
+      "availableSeats": 11
+    },
+    {
+      "flightNumber": "WS16",
+      "airline": "WestJet",
+      "departureAirport": "YYZ",
+      "arrivalAirport": "EDI",
+      "departureTime": "2025-09-16T22:15:00",
+      "arrivalTime": "2025-09-17T10:05:00",
+      "fare": "247",
+      "availableSeats": 13
+    },
+    {
+      "flightNumber": "FR9816",
+      "airline": "Ryanair",
+      "departureAirport": "EDI",
+      "arrivalAirport": "STN",
+      "departureTime": "2025-09-17T13:35:00",
+      "arrivalTime": "2025-09-17T15:00:00",
+      "fare": "30",
+      "availableSeats": 13
+    },
+    {
+      "flightNumber": "FR8168",
+      "airline": "Ryanair",
+      "departureAirport": "STN",
+      "arrivalAirport": "AGP",
+      "departureTime": "2025-09-17T18:25:00",
+      "arrivalTime": "2025-09-17T22:25:00",
+      "fare": "42",
+      "availableSeats": 13
+    },
+    {
+      "flightNumber": "S4322-EXP",
+      "airline": "SATA International-Azores Airlines SA",
+      "departureAirport": "YYZ",
+      "arrivalAirport": "PDL",
+      "departureTime": "2025-09-16T20:45:00",
+      "arrivalTime": "2025-09-17T06:40:00",
+      "fare": "153",
+      "availableSeats": 13
+    },
+    {
+      "flightNumber": "S4120-EXP",
+      "airline": "SATA International-Azores Airlines SA",
+      "departureAirport": "PDL",
+      "arrivalAirport": "LIS",
+      "departureTime": "2025-09-17T08:25:00",
+      "arrivalTime": "2025-09-17T11:10:00",
+      "fare": "153",
+      "availableSeats": 13
+    },
+    {
+      "flightNumber": "S48756-EXP",
+      "airline": "SATA International-Azores Airlines SA",
+      "departureAirport": "LIS",
+      "arrivalAirport": "AGP",
+      "departureTime": "2025-09-17T20:40:00",
+      "arrivalTime": "2025-09-17T22:55:00",
+      "fare": "153",
+      "availableSeats": 13
+    },
+    {
+      "flightNumber": "FR3592",
+      "airline": "Ryanair",
+      "departureAirport": "STN",
+      "arrivalAirport": "BUD",
+      "departureTime": "2025-09-15T18:25:00",
+      "arrivalTime": "2025-09-15T21:50:00",
+      "fare": "42",
       "availableSeats": 15
     },
     {
-      "flightNumber": "QR707",
-      "airline": "EuroAir",
-      "departureAirport": "COK",
-      "arrivalAirport": "DEL",
-      "departureTime": "2025-06-01T23:00:00",
-      "arrivalTime": "2025-06-02T00:30:00",
-      "fare": "12000",
-      "availableSeats": 10
+      "flightNumber": "HU762",
+      "airline": "Hainan Airline",
+      "departureAirport": "BUD",
+      "arrivalAirport": "SZX",
+      "departureTime": "2025-09-16T12:05:00",
+      "arrivalTime": "2025-09-16T04:50:00",
+      "fare": "151",
+      "availableSeats": 15
     },
     {
-      "flightNumber": "LM505",
-      "airline": "JetExpress",
-      "departureAirport": "MAA",
-      "arrivalAirport": "BLR",
-      "departureTime": "2025-06-01T02:30:00",
-      "arrivalTime": "2025-06-01T05:00:00",
-      "fare": "1800",
-      "availableSeats": 12
+      "flightNumber": "HU7721",
+      "airline": "Hainan Airline",
+      "departureAirport": "SZX",
+      "arrivalAirport": "PVG",
+      "departureTime": "2025-09-16T07:50:00",
+      "arrivalTime": "2025-09-16T10:30:00",
+      "fare": "151",
+      "availableSeats": 15
     },
     {
-      "flightNumber": "QR707",
-      "airline": "EuroAir",
-      "departureAirport": "BLR",
-      "arrivalAirport": "SXR",
-      "departureTime": "2025-06-01T23:00:00",
-      "arrivalTime": "2025-06-02T00:30:00",
-      "fare": "2200",
-      "availableSeats": 8
+    "flightNumber": "MU521",
+    "airline": "China Eastern Airline",
+    "departureAirport": "PVG",
+    "arrivalAirport": "NRT",
+    "departureTime": "2025-09-16T11:35:00",
+    "arrivalTime": "2025-09-16T15:55:00",
+    "fare": "272",
+    "availableSeats": 15
     },
     {
-      "flightNumber": "LM505",
-      "airline": "JetExpress",
-      "departureAirport": "DEL",
-      "arrivalAirport": "SXR",
-      "departureTime": "2025-06-02T05:30:00",
-      "arrivalTime": "2025-06-02T07:00:00",
-      "fare": "2000",
-      "availableSeats": 20
+    "flightNumber": "EK68-EXP",
+    "airline": "Emirates",
+    "departureAirport": "STN",
+    "arrivalAirport": "DXB",
+    "departureTime": "2025-09-15T21:10:00",
+    "arrivalTime": "2025-09-16T07:10:00",
+    "fare": "310",
+    "availableSeats": 15
     },
     {
-      "flightNumber": "LA505",
-      "airline": "JetExpress",
-      "departureAirport": "COK",
-      "arrivalAirport": "SXR",
-      "departureTime": "2025-06-01T09:30:00",
-      "arrivalTime": "2025-06-01T21:00:00",
-      "fare": "1200",
-      "availableSeats": 9
+    "flightNumber": "EK380-EXP",
+    "airline": "Emirates",
+    "departureAirport": "DXB",
+    "arrivalAirport": "HKG",
+    "departureTime": "2025-09-16T10:00:00",
+    "arrivalTime": "2025-09-16T21:55:00",
+    "fare": "310",
+    "availableSeats": 15
     },
     {
-      "flightNumber": "DX100",
-      "airline": "SkyFly",
-      "departureAirport": "DXB",
-      "arrivalAirport": "AUH",
-      "departureTime": "2025-07-01T08:00:00",
-      "arrivalTime": "2025-07-01T09:00:00",
-      "fare": "300",
-      "availableSeats": 7
-    },
-    {
-      "flightNumber": "AU200",
-      "airline": "GulfWings",
-      "departureAirport": "AUH",
-      "arrivalAirport": "DOH",
-      "departureTime": "2025-07-01T11:00:00",
-      "arrivalTime": "2025-07-01T13:00:00",
-      "fare": "500",
-      "availableSeats": 6
-    },
-    {
-      "flightNumber": "QTR300",
-      "airline": "QatarConnect",
-      "departureAirport": "DOH",
-      "arrivalAirport": "COK",
-      "departureTime": "2025-07-01T15:00:00",
-      "arrivalTime": "2025-07-01T22:00:00",
-      "fare": "1100",
-      "availableSeats": 14
-    },
-    {
-      "flightNumber": "DXC400",
-      "airline": "JetExpress",
-      "departureAirport": "DXB",
-      "arrivalAirport": "COK",
-      "departureTime": "2025-07-01T07:00:00",
-      "arrivalTime": "2025-07-01T16:00:00",
-      "fare": "1800",
-      "availableSeats": 11
+    "flightNumber": "HX606-EXP",
+    "airline": "Hong Kong Airlines",
+    "departureAirport": "HKG",
+    "arrivalAirport": "NRT",
+    "departureTime": "2025-09-17T02:35:00",
+    "arrivalTime": "2025-09-17T08:20:00",
+    "fare": "310",
+    "availableSeats": 15
     }
   ]
 }
