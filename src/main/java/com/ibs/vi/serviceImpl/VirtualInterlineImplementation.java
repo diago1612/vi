@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ibs.vi.model.Flight;
 import com.ibs.vi.model.FlightPoint;
 import com.ibs.vi.model.Flights;
+import com.ibs.vi.model.Layover;
 import com.ibs.vi.service.VirtualInterlineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,7 +46,6 @@ public class VirtualInterlineImplementation implements VirtualInterlineService {
             if (flight.departureAirport.equalsIgnoreCase(origin)
                     && flight.departureTime.toLocalDate().equals(departureDate)
                      && flight.availableSeats>=pax) {
-                System.out.println("Matched flight: " + flight);
                 List<Flight> path = new ArrayList<>();
                 path.add(flight);
                 buildItineraries(path, flights, itineraries, destination, pax);
@@ -120,8 +120,24 @@ public class VirtualInterlineImplementation implements VirtualInterlineService {
                     .mapToDouble(Flight::getFare)
                     .sum();
             flight.setPrice(totalPrice);
-            flight.setCurrency("INR");
+            flight.setCurrency("USD");
             flight.setSegments(itinerary);
+            for (int i = 1; i < itinerary.size(); i++) {
+                Flight prev = itinerary.get(i - 1);
+                Flight curr = itinerary.get(i);
+
+                Duration layoverDuration = Duration.between(prev.getArrivalTime(), curr.getDepartureTime());
+
+                boolean isDifferentAirline = !prev.getAirline().equalsIgnoreCase(curr.getAirline());
+                boolean isExpConnection = curr.getFlightNumber().toUpperCase().contains("-EXP");
+                boolean isSelfTransfer = isDifferentAirline && !isExpConnection;
+
+                Layover layover = new Layover();
+                layover.setDuration(formatDuration(layoverDuration));
+                layover.setSelfTransfer(String.valueOf(isSelfTransfer));
+
+                curr.setLayover(layover);
+            }
 
             List<String> airlineNames = itinerary.stream()
                     .map(Flight::getAirline)
@@ -140,6 +156,12 @@ public class VirtualInterlineImplementation implements VirtualInterlineService {
         long hours = duration.toHours();
         long minutes = duration.toMinutesPart();
         return hours + "h " + minutes + "m";
+    }
+
+    public String formatDuration(Duration duration) {
+        long hours = duration.toHours();
+        long minutes = duration.toMinutesPart();
+        return String.format("%dh %02dm", hours, minutes);
     }
 
 
