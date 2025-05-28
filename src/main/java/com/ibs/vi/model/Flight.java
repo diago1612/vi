@@ -2,6 +2,7 @@ package com.ibs.vi.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 public class Flight {
@@ -15,6 +16,15 @@ public class Flight {
 
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     public LocalDateTime arrivalTime;
+    public Layover layover;
+
+    public Layover getLayover() {
+        return layover;
+    }
+
+    public void setLayover(Layover layover) {
+        this.layover = layover;
+    }
 
     public int getFare() {
         return fare;
