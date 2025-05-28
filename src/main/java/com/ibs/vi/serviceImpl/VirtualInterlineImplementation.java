@@ -102,6 +102,7 @@ public class VirtualInterlineImplementation implements VirtualInterlineService {
             departure.setTime(depTime.format(DateTimeFormatter.ofPattern("HH:mm")));
             departure.setDate(depTime.format(DateTimeFormatter.ofPattern("d MMM")));
             departure.setAirport(first.getDepartureAirport());
+            departure.setAirportName(first.getDepartureAirportName()); 
             flight.setDeparture(departure);
 
             // Arrival
@@ -110,6 +111,7 @@ public class VirtualInterlineImplementation implements VirtualInterlineService {
             arrival.setTime(arrTime.format(DateTimeFormatter.ofPattern("HH:mm")));
             arrival.setDate(arrTime.format(DateTimeFormatter.ofPattern("d MMM")));
             arrival.setAirport(last.getArrivalAirport());
+            arrival.setAirportName(last.getArrivalAirportName());
             flight.setArrival(arrival);
 
             // General Info
