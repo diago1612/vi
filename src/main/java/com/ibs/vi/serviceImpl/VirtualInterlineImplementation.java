@@ -132,7 +132,7 @@ public class VirtualInterlineImplementation implements VirtualInterlineService {
 
                 Layover layover = new Layover();
                 layover.setDuration(calculateDuration(prev.getArrivalTime(), curr.getDepartureTime()));
-                layover.setSelfTransfer(String.valueOf(isSelfTransfer));
+                layover.setSelfTransfer(isSelfTransfer);
 
                 curr.setLayover(layover);
             }

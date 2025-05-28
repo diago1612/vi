@@ -4,7 +4,7 @@ import java.time.Duration;
 
 public class Layover {
     private String duration;
-    private String selfTransfer;
+    private boolean selfTransfer;
 
     public String getDuration() {
         return duration;
@@ -14,11 +14,11 @@ public class Layover {
         this.duration = duration;
     }
 
-    public String getSelfTransfer() {
+    public boolean isSelfTransfer() {
         return selfTransfer;
     }
 
-    public void setSelfTransfer(String selfTransfer) {
+    public void setSelfTransfer(boolean selfTransfer) {
         this.selfTransfer = selfTransfer;
     }
 }
