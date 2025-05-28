@@ -126,14 +126,12 @@ public class VirtualInterlineImplementation implements VirtualInterlineService {
                 Flight prev = itinerary.get(i - 1);
                 Flight curr = itinerary.get(i);
 
-                Duration layoverDuration = Duration.between(prev.getArrivalTime(), curr.getDepartureTime());
-
                 boolean isDifferentAirline = !prev.getAirline().equalsIgnoreCase(curr.getAirline());
                 boolean isExpConnection = curr.getFlightNumber().toUpperCase().contains("-EXP");
                 boolean isSelfTransfer = isDifferentAirline && !isExpConnection;
 
                 Layover layover = new Layover();
-                layover.setDuration(formatDuration(layoverDuration));
+                layover.setDuration(calculateDuration(prev.getArrivalTime(), curr.getDepartureTime()));
                 layover.setSelfTransfer(String.valueOf(isSelfTransfer));
 
                 curr.setLayover(layover);
@@ -157,13 +155,6 @@ public class VirtualInterlineImplementation implements VirtualInterlineService {
         long minutes = duration.toMinutesPart();
         return hours + "h " + minutes + "m";
     }
-
-    public String formatDuration(Duration duration) {
-        long hours = duration.toHours();
-        long minutes = duration.toMinutesPart();
-        return String.format("%dh %02dm", hours, minutes);
-    }
-
 
     private List<Flight> loadFlightsFromJson() throws Exception {
         InputStream is = getClass().getClassLoader().getResourceAsStream("data/flights.json");
