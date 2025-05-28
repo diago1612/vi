@@ -4,6 +4,7 @@ public class FlightPoint {
     private String time;
     private String date;
     private String airport;
+    private String airportName;
 
     public String getTime() {
         return time;
@@ -28,4 +29,13 @@ public class FlightPoint {
     public void setAirport(String airport) {
         this.airport = airport;
     }
+
+    public String getAirportName() {
+        return airportName;
+    }
+
+    public void setAirportName(String airportName) {
+        this.airportName = airportName;
+    }
+    
 }
