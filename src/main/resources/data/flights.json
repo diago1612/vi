@@ -215,6 +215,30 @@
     "arrivalTime": "2025-09-17T08:20:00",
     "fare": "310",
     "availableSeats": 15
+    },
+    {
+      "flightNumber": "TP258-EXP",
+      "airline": "TAP Portugal",
+      "departureAirport": "YYZ",
+      "arrivalAirport": "LIS",
+      "departureAirportName": "Toronto",
+      "arrivalAirportName": "Lisbon",
+      "departureTime": "2025-09-19T17:40:00",
+      "arrivalTime": "2025-09-20T05:55:00",
+      "fare": "289",
+      "availableSeats": 13
+    },
+    {
+      "flightNumber": "TP1136-EXP",
+      "airline": "TAP Portugal",
+      "departureAirport": "LIS",
+      "arrivalAirport": "AGP",
+      "departureAirportName": "Lisbon",
+      "arrivalAirportName": "Malaga",
+      "departureTime": "2025-09-20T12:25:00",
+      "arrivalTime": "2025-09-20T14:40:00",
+      "fare": "289",
+      "availableSeats": 13
     }
   ]
 }
