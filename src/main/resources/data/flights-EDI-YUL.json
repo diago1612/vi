@@ -1,0 +1,205 @@
+{
+  "flights": [
+    [{
+      "flightNumber": "EI3551-EXP",
+      "airline": "Aer Lingus",
+      "departureAirport": "EDI",
+      "arrivalAirport": "DUB",
+      "departureAirportName": "Edinburgh",
+      "arrivalAirportName": "Dublin",
+      "departureTime": "2025-08-07T09:40:00",
+      "arrivalTime": "2025-08-07T10:55:00",
+      "fare": "435",
+      "availableSeats": 30
+    },
+    {
+      "flightNumber": "EI127-EXP",
+      "airline": "Aer Lingus",
+      "departureAirport": "DUB",
+      "arrivalAirport": "YYZ",
+      "departureAirportName": "Dublin",
+      "arrivalAirportName": "Toronto",
+      "departureTime": "2025-08-07T13:15:00",
+      "arrivalTime": "2025-08-07T15:50:00",
+      "fare": "435",
+      "availableSeats": 30
+    },
+    {
+      "flightNumber": "EI8526-EXP",
+      "airline": "Aer Lingus",
+      "departureAirport": "YYZ",
+      "arrivalAirport": "YUL",
+      "departureAirportName": "Toronto",
+      "arrivalAirportName": "Montreal",
+      "departureTime": "2025-08-07T18:00:00",
+      "arrivalTime": "2025-08-07T19:21:00",
+      "fare": "435",
+      "availableSeats": 30
+    }],
+    [{
+      "flightNumber": "LH961-EXP",
+      "airline": "Lufthansa",
+      "departureAirport": "EDI",
+      "arrivalAirport": "FRA",
+      "departureAirportName": "Edinburgh",
+      "arrivalAirportName": "Frankfurt",
+      "departureTime": "2025-08-07T06:15:00",
+      "arrivalTime": "2025-08-07T09:15:00",
+      "fare": "587",
+      "availableSeats": 40
+    },
+      {
+        "flightNumber": "TP6702-EXP",
+        "airline": "TAP Portugal",
+        "departureAirport": "FRA",
+        "arrivalAirport": "LIS",
+        "departureAirportName": "Frankfurt",
+        "arrivalAirportName": "Lisbon",
+        "departureTime": "2025-08-07T13:15:00",
+        "arrivalTime": "2025-08-07T15:25:00",
+        "fare": "587",
+        "availableSeats": 40
+      },
+      {
+        "flightNumber": "TP253-EXP",
+        "airline": "TAP Portugal",
+        "departureAirport": "LIS",
+        "arrivalAirport": "YUL",
+        "departureAirportName": "Lisbon",
+        "arrivalAirportName": "Montreal",
+        "departureTime": "2025-08-07T18:35:00",
+        "arrivalTime": "2025-08-07T21:10:00",
+        "fare": "587",
+        "availableSeats": 40
+      }],
+    [
+      {
+        "flightNumber": "AC807-EXP",
+        "airline": "Air Canada",
+        "departureAirport": "EDI",
+        "arrivalAirport": "YYZ",
+        "departureAirportName": "Edinburgh",
+        "arrivalAirportName": "Toronto",
+        "departureTime": "2025-08-07T09:00:00",
+        "arrivalTime": "2025-08-07T11:00:00",
+        "fare": "898",
+        "availableSeats": 50
+      },
+      {
+        "flightNumber": "AC412-EXP",
+        "airline": "Air Canada",
+        "departureAirport": "YYZ",
+        "arrivalAirport": "YUL",
+        "departureAirportName": "Toronto",
+        "arrivalAirportName": "Montreal",
+        "departureTime": "2025-08-07T13:00:00",
+        "arrivalTime": "2025-08-07T14:21:00",
+        "fare": "898",
+        "availableSeats": 50
+      }
+    ],
+    [
+      {
+        "flightNumber": "AC807-EXP",
+        "airline": "Air Canada",
+        "departureAirport": "EDI",
+        "arrivalAirport": "YYZ",
+        "departureAirportName": "Edinburgh",
+        "arrivalAirportName": "Toronto",
+        "departureTime": "2025-08-07T09:00:00",
+        "arrivalTime": "2025-08-07T11:00:00",
+        "fare": "898",
+        "availableSeats": 60
+      },
+      {
+        "flightNumber": "AC414-EXP",
+        "airline": "Air Canada",
+        "departureAirport": "YYZ",
+        "arrivalAirport": "YUL",
+        "departureAirportName": "Toronto",
+        "arrivalAirportName": "Montreal",
+        "departureTime": "2025-08-07T14:20:00",
+        "arrivalTime": "2025-08-07T15:21:00",
+        "fare": "898",
+        "availableSeats": 60
+      }
+    ],
+    [
+      {
+        "flightNumber": "AA6725-EXP",
+        "airline": "American Airlines",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LHR",
+        "departureAirportName": "Edinburgh",
+        "arrivalAirportName": "London",
+        "departureTime": "2025-08-07T14:45:00",
+        "arrivalTime": "2025-08-07T16:10:00",
+        "fare": "898",
+        "availableSeats": 70
+      },
+      {
+        "flightNumber": "AA6920-EXP",
+        "airline": "American Airlines",
+        "departureAirport": "LHR",
+        "arrivalAirport": "YUL",
+        "departureAirportName": "London",
+        "arrivalAirportName": "Montreal",
+        "departureTime": "2025-08-07T18:05:00",
+        "arrivalTime": "2025-08-07T20:15:00",
+        "fare": "898",
+        "availableSeats": 70
+      }
+    ],
+    [
+      {
+        "flightNumber": "WS11",
+        "airline": "WestJet",
+        "departureAirport": "EDI",
+        "arrivalAirport": "YYZ",
+        "departureAirportName": "Edinburgh",
+        "arrivalAirportName": "Toronto",
+        "departureTime": "2025-08-07T10:30:00",
+        "arrivalTime": "2025-08-07T13:10:00",
+        "fare": "267",
+        "availableSeats": 10
+      },
+      {
+        "flightNumber": "AC432",
+        "airline": "Air Canada",
+        "departureAirport": "YYZ",
+        "arrivalAirport": "YUL",
+        "departureAirportName": "Toronto",
+        "arrivalAirportName": "Montreal",
+        "departureTime": "2025-08-07T23:20:00",
+        "arrivalTime": "2025-08-08T12:41:00",
+        "fare": "164",
+        "availableSeats": 10
+      }
+     ],
+    [
+      {
+        "flightNumber": "WS11",
+        "airline": "WestJet",
+        "departureAirport": "EDI",
+        "arrivalAirport": "YYZ",
+        "departureAirportName": "Edinburgh",
+        "arrivalAirportName": "Toronto",
+        "departureTime": "2025-08-07T10:30:00",
+        "arrivalTime": "2025-08-07T13:10:00",
+        "fare": "267",
+        "availableSeats": 10
+      },{
+      "flightNumber": "TS541",
+      "airline": "Air Transat",
+      "departureAirport": "YYZ",
+      "arrivalAirport": "YUL",
+      "departureAirportName": "Toronto",
+      "arrivalAirportName": "Montreal",
+      "departureTime": "2025-08-07T18:00:00",
+      "arrivalTime": "2025-08-07T19:20:00",
+      "fare": "214",
+      "availableSeats": 10
+    }
+    ]
+  ]
+}

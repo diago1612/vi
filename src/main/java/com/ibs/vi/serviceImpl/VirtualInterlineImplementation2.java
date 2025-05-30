@@ -5,7 +5,7 @@ import com.ibs.vi.model.Flight;
 import com.ibs.vi.model.FlightPoint;
 import com.ibs.vi.model.Flights;
 import com.ibs.vi.model.Layover;
-import com.ibs.vi.service.VirtualInterlineService;
+import com.ibs.vi.service.VirtualInterlineService2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,14 +18,13 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
-public class VirtualInterlineImplementation implements VirtualInterlineService {
+public class VirtualInterlineImplementation2 implements VirtualInterlineService2 {
 
     private static final Duration MIN_LAYOVER = Duration.ofHours(1);
-
     private final ObjectMapper mapper;
 
     @Autowired
-    public VirtualInterlineImplementation(ObjectMapper mapper) {
+    public VirtualInterlineImplementation2(ObjectMapper mapper) {
         this.mapper = mapper;
     }
 
@@ -36,53 +35,42 @@ public class VirtualInterlineImplementation implements VirtualInterlineService {
 
     @Override
     public List<List<Flight>> generateItineraries(String origin, String destination, LocalDate departureDate, int pax) throws Exception {
-        List<Flight> flights = loadFlightsFromJson();
-        List<List<Flight>> itineraries = new ArrayList<>();
+        List<List<Flight>> allRoutes = loadRoutesFromJson();
+        List<List<Flight>> validItineraries = new ArrayList<>();
 
-        for (Flight flight : flights) {
-            if (flight.departureAirport.equalsIgnoreCase(origin)
-                    && flight.departureTime.toLocalDate().equals(departureDate)
-                     && flight.availableSeats>=pax) {
-                List<Flight> path = new ArrayList<>();
-                path.add(flight);
-                buildItineraries(path, flights, itineraries, destination, pax);
+        for (List<Flight> route : allRoutes) {
+            if (route.isEmpty()) continue;
+
+            Flight first = route.get(0);
+            Flight last = route.get(route.size() - 1);
+
+            boolean originMatches = first.getDepartureAirport().equalsIgnoreCase(origin);
+            boolean destinationMatches = last.getArrivalAirport().equalsIgnoreCase(destination);
+            boolean dateMatches = first.getDepartureTime().toLocalDate().equals(departureDate);
+            boolean allHaveSeats = route.stream().allMatch(f -> f.getAvailableSeats() >= pax);
+
+            if (originMatches && destinationMatches && dateMatches && allHaveSeats) {
+                if (isValidRoute(route, pax)) {
+                    validItineraries.add(route);
+                }
             }
         }
-        return itineraries;
+
+        return validItineraries;
     }
 
-    private void buildItineraries(List<Flight> currentPath, List<Flight> allFlights,
-                                  List<List<Flight>> allItineraries, String destination, int pax) {
-        Flight lastFlight = currentPath.get(currentPath.size() - 1);
+    private boolean isValidRoute(List<Flight> route, int pax) {
+        for (int i = 1; i < route.size(); i++) {
+            Flight prev = route.get(i - 1);
+            Flight curr = route.get(i);
 
-        if (lastFlight.arrivalAirport.equalsIgnoreCase(destination)) {
-            allItineraries.add(new ArrayList<>(currentPath));
-            return;
+            Duration layover = Duration.between(prev.getArrivalTime(), curr.getDepartureTime());
+            if (layover.compareTo(MIN_LAYOVER) < 0) return false;
+
+            if (curr.getAvailableSeats() < pax) return false;
         }
-
-        for (Flight nextFlight : allFlights) {
-            if (currentPath.contains(nextFlight)) continue;
-            if (!lastFlight.arrivalAirport.equalsIgnoreCase(nextFlight.departureAirport)) continue;
-
-            Duration layover = Duration.between(lastFlight.arrivalTime, nextFlight.departureTime);
-            if (layover.compareTo(MIN_LAYOVER) < 0) continue;
-            if (nextFlight.availableSeats < pax) continue;
-
-            boolean isExp = nextFlight.getFlightNumber().toUpperCase().contains("-EXP");
-
-            // If EXP: force same airline across entire path
-            if (isExp) {
-                boolean allSameAirline = currentPath.stream()
-                        .allMatch(f -> f.getAirline().equalsIgnoreCase(nextFlight.getAirline()));
-                if (!allSameAirline) continue;
-            }
-
-            List<Flight> newPath = new ArrayList<>(currentPath);
-            newPath.add(nextFlight);
-            buildItineraries(newPath, allFlights, allItineraries, destination, pax);
-        }
+        return true;
     }
-
 
     @Override
     public List<Flights> generateNewItineraries(String origin, String destination, LocalDate departureDate, int pax) throws Exception {
@@ -109,7 +97,7 @@ public class VirtualInterlineImplementation implements VirtualInterlineService {
             departure.setTime(depTime.format(DateTimeFormatter.ofPattern("HH:mm")));
             departure.setDate(depTime.format(DateTimeFormatter.ofPattern("d MMM")));
             departure.setAirport(first.getDepartureAirport());
-            departure.setAirportName(first.getDepartureAirportName()); 
+            departure.setAirportName(first.getDepartureAirportName());
             flight.setDeparture(departure);
 
             // Arrival
@@ -125,12 +113,11 @@ public class VirtualInterlineImplementation implements VirtualInterlineService {
             flight.setStops(itinerary.size() - 1);
             flight.setDuration(calculateDuration(depTime, arrTime));
             flight.setFareType("Included: personal item, cabin bag");
-            double totalPrice = itinerary.stream()
-                    .mapToDouble(Flight::getFare)
-                    .sum();
+            double totalPrice = itinerary.stream().mapToDouble(Flight::getFare).sum();
             flight.setPrice(totalPrice);
             flight.setCurrency("USD");
             flight.setSegments(itinerary);
+
             for (int i = 1; i < itinerary.size(); i++) {
                 Flight prev = itinerary.get(i - 1);
                 Flight curr = itinerary.get(i);
@@ -154,6 +141,7 @@ public class VirtualInterlineImplementation implements VirtualInterlineService {
 
             result.add(flight);
         }
+
         result.sort(Comparator.comparingDouble(Flights::getPrice));
         return result;
     }
@@ -165,10 +153,17 @@ public class VirtualInterlineImplementation implements VirtualInterlineService {
         return hours + "h " + minutes + "m";
     }
 
-    private List<Flight> loadFlightsFromJson() throws Exception {
-        InputStream is = getClass().getClassLoader().getResourceAsStream("data/flights.json");
+    private List<List<Flight>> loadRoutesFromJson() throws Exception {
+        InputStream is = getClass().getClassLoader().getResourceAsStream("data/flights-EDI-YUL.json");
         Map<?, ?> map = mapper.readValue(is, Map.class);
-        List<?> flightList = (List<?>) map.get("flights");
-        return Arrays.asList(mapper.convertValue(flightList, Flight[].class));
+        List<?> rawRoutes = (List<?>) map.get("flights");
+
+        List<List<Flight>> routes = new ArrayList<>();
+        for (Object routeObj : rawRoutes) {
+            List<?> rawFlights = (List<?>) routeObj;
+            List<Flight> route = Arrays.asList(mapper.convertValue(rawFlights, Flight[].class));
+            routes.add(route);
+        }
+        return routes;
     }
 }
