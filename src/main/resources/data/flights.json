@@ -1,244 +1,786 @@
 {
   "flights": [
-    {
-      "flightNumber": "F8609",
-      "airline": "Flair Airlines",
-      "departureAirport": "YYZ",
-      "arrivalAirport": "YVR",
-      "departureAirportName": "Toronto",
-      "arrivalAirportName": "Vancouver",
-      "departureTime": "2025-09-08T07:40:00",
-      "arrivalTime": "2025-09-08T09:50:00",
-      "fare": "78",
-      "availableSeats": 11
-    },
-    {
-      "flightNumber": "PR117",
-      "airline": "Philippine Airlines",
-      "departureAirport": "YVR",
-      "arrivalAirport": "MNL",
-      "departureAirportName": "Vancouver",
-      "arrivalAirportName": "Manila",
-      "departureTime": "2025-09-09T00:40:00",
-      "arrivalTime": "2025-09-09T05:30:00",
-      "fare": "516",
-      "availableSeats": 11
-    },
-    {
-      "flightNumber": "PR509",
-      "airline": "Philippine Airlines",
-      "departureAirport": "MNL",
-      "arrivalAirport": "SIN",
-      "departureAirportName": "Manila",
-      "arrivalAirportName": "Singapore",
-      "departureTime": "2025-09-10T19:45:00",
-      "arrivalTime": "2025-09-10T23:20:00",
-      "fare": "76",
-      "availableSeats": 11
-    },
-    {
-      "flightNumber": "UA2462-EXP",
-      "airline": "United",
-      "departureAirport": "YYZ",
-      "arrivalAirport": "SFO",
-      "departureAirportName": "Toronto",
-      "arrivalAirportName": "San Francisco",
-      "departureTime": "2025-09-08T19:40:00",
-      "arrivalTime": "2025-09-08T21:32:00",
-      "fare": "262",
-      "availableSeats": 11
-    },
-    {
-      "flightNumber": "UA1-EXP",
-      "airline": "United",
-      "departureAirport": "SFO",
-      "arrivalAirport": "SIN",
-      "departureAirportName": "San Francisco",
-      "arrivalAirportName": "Singapore",
-      "departureTime": "2025-09-08T22:40:00",
-      "arrivalTime": "2025-09-10T06:15:00",
-      "fare": "262",
-      "availableSeats": 11
-    },
-    {
-      "flightNumber": "WS16",
-      "airline": "WestJet",
-      "departureAirport": "YYZ",
-      "arrivalAirport": "EDI",
-      "departureAirportName": "Toronto",
-      "arrivalAirportName": "Edinburgh",
-      "departureTime": "2025-09-16T22:15:00",
-      "arrivalTime": "2025-09-17T10:05:00",
-      "fare": "247",
-      "availableSeats": 13
-    },
-    {
-      "flightNumber": "FR9816",
-      "airline": "Ryanair",
-      "departureAirport": "EDI",
-      "arrivalAirport": "STN",
-      "departureAirportName": "Edinburgh",
-      "arrivalAirportName": "London",
-      "departureTime": "2025-09-17T13:35:00",
-      "arrivalTime": "2025-09-17T15:00:00",
-      "fare": "30",
-      "availableSeats": 13
-    },
-    {
-      "flightNumber": "FR8168",
-      "airline": "Ryanair",
-      "departureAirport": "STN",
-      "arrivalAirport": "AGP",
-      "departureAirportName": "London",
-      "arrivalAirportName": "Málaga",
-      "departureTime": "2025-09-17T18:25:00",
-      "arrivalTime": "2025-09-17T22:25:00",
-      "fare": "42",
-      "availableSeats": 13
-    },
-    {
-      "flightNumber": "S4322-EXP",
-      "airline": "SATA International-Azores Airlines SA",
-      "departureAirport": "YYZ",
-      "arrivalAirport": "PDL",
-      "departureAirportName": "Toronto",
-      "arrivalAirportName": "Ponta Delgada",
-      "departureTime": "2025-09-16T20:45:00",
-      "arrivalTime": "2025-09-17T06:40:00",
-      "fare": "153",
-      "availableSeats": 13
-    },
-    {
-      "flightNumber": "S4120-EXP",
-      "airline": "SATA International-Azores Airlines SA",
-      "departureAirport": "PDL",
-      "arrivalAirport": "LIS",
-      "departureAirportName": "Ponta Delgada",
-      "arrivalAirportName": "Lisbon",
-      "departureTime": "2025-09-17T08:25:00",
-      "arrivalTime": "2025-09-17T11:10:00",
-      "fare": "153",
-      "availableSeats": 13
-    },
-    {
-      "flightNumber": "S48756-EXP",
-      "airline": "SATA International-Azores Airlines SA",
-      "departureAirport": "LIS",
-      "arrivalAirport": "AGP",
-      "departureAirportName": "Lisbon",
-      "arrivalAirportName": "Málaga",
-      "departureTime": "2025-09-17T20:40:00",
-      "arrivalTime": "2025-09-17T22:55:00",
-      "fare": "153",
-      "availableSeats": 13
-    },
-    {
-      "flightNumber": "FR3592",
-      "airline": "Ryanair",
-      "departureAirport": "STN",
-      "arrivalAirport": "BUD",
-      "departureAirportName": "London",
-      "arrivalAirportName": "Budapest",
-      "departureTime": "2025-09-15T18:25:00",
-      "arrivalTime": "2025-09-15T21:50:00",
-      "fare": "42",
-      "availableSeats": 15
-    },
-    {
-      "flightNumber": "HU762",
-      "airline": "Hainan Airline",
-      "departureAirport": "BUD",
-      "arrivalAirport": "SZX",
-      "departureAirportName": "Budapest",
-      "arrivalAirportName": "Shenzhen",
-      "departureTime": "2025-09-16T12:05:00",
-      "arrivalTime": "2025-09-16T04:50:00",
-      "fare": "151",
-      "availableSeats": 15
-    },
-    {
-      "flightNumber": "HU7721",
-      "airline": "Hainan Airline",
-      "departureAirport": "SZX",
-      "arrivalAirport": "PVG",
-      "departureAirportName": "Shenzhen",
-      "arrivalAirportName": "Shanghai",
-      "departureTime": "2025-09-16T07:50:00",
-      "arrivalTime": "2025-09-16T10:30:00",
-      "fare": "151",
-      "availableSeats": 15
-    },
-    {
-    "flightNumber": "MU521",
-    "airline": "China Eastern Airline",
-    "departureAirport": "PVG",
-    "arrivalAirport": "NRT",
-    "departureAirportName": "Shanghai",
-    "arrivalAirportName": "Tokyo",
-    "departureTime": "2025-09-16T11:35:00",
-    "arrivalTime": "2025-09-16T15:55:00",
-    "fare": "272",
-    "availableSeats": 15
-    },
-    {
-    "flightNumber": "EK68-EXP",
-    "airline": "Emirates",
-    "departureAirport": "STN",
-    "arrivalAirport": "DXB",
-    "departureAirportName": "London",
-    "arrivalAirportName": "Dubai",
-    "departureTime": "2025-09-15T21:10:00",
-    "arrivalTime": "2025-09-16T07:10:00",
-    "fare": "310",
-    "availableSeats": 15
-    },
-    {
-    "flightNumber": "EK380-EXP",
-    "airline": "Emirates",
-    "departureAirport": "DXB",
-    "arrivalAirport": "HKG",
-    "departureAirportName": "Dubai",
-    "arrivalAirportName": "Hong Kong",   
-    "departureTime": "2025-09-16T10:00:00",
-    "arrivalTime": "2025-09-16T21:55:00",
-    "fare": "310",
-    "availableSeats": 15
-    },
-    {
-    "flightNumber": "HX606-EXP",
-    "airline": "Hong Kong Airlines",
-    "departureAirport": "HKG",
-    "arrivalAirport": "NRT",
-    "departureAirportName": "Hong Kong",
-    "arrivalAirportName": "Tokyo",   
-    "departureTime": "2025-09-17T02:35:00",
-    "arrivalTime": "2025-09-17T08:20:00",
-    "fare": "310",
-    "availableSeats": 15
-    },
-    {
-      "flightNumber": "TP258-EXP",
-      "airline": "TAP Portugal",
-      "departureAirport": "YYZ",
-      "arrivalAirport": "LIS",
-      "departureAirportName": "Toronto",
-      "arrivalAirportName": "Lisbon",
-      "departureTime": "2025-09-19T17:40:00",
-      "arrivalTime": "2025-09-20T05:55:00",
-      "fare": "289",
-      "availableSeats": 13
-    },
-    {
-      "flightNumber": "TP1136-EXP",
-      "airline": "TAP Portugal",
-      "departureAirport": "LIS",
-      "arrivalAirport": "AGP",
-      "departureAirportName": "Lisbon",
-      "arrivalAirportName": "Malaga",
-      "departureTime": "2025-09-20T12:25:00",
-      "arrivalTime": "2025-09-20T14:40:00",
-      "fare": "289",
-      "availableSeats": 13
-    }
+    [
+      {
+        "flightNumber": "EI3551-EXP",
+        "airline": "Aer Lingus",
+        "departureAirport": "EDI",
+        "arrivalAirport": "DUB",
+        "departureAirportName": "Edinburgh",
+        "arrivalAirportName": "Dublin",
+        "departureTime": "2025-08-07T09:40:00",
+        "arrivalTime": "2025-08-07T10:55:00",
+        "fare": "435",
+        "availableSeats": 30
+      },
+      {
+        "flightNumber": "EI127-EXP",
+        "airline": "Aer Lingus",
+        "departureAirport": "DUB",
+        "arrivalAirport": "YYZ",
+        "departureAirportName": "Dublin",
+        "arrivalAirportName": "Toronto",
+        "departureTime": "2025-08-07T13:15:00",
+        "arrivalTime": "2025-08-07T15:50:00",
+        "fare": "435",
+        "availableSeats": 30
+      },
+      {
+        "flightNumber": "EI8526-EXP",
+        "airline": "Aer Lingus",
+        "departureAirport": "YYZ",
+        "arrivalAirport": "YUL",
+        "departureAirportName": "Toronto",
+        "arrivalAirportName": "Montreal",
+        "departureTime": "2025-08-07T18:00:00",
+        "arrivalTime": "2025-08-07T19:21:00",
+        "fare": "435",
+        "availableSeats": 30
+      }
+    ],
+    [
+      {
+        "flightNumber": "LH961-EXP",
+        "airline": "Lufthansa",
+        "departureAirport": "EDI",
+        "arrivalAirport": "FRA",
+        "departureAirportName": "Edinburgh",
+        "arrivalAirportName": "Frankfurt",
+        "departureTime": "2025-08-07T06:15:00",
+        "arrivalTime": "2025-08-07T09:15:00",
+        "fare": "587",
+        "availableSeats": 40
+      },
+      {
+        "flightNumber": "TP6702-EXP",
+        "airline": "TAP Portugal",
+        "departureAirport": "FRA",
+        "arrivalAirport": "LIS",
+        "departureAirportName": "Frankfurt",
+        "arrivalAirportName": "Lisbon",
+        "departureTime": "2025-08-07T13:15:00",
+        "arrivalTime": "2025-08-07T15:25:00",
+        "fare": "587",
+        "availableSeats": 40
+      },
+      {
+        "flightNumber": "TP253-EXP",
+        "airline": "TAP Portugal",
+        "departureAirport": "LIS",
+        "arrivalAirport": "YUL",
+        "departureAirportName": "Lisbon",
+        "arrivalAirportName": "Montreal",
+        "departureTime": "2025-08-07T18:35:00",
+        "arrivalTime": "2025-08-07T21:10:00",
+        "fare": "587",
+        "availableSeats": 40
+      }
+    ],
+    [
+      {
+        "flightNumber": "AC807-EXP",
+        "airline": "Air Canada",
+        "departureAirport": "EDI",
+        "arrivalAirport": "YYZ",
+        "departureAirportName": "Edinburgh",
+        "arrivalAirportName": "Toronto",
+        "departureTime": "2025-08-07T09:00:00",
+        "arrivalTime": "2025-08-07T11:00:00",
+        "fare": "898",
+        "availableSeats": 50
+      },
+      {
+        "flightNumber": "AC412-EXP",
+        "airline": "Air Canada",
+        "departureAirport": "YYZ",
+        "arrivalAirport": "YUL",
+        "departureAirportName": "Toronto",
+        "arrivalAirportName": "Montreal",
+        "departureTime": "2025-08-07T13:00:00",
+        "arrivalTime": "2025-08-07T14:21:00",
+        "fare": "898",
+        "availableSeats": 50
+      }
+    ],
+    [
+      {
+        "flightNumber": "AC807-EXP",
+        "airline": "Air Canada",
+        "departureAirport": "EDI",
+        "arrivalAirport": "YYZ",
+        "departureAirportName": "Edinburgh",
+        "arrivalAirportName": "Toronto",
+        "departureTime": "2025-08-07T09:00:00",
+        "arrivalTime": "2025-08-07T11:00:00",
+        "fare": "898",
+        "availableSeats": 60
+      },
+      {
+        "flightNumber": "AC414-EXP",
+        "airline": "Air Canada",
+        "departureAirport": "YYZ",
+        "arrivalAirport": "YUL",
+        "departureAirportName": "Toronto",
+        "arrivalAirportName": "Montreal",
+        "departureTime": "2025-08-07T14:20:00",
+        "arrivalTime": "2025-08-07T15:21:00",
+        "fare": "898",
+        "availableSeats": 60
+      }
+    ],
+    [
+      {
+        "flightNumber": "AA6725-EXP",
+        "airline": "American Airlines",
+        "departureAirport": "EDI",
+        "arrivalAirport": "LHR",
+        "departureAirportName": "Edinburgh",
+        "arrivalAirportName": "London",
+        "departureTime": "2025-08-07T14:45:00",
+        "arrivalTime": "2025-08-07T16:10:00",
+        "fare": "900",
+        "availableSeats": 70
+      },
+      {
+        "flightNumber": "AA6920-EXP",
+        "airline": "American Airlines",
+        "departureAirport": "LHR",
+        "arrivalAirport": "YUL",
+        "departureAirportName": "London",
+        "arrivalAirportName": "Montreal",
+        "departureTime": "2025-08-07T18:05:00",
+        "arrivalTime": "2025-08-07T20:15:00",
+        "fare": "900",
+        "availableSeats": 70
+      }
+    ],
+    [
+      {
+        "flightNumber": "WS11",
+        "airline": "WestJet",
+        "departureAirport": "EDI",
+        "arrivalAirport": "YYZ",
+        "departureAirportName": "Edinburgh",
+        "arrivalAirportName": "Toronto",
+        "departureTime": "2025-08-07T10:30:00",
+        "arrivalTime": "2025-08-07T13:10:00",
+        "fare": "267",
+        "availableSeats": 10
+      },
+      {
+        "flightNumber": "AC432",
+        "airline": "Air Canada",
+        "departureAirport": "YYZ",
+        "arrivalAirport": "YUL",
+        "departureAirportName": "Toronto",
+        "arrivalAirportName": "Montreal",
+        "departureTime": "2025-08-07T23:20:00",
+        "arrivalTime": "2025-08-08T12:41:00",
+        "fare": "164",
+        "availableSeats": 10
+      }
+    ],
+    [
+      {
+        "flightNumber": "WS11",
+        "airline": "WestJet",
+        "departureAirport": "EDI",
+        "arrivalAirport": "YYZ",
+        "departureAirportName": "Edinburgh",
+        "arrivalAirportName": "Toronto",
+        "departureTime": "2025-08-07T10:30:00",
+        "arrivalTime": "2025-08-07T13:10:00",
+        "fare": "267",
+        "availableSeats": 10
+      },
+      {
+        "flightNumber": "TS541",
+        "airline": "Air Transat",
+        "departureAirport": "YYZ",
+        "arrivalAirport": "YUL",
+        "departureAirportName": "Toronto",
+        "arrivalAirportName": "Montreal",
+        "departureTime": "2025-08-07T18:00:00",
+        "arrivalTime": "2025-08-07T19:20:00",
+        "fare": "214",
+        "availableSeats": 10
+      }
+    ],
+    [
+      {
+        "flightNumber": "HV6511",
+        "airline": "Transavia",
+        "departureAirport": "EIN",
+        "arrivalAirport": "PMI",
+        "departureAirportName": "Eindhoven",
+        "arrivalAirportName": "Palma de Mallorca",
+        "departureTime": "2025-10-07T13:15:00",
+        "arrivalTime": "2025-10-07T15:30:00",
+        "fare": "95",
+        "availableSeats": 10
+      },
+      {
+        "flightNumber": "VY3927",
+        "airline": "Vueling Airlines",
+        "departureAirport": "PMI",
+        "arrivalAirport": "BCN",
+        "departureAirportName": "Palma de Mallorca",
+        "arrivalAirportName": "Barcelona",
+        "departureTime": "2025-10-07T21:45:00",
+        "arrivalTime": "2025-10-07T22:45:00",
+        "fare": "45",
+        "availableSeats": 10
+      },
+      {
+        "flightNumber": "VY6246",
+        "airline": "Vueling Airlines",
+        "departureAirport": "BCN",
+        "arrivalAirport": "ZRH",
+        "departureAirportName": "Barcelona",
+        "arrivalAirportName": "Zürich",
+        "departureTime": "2025-10-08T07:00:00",
+        "arrivalTime": "2025-10-08T08:55:00",
+        "fare": "45",
+        "availableSeats": 10
+      }
+    ],
+    [
+      {
+        "flightNumber": "FR7473",
+        "airline": "Ryanair",
+        "departureAirport": "EIN",
+        "arrivalAirport": "OPO",
+        "departureAirportName": "Eindhoven",
+        "arrivalAirportName": "Porto",
+        "departureTime": "2025-10-07T11:00:00",
+        "arrivalTime": "2025-10-07T12:35:00",
+        "fare": "54",
+        "availableSeats": 20
+      },
+      {
+        "flightNumber": "IB1154",
+        "airline": "Iberia",
+        "departureAirport": "OPO",
+        "arrivalAirport": "MAD",
+        "departureAirportName": "Porto",
+        "arrivalAirportName": "Madrid",
+        "departureTime": "2025-10-07T20:35:00",
+        "arrivalTime": "2025-10-07T22:55:00",
+        "fare": "44",
+        "availableSeats": 20
+      },
+      {
+        "flightNumber": "IB627",
+        "airline": "Iberia",
+        "departureAirport": "MAD",
+        "arrivalAirport": "ZRH",
+        "departureAirportName": "Madrid",
+        "arrivalAirportName": "Zürich",
+        "departureTime": "2025-10-08T08:45:00",
+        "arrivalTime": "2025-10-08T11:05:00",
+        "fare": "44",
+        "availableSeats": 20
+      }
+    ],
+    [
+      {
+        "flightNumber": "KL316-EXP",
+        "airline": "KLM",
+        "departureAirport": "EIN",
+        "arrivalAirport": "AMS",
+        "departureAirportName": "Eindhoven",
+        "arrivalAirportName": "Amsterdam",
+        "departureTime": "2025-10-07T06:25:00",
+        "arrivalTime": "2025-10-07T08:10:00",
+        "fare": "88",
+        "availableSeats": 30
+      },
+      {
+        "flightNumber": "AF1445-EXP",
+        "airline": "Air France",
+        "departureAirport": "AMS",
+        "arrivalAirport": "CDG",
+        "departureAirportName": "Amsterdam",
+        "arrivalAirportName": "Paris",
+        "departureTime": "2025-10-07T11:35:00",
+        "arrivalTime": "2025-10-07T12:55:00",
+        "fare": "88",
+        "availableSeats": 30
+      },
+      {
+        "flightNumber": "AF1414-EXP",
+        "airline": "Air France",
+        "departureAirport": "CDG",
+        "arrivalAirport": "ZRH",
+        "departureAirportName": "Paris",
+        "arrivalAirportName": "Zürich",
+        "departureTime": "2025-10-07T21:10:00",
+        "arrivalTime": "2025-10-07T22:30:00",
+        "fare": "88",
+        "availableSeats": 30
+      }
+    ],
+    [
+      {
+        "flightNumber": "KL318-EXP",
+        "airline": "KLM",
+        "departureAirport": "EIN",
+        "arrivalAirport": "AMS",
+        "departureAirportName": "Eindhoven",
+        "arrivalAirportName": "Amsterdam",
+        "departureTime": "2025-10-07T16:00:00",
+        "arrivalTime": "2025-10-07T18:00:00",
+        "fare": "89",
+        "availableSeats": 40
+      },
+      {
+        "flightNumber": "AF1741-EXP",
+        "airline": "Air France",
+        "departureAirport": "AMS",
+        "arrivalAirport": "CDG",
+        "departureAirportName": "Amsterdam",
+        "arrivalAirportName": "Paris",
+        "departureTime": "2025-10-08T14:35:00",
+        "arrivalTime": "2025-10-08T15:55:00",
+        "fare": "89",
+        "availableSeats": 40
+      },
+      {
+        "flightNumber": "AF1114-EXP",
+        "airline": "Air France",
+        "departureAirport": "CDG",
+        "arrivalAirport": "ZRH",
+        "departureAirportName": "Paris",
+        "arrivalAirportName": "Zürich",
+        "departureTime": "2025-10-09T21:10:00",
+        "arrivalTime": "2025-10-09T22:25:00",
+        "fare": "89",
+        "availableSeats": 40
+      }
+    ],
+    [
+      {
+        "flightNumber": "KL318-EXP",
+        "airline": "KLM",
+        "departureAirport": "EIN",
+        "arrivalAirport": "AMS",
+        "departureAirportName": "Eindhoven",
+        "arrivalAirportName": "Amsterdam",
+        "departureTime": "2025-10-07T16:00:00",
+        "arrivalTime": "2025-10-07T18:00:00",
+        "fare": "95",
+        "availableSeats": 50
+      },
+      {
+        "flightNumber": "AF1437-EXP",
+        "airline": "Air France",
+        "departureAirport": "AMS",
+        "arrivalAirport": "CDG",
+        "departureAirportName": "Amsterdam",
+        "arrivalAirportName": "Paris",
+        "departureTime": "2025-10-08T15:50:00",
+        "arrivalTime": "2025-10-08T17:10:00",
+        "fare": "95",
+        "availableSeats": 50
+      },
+      {
+        "flightNumber": "AF1414-EXP",
+        "airline": "Air France",
+        "departureAirport": "CDG",
+        "arrivalAirport": "ZRH",
+        "departureAirportName": "Paris",
+        "arrivalAirportName": "Zürich",
+        "departureTime": "2025-10-09T21:10:00",
+        "arrivalTime": "2025-10-09T22:30:00",
+        "fare": "95",
+        "availableSeats": 50
+      }
+    ],
+    [
+      {
+        "flightNumber": "KL316-EXP",
+        "airline": "KLM",
+        "departureAirport": "EIN",
+        "arrivalAirport": "AMS",
+        "departureAirportName": "Eindhoven",
+        "arrivalAirportName": "Amsterdam",
+        "departureTime": "2025-10-07T06:25:00",
+        "arrivalTime": "2025-10-07T08:10:00",
+        "fare": "151",
+        "availableSeats": 60
+      },
+      {
+        "flightNumber": "KL1919-EXP",
+        "airline": "KLM",
+        "departureAirport": "AMS",
+        "arrivalAirport": "ZRH",
+        "departureAirportName": "Amsterdam",
+        "arrivalAirportName": "Zurich",
+        "departureTime": "2025-10-08T09:45:00",
+        "arrivalTime": "2025-10-08T11:05:00",
+        "fare": "151",
+        "availableSeats": 60
+      }
+    ],
+    [
+      {
+        "flightNumber": "SK2682-EXP",
+        "airline": "Scandinavian Airlines",
+        "departureAirport": "NAP",
+        "arrivalAirport": "CPH",
+        "departureAirportName": "Naples",
+        "arrivalAirportName": "Copenhagen",
+        "departureTime": "2025-10-02T19:35:00",
+        "arrivalTime": "2025-10-02T22:25:00",
+        "fare": "103",
+        "availableSeats": 30
+      },
+      {
+        "flightNumber": "SK595-EXP",
+        "airline": "Scandinavian Airlines",
+        "departureAirport": "CPH",
+        "arrivalAirport": "KEF",
+        "departureAirportName": "Copenhagen",
+        "arrivalAirportName": "Reykjavik",
+        "departureTime": "2025-10-03T08:20:00",
+        "arrivalTime": "2025-10-03T10:15:00",
+        "fare": "103",
+        "availableSeats": 30
+      }
+    ],
+    [
+      {
+        "flightNumber": "LH1881-EXP",
+        "airline": "Lufthansa",
+        "departureAirport": "NAP",
+        "arrivalAirport": "MUC",
+        "departureAirportName": "Naples",
+        "arrivalAirportName": "Munich",
+        "departureTime": "2025-10-02T06:00:00",
+        "arrivalTime": "2025-10-02T07:30:00",
+        "fare": "117",
+        "availableSeats": 40
+      },
+      {
+        "flightNumber": "LH4554-EXP",
+        "airline": "Lufthansa",
+        "departureAirport": "MUC",
+        "arrivalAirport": "KEF",
+        "departureAirportName": "Munich",
+        "arrivalAirportName": "Reykjavik",
+        "departureTime": "2025-10-02T20:10:00",
+        "arrivalTime": "2025-10-03T00:10:00",
+        "fare": "117",
+        "availableSeats": 40
+      }
+    ],
+    [
+      {
+        "flightNumber": "LH5133-EXP",
+        "airline": "Lufthansa",
+        "departureAirport": "NAP",
+        "arrivalAirport": "FCO",
+        "departureAirportName": "Naples",
+        "arrivalAirportName": "Rome",
+        "departureTime": "2025-10-02T15:05:00",
+        "arrivalTime": "2025-10-02T16:00:00",
+        "fare": "92",
+        "availableSeats": 50
+      },
+      {
+        "flightNumber": "LH4133-EXP",
+        "airline": "Lufthansa",
+        "departureAirport": "FCO",
+        "arrivalAirport": "MUC",
+        "departureAirportName": "Rome",
+        "arrivalAirportName": "Munich",
+        "departureTime": "2025-10-02T18:55:00",
+        "arrivalTime": "2025-10-03T20:35:00",
+        "fare": "92",
+        "availableSeats": 50
+      },
+      {
+        "flightNumber": "LH4554-EXP",
+        "airline": "Lufthansa",
+        "departureAirport": "MUC",
+        "arrivalAirport": "KEF",
+        "departureAirportName": "Munich",
+        "arrivalAirportName": "Reykjavik",
+        "departureTime": "2025-10-02T20:10:00",
+        "arrivalTime": "2025-10-03T00:10:00",
+        "fare": "92",
+        "availableSeats": 50
+      }
+    ],
+    [
+      {
+        "flightNumber": "LH1877-EXP",
+        "airline": "Lufthansa",
+        "departureAirport": "NAP",
+        "arrivalAirport": "MUC",
+        "departureAirportName": "Naples",
+        "arrivalAirportName": "Munich",
+        "departureTime": "2025-10-02T13:05:00",
+        "arrivalTime": "2025-10-02T15:00:00",
+        "fare": "148",
+        "availableSeats": 60
+      },
+      {
+        "flightNumber": "LH4554-EXP",
+        "airline": "Lufthansa",
+        "departureAirport": "MUC",
+        "arrivalAirport": "KEF",
+        "departureAirportName": "Munich",
+        "arrivalAirportName": "Reykjavik",
+        "departureTime": "2025-10-02T20:10:00",
+        "arrivalTime": "2025-10-03T00:10:00",
+        "fare": "148",
+        "availableSeats": 60
+      }
+    ],
+    [
+      {
+        "flightNumber": "LH5133-EXP",
+        "airline": "Lufthansa",
+        "departureAirport": "NAP",
+        "arrivalAirport": "FCO",
+        "departureAirportName": "Naples",
+        "arrivalAirportName": "Rome",
+        "departureTime": "2025-10-02T15:05:00",
+        "arrivalTime": "2025-10-02T16:05:00",
+        "fare": "92",
+        "availableSeats": 70
+      },
+      {
+        "flightNumber": "LH4133-EXP",
+        "airline": "Lufthansa",
+        "departureAirport": "FCO",
+        "arrivalAirport": "MUC",
+        "departureAirportName": "Rome",
+        "arrivalAirportName": "Munich",
+        "departureTime": "2025-10-02T18:55:00",
+        "arrivalTime": "2025-10-02T20:35:00",
+        "fare": "92",
+        "availableSeats": 70
+      },
+      {
+        "flightNumber": "LH4554-EXP",
+        "airline": "Lufthansa",
+        "departureAirport": "MUC",
+        "arrivalAirport": "KEF",
+        "departureAirportName": "Munich",
+        "arrivalAirportName": "Reykjavik",
+        "departureTime": "2025-10-02T22:10:00",
+        "arrivalTime": "2025-10-03T00:10:00",
+        "fare": "92",
+        "availableSeats": 70
+      }
+    ],
+    [
+      {
+        "flightNumber": "FR6834",
+        "airline": "Ryanair",
+        "departureAirport": "NAP",
+        "arrivalAirport": "MAN",
+        "departureAirportName": "Naples",
+        "arrivalAirportName": "Manchester",
+        "departureTime": "2025-10-02T06:35:00",
+        "arrivalTime": "2025-10-02T08:35:00",
+        "fare": "40",
+        "availableSeats": 10
+      },
+      {
+        "flightNumber": "FI441",
+        "airline": "Icelandair",
+        "departureAirport": "MAN",
+        "arrivalAirport": "KEF",
+        "departureAirportName": "Manchester",
+        "arrivalAirportName": "Reykjavik",
+        "departureTime": "2025-10-02T12:40:00",
+        "arrivalTime": "2025-10-02T14:25:00",
+        "fare": "151",
+        "availableSeats": 10
+      }
+    ],
+    [
+      {
+        "flightNumber": "WS16",
+        "airline": "WestJet",
+        "departureAirport": "YYZ",
+        "arrivalAirport": "EDI",
+        "departureAirportName": "Toronto",
+        "arrivalAirportName": "Edinburgh",
+        "departureTime": "2025-09-16T22:15:00",
+        "arrivalTime": "2025-09-17T10:05:00",
+        "fare": "247",
+        "availableSeats": 10
+      },
+      {
+        "flightNumber": "FR9816",
+        "airline": "Ryanair",
+        "departureAirport": "EDI",
+        "arrivalAirport": "STN",
+        "departureAirportName": "Edinburgh",
+        "arrivalAirportName": "London",
+        "departureTime": "2025-09-17T13:35:00",
+        "arrivalTime": "2025-09-17T15:00:00",
+        "fare": "30",
+        "availableSeats": 10
+      },
+      {
+        "flightNumber": "FR8168",
+        "airline": "Ryanair",
+        "departureAirport": "STN",
+        "arrivalAirport": "AGP",
+        "departureAirportName": "London",
+        "arrivalAirportName": "Málaga",
+        "departureTime": "2025-09-17T18:25:00",
+        "arrivalTime": "2025-09-17T22:25:00",
+        "fare": "42",
+        "availableSeats": 10
+      }
+    ],
+    [
+      {
+        "flightNumber": "WS34",
+        "airline": "WestJet",
+        "departureAirport": "YYZ",
+        "arrivalAirport": "DUB",
+        "departureAirportName": "Toronto",
+        "arrivalAirportName": "Dublin",
+        "departureTime": "2025-09-16T22:40:00",
+        "arrivalTime": "2025-09-17T10:30:00",
+        "fare": "272",
+        "availableSeats": 20
+      },
+      {
+        "flightNumber": "FR7044",
+        "airline": "Ryanair",
+        "departureAirport": " DUB",
+        "arrivalAirport": "AGP",
+        "departureAirportName": "Dublin",
+        "arrivalAirportName": "Málaga",
+        "departureTime": "2025-09-17T19:45:00",
+        "arrivalTime": "2025-09-17T23:55:00",
+        "fare": "55",
+        "availableSeats": 20
+      }
+    ],
+    [
+      {
+        "flightNumber": "S4322-EXP",
+        "airline": "SATA International-Azores Airlines SA",
+        "departureAirport": "YYZ",
+        "arrivalAirport": "PDL",
+        "departureAirportName": "Toronto",
+        "arrivalAirportName": "Ponta Delgada",
+        "departureTime": "2025-09-16T20:45:00",
+        "arrivalTime": "2025-09-17T06:40:00",
+        "fare": "153",
+        "availableSeats": 30
+      },
+      {
+        "flightNumber": "S4120-EXP",
+        "airline": "SATA International-Azores Airlines SA",
+        "departureAirport": "PDL",
+        "arrivalAirport": "LIS",
+        "departureAirportName": "Ponta Delgada",
+        "arrivalAirportName": "Lisbon",
+        "departureTime": "2025-09-17T08:25:00",
+        "arrivalTime": "2025-09-17T11:10:00",
+        "fare": "153",
+        "availableSeats": 30
+      },
+      {
+        "flightNumber": "S48756-EXP",
+        "airline": "SATA International-Azores Airlines SA",
+        "departureAirport": "LIS",
+        "arrivalAirport": "AGP",
+        "departureAirportName": "Lisbon",
+        "arrivalAirportName": "Málaga",
+        "departureTime": "2025-09-17T20:40:00",
+        "arrivalTime": "2025-09-17T22:55:00",
+        "fare": "153",
+        "availableSeats": 30
+      }
+    ],
+    [
+      {
+        "flightNumber": "TP258-EXP",
+        "airline": "TAP Portugal",
+        "departureAirport": "YYZ",
+        "arrivalAirport": "LIS",
+        "departureAirportName": "Toronto",
+        "arrivalAirportName": "Lisbon",
+        "departureTime": "2025-09-16T17:40:00",
+        "arrivalTime": "2025-09-17T05:55:00",
+        "fare": "286",
+        "availableSeats": 40
+      },
+      {
+        "flightNumber": "TP1136-EXP",
+        "airline": "TAP Portugal",
+        "departureAirport": "LIS",
+        "arrivalAirport": "AGP",
+        "departureAirportName": "Lisbon",
+        "arrivalAirportName": "Malaga",
+        "departureTime": "2025-09-17T12:25:00",
+        "arrivalTime": "2025-09-17T14:40:00",
+        "fare": "286",
+        "availableSeats": 40
+      }
+    ],
+    [
+      {
+        "flightNumber": "TP258-EXP",
+        "airline": "TAP Portugal",
+        "departureAirport": "YYZ",
+        "arrivalAirport": "LIS",
+        "departureAirportName": "Toronto",
+        "arrivalAirportName": "Lisbon",
+        "departureTime": "2025-09-16T17:40:00",
+        "arrivalTime": "2025-09-17T05:55:00",
+        "fare": "287",
+        "availableSeats": 50
+      },
+      {
+        "flightNumber": "TP1138-EXP",
+        "airline": "TAP Portugal",
+        "departureAirport": "LIS",
+        "arrivalAirport": "AGP",
+        "departureAirportName": "Lisbon",
+        "arrivalAirportName": "Malaga",
+        "departureTime": "2025-09-17T20:40:00",
+        "arrivalTime": "2025-09-17T22:55:00",
+        "fare": "287",
+        "availableSeats": 50
+      }
+    ],
+    [
+      {
+        "flightNumber": "TS421-EXP",
+        "airline": "Air Transat",
+        "departureAirport": "YYZ",
+        "arrivalAirport": "YUL",
+        "departureAirportName": "Toronto",
+        "arrivalAirportName": "Montreal",
+        "departureTime": "2025-09-16T16:00:00",
+        "arrivalTime": "2025-09-16T17:20:00",
+        "fare": "366",
+        "availableSeats": 60
+      },
+      {
+        "flightNumber": "TS252-EXP",
+        "airline": "Air Transat",
+        "departureAirport": "YUL",
+        "arrivalAirport": "AGP",
+        "departureAirportName": "Montreal",
+        "arrivalAirportName": "Malaga",
+        "departureTime": "2025-09-16T18:50:00",
+        "arrivalTime": "2025-09-17T07:45:00",
+        "fare": "366",
+        "availableSeats": 60
+      }
+    ]
   ]
 }

@@ -1,0 +1,184 @@
+{
+  "flights": [
+    [
+      {
+        "flightNumber": "SK2682-EXP",
+        "airline": "Scandinavian Airlines",
+        "departureAirport": "NAP",
+        "arrivalAirport": "CPH",
+        "departureAirportName": "Naples",
+        "arrivalAirportName": "Copenhagen",
+        "departureTime": "2025-10-02T19:35:00",
+        "arrivalTime": "2025-10-02T22:25:00",
+        "fare": "103",
+        "availableSeats": 30
+      },
+      {
+        "flightNumber": "SK595-EXP",
+        "airline": "Scandinavian Airlines",
+        "departureAirport": "CPH",
+        "arrivalAirport": "KEF",
+        "departureAirportName": "Copenhagen",
+        "arrivalAirportName": "Reykjavik",
+        "departureTime": "2025-10-03T08:20:00",
+        "arrivalTime": "2025-10-03T10:15:00",
+        "fare": "103",
+        "availableSeats": 30
+      }
+    ],
+    [
+      {
+        "flightNumber": "LH1881-EXP",
+        "airline": "Lufthansa",
+        "departureAirport": "NAP",
+        "arrivalAirport": "MUC",
+        "departureAirportName": "Naples",
+        "arrivalAirportName": "Munich",
+        "departureTime": "2025-10-02T06:00:00",
+        "arrivalTime": "2025-10-02T07:30:00",
+        "fare": "117",
+        "availableSeats": 40
+      },
+      {
+        "flightNumber": "LH4554-EXP",
+        "airline": "Lufthansa",
+        "departureAirport": "MUC",
+        "arrivalAirport": "KEF",
+        "departureAirportName": "Munich",
+        "arrivalAirportName": "Reykjavik",
+        "departureTime": "2025-10-02T20:10:00",
+        "arrivalTime": "2025-10-03T00:10:00",
+        "fare": "117",
+        "availableSeats": 40
+      }
+    ],
+    [
+      {
+        "flightNumber": "LH5133-EXP",
+        "airline": "Lufthansa",
+        "departureAirport": "NAP",
+        "arrivalAirport": "FCO",
+        "departureAirportName": "Naples",
+        "arrivalAirportName": "Rome",
+        "departureTime": "2025-10-02T15:05:00",
+        "arrivalTime": "2025-10-02T16:00:00",
+        "fare": "92",
+        "availableSeats": 50
+      },
+      {
+        "flightNumber": "LH4133-EXP",
+        "airline": "Lufthansa",
+        "departureAirport": "FCO",
+        "arrivalAirport": "MUC",
+        "departureAirportName": "Rome",
+        "arrivalAirportName": "Munich",
+        "departureTime": "2025-10-02T18:55:00",
+        "arrivalTime": "2025-10-03T20:35:00",
+        "fare": "92",
+        "availableSeats": 50
+      },
+      {
+        "flightNumber": "LH4554-EXP",
+        "airline": "Lufthansa",
+        "departureAirport": "MUC",
+        "arrivalAirport": "KEF",
+        "departureAirportName": "Munich",
+        "arrivalAirportName": "Reykjavik",
+        "departureTime": "2025-10-02T20:10:00",
+        "arrivalTime": "2025-10-03T00:10:00",
+        "fare": "92",
+        "availableSeats": 50
+      }
+    ],
+    [
+      {
+        "flightNumber": "LH1877-EXP",
+        "airline": "Lufthansa",
+        "departureAirport": "NAP",
+        "arrivalAirport": "MUC",
+        "departureAirportName": "Naples",
+        "arrivalAirportName": "Munich",
+        "departureTime": "2025-10-02T13:05:00",
+        "arrivalTime": "2025-10-02T15:00:00",
+        "fare": "148",
+        "availableSeats": 60
+      },
+      {
+        "flightNumber": "LH4554-EXP",
+        "airline": "Lufthansa",
+        "departureAirport": "MUC",
+        "arrivalAirport": "KEF",
+        "departureAirportName": "Munich",
+        "arrivalAirportName": "Reykjavik",
+        "departureTime": "2025-10-02T20:10:00",
+        "arrivalTime": "2025-10-03T00:10:00",
+        "fare": "148",
+        "availableSeats": 60
+      }
+    ],
+    [
+      {
+        "flightNumber": "LH5133-EXP",
+        "airline": "Lufthansa",
+        "departureAirport": "NAP",
+        "arrivalAirport": "FCO",
+        "departureAirportName": "Naples",
+        "arrivalAirportName": "Rome",
+        "departureTime": "2025-10-02T15:05:00",
+        "arrivalTime": "2025-10-02T16:05:00",
+        "fare": "92",
+        "availableSeats": 70
+      },
+      {
+        "flightNumber": "LH4133-EXP",
+        "airline": "Lufthansa",
+        "departureAirport": "FCO",
+        "arrivalAirport": "MUC",
+        "departureAirportName": "Rome",
+        "arrivalAirportName": "Munich",
+        "departureTime": "2025-10-02T18:55:00",
+        "arrivalTime": "2025-10-02T20:35:00",
+        "fare": "92",
+        "availableSeats": 70
+      },
+      {
+        "flightNumber": "LH4554-EXP",
+        "airline": "Lufthansa",
+        "departureAirport": "MUC",
+        "arrivalAirport": "KEF",
+        "departureAirportName": "Munich",
+        "arrivalAirportName": "Reykjavik",
+        "departureTime": "2025-10-02T22:10:00",
+        "arrivalTime": "2025-10-03T00:10:00",
+        "fare": "92",
+        "availableSeats": 70
+      }
+    ],
+    [
+      {
+        "flightNumber": "FR6834",
+        "airline": "Ryanair",
+        "departureAirport": "NAP",
+        "arrivalAirport": "MAN",
+        "departureAirportName": "Naples",
+        "arrivalAirportName": "Manchester",
+        "departureTime": "2025-10-02T06:35:00",
+        "arrivalTime": "2025-10-02T08:35:00",
+        "fare": "40",
+        "availableSeats": 10
+      },
+      {
+        "flightNumber": "FI441",
+        "airline": "Icelandair",
+        "departureAirport": "MAN",
+        "arrivalAirport": "KEF",
+        "departureAirportName": "Manchester",
+        "arrivalAirportName": "Reykjavik",
+        "departureTime": "2025-10-02T12:40:00",
+        "arrivalTime": "2025-10-02T14:25:00",
+        "fare": "151",
+        "availableSeats": 10
+      }
+    ]
+  ]
+}
