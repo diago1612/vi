@@ -1,0 +1,134 @@
+{
+  "flights": [
+    [
+      {
+        "flightNumber": "MH199-EXP",
+        "airline": "Malaysia Airlines",
+        "departureAirport": "HYD",
+        "arrivalAirport": "KUL",
+        "departureAirportName": "Hyderabad",
+        "arrivalAirportName": "Kuala Lumpur",
+        "departureTime": "2025-10-02T00:15:00",
+        "arrivalTime": "2025-10-02T07:30:00",
+        "fare": "197",
+        "availableSeats": 30
+      },
+      {
+        "flightNumber": "MH70-EXP",
+        "airline": "Malaysia Airlines",
+        "departureAirport": "KUL",
+        "arrivalAirport": "NRT",
+        "departureAirportName": "Hyderabad",
+        "arrivalAirportName": "Tokyo",
+        "departureTime": "2025-10-02T09:50:00",
+        "arrivalTime": "2025-10-02T18:05:00",
+        "fare": "197",
+        "availableSeats": 30
+      }
+    ],
+    [
+      {
+        "flightNumber": "MH199-EXP",
+        "airline": "Malaysia Airlines",
+        "departureAirport": "HYD",
+        "arrivalAirport": "KUL",
+        "departureAirportName": "Hyderabad",
+        "arrivalAirportName": "Kuala Lumpur",
+        "departureTime": "2025-10-02T00:15:00",
+        "arrivalTime": "2025-10-02T07:10:00",
+        "fare": "200",
+        "availableSeats": 40
+      },
+      {
+        "flightNumber": "MH88-EXP",
+        "airline": "Malaysia Airlines",
+        "departureAirport": "KUL",
+        "arrivalAirport": "NRT",
+        "departureAirportName": "Hyderabad",
+        "arrivalAirportName": "Tokyo",
+        "departureTime": "2025-10-02T23:30:00",
+        "arrivalTime": "2025-10-03T07:40:00",
+        "fare": "200",
+        "availableSeats": 40
+      }
+    ],
+    [
+      {
+        "flightNumber": "CX672-EXP",
+        "airline": "Cathay Pacific",
+        "departureAirport": "HYD",
+        "arrivalAirport": "HKG",
+        "departureAirportName": "Hyderabad",
+        "arrivalAirportName": "Hong Kong SAR",
+        "departureTime": "2025-10-02T01:50:00",
+        "arrivalTime": "2025-10-02T09:30:00",
+        "fare": "214",
+        "availableSeats": 50
+      },
+      {
+        "flightNumber": "CX520-EXP",
+        "airline": "Cathay Pacific",
+        "departureAirport": "HKG",
+        "arrivalAirport": "NRT",
+        "departureAirportName": "Hong Kong SAR",
+        "arrivalAirportName": "Tokyo",
+        "departureTime": "2025-10-02T10:40:00",
+        "arrivalTime": "2025-10-02T16:05:00",
+        "fare": "214",
+        "availableSeats": 50
+      }
+    ],
+    [
+      {
+        "flightNumber": "CX672-EXP",
+        "airline": "Cathay Pacific",
+        "departureAirport": "HYD",
+        "arrivalAirport": "HKG",
+        "departureAirportName": "Hyderabad",
+        "arrivalAirportName": "Hong Kong SAR",
+        "departureTime": "2025-10-02T01:50:00",
+        "arrivalTime": "2025-10-02T09:30:00",
+        "fare": "214",
+        "availableSeats": 50
+      },
+      {
+        "flightNumber": "CX500-EXP",
+        "airline": "Cathay Pacific",
+        "departureAirport": "HKG",
+        "arrivalAirport": "NRT",
+        "departureAirportName": "Hong Kong SAR",
+        "arrivalAirportName": "Tokyo",
+        "departureTime": "2025-10-02T15:10:00",
+        "arrivalTime": "2025-10-02T20:30:00",
+        "fare": "214",
+        "availableSeats": 50
+      }
+    ],
+    [
+      {
+        "flightNumber": "CX672-EXP",
+        "airline": "Cathay Pacific",
+        "departureAirport": "HYD",
+        "arrivalAirport": "HKG",
+        "departureAirportName": "Hyderabad",
+        "arrivalAirportName": "Hong Kong SAR",
+        "departureTime": "2025-10-02T01:50:00",
+        "arrivalTime": "2025-10-02T09:30:00",
+        "fare": "214",
+        "availableSeats": 60
+      },
+      {
+        "flightNumber": "CX524-EXP",
+        "airline": "Cathay Pacific",
+        "departureAirport": "HKG",
+        "arrivalAirport": "NRT",
+        "departureAirportName": "Hong Kong SAR",
+        "arrivalAirportName": "Tokyo",
+        "departureTime": "2025-10-03T01:20:00",
+        "arrivalTime": "2025-10-03T06:40:00",
+        "fare": "214",
+        "availableSeats": 60
+      }
+    ]
+  ]
+}

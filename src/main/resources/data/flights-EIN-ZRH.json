@@ -1,0 +1,220 @@
+{
+  "flights": [
+    [
+      {
+        "flightNumber": "HV6511",
+        "airline": "Transavia",
+        "departureAirport": "EIN",
+        "arrivalAirport": "PMI",
+        "departureAirportName": "Eindhoven",
+        "arrivalAirportName": "Palma de Mallorca",
+        "departureTime": "2025-10-07T13:15:00",
+        "arrivalTime": "2025-10-07T15:30:00",
+        "fare": "95",
+        "availableSeats": 10
+      },
+      {
+        "flightNumber": "VY3927",
+        "airline": "Vueling Airlines",
+        "departureAirport": "PMI",
+        "arrivalAirport": "BCN",
+        "departureAirportName": "Palma de Mallorca",
+        "arrivalAirportName": "Barcelona",
+        "departureTime": "2025-10-07T21:45:00",
+        "arrivalTime": "2025-10-07T22:45:00",
+        "fare": "45",
+        "availableSeats": 10
+      },
+      {
+        "flightNumber": "VY6246",
+        "airline": "Vueling Airlines",
+        "departureAirport": "BCN",
+        "arrivalAirport": "ZRH",
+        "departureAirportName": "Barcelona",
+        "arrivalAirportName": "Zürich",
+        "departureTime": "2025-10-08T07:00:00",
+        "arrivalTime": "2025-10-08T08:55:00",
+        "fare": "45",
+        "availableSeats": 10
+      }
+    ],
+    [
+      {
+        "flightNumber": "FR7473",
+        "airline": "Ryanair",
+        "departureAirport": "EIN",
+        "arrivalAirport": "OPO",
+        "departureAirportName": "Eindhoven",
+        "arrivalAirportName": "Porto",
+        "departureTime": "2025-10-07T11:00:00",
+        "arrivalTime": "2025-10-07T12:35:00",
+        "fare": "54",
+        "availableSeats": 20
+      },
+      {
+        "flightNumber": "IB1154",
+        "airline": "Iberia",
+        "departureAirport": "OPO",
+        "arrivalAirport": "MAD",
+        "departureAirportName": "Porto",
+        "arrivalAirportName": "Madrid",
+        "departureTime": "2025-10-07T20:35:00",
+        "arrivalTime": "2025-10-07T22:55:00",
+        "fare": "44",
+        "availableSeats": 20
+      },
+      {
+        "flightNumber": "IB627",
+        "airline": "Iberia",
+        "departureAirport": "MAD",
+        "arrivalAirport": "ZRH",
+        "departureAirportName": "Madrid",
+        "arrivalAirportName": "Zürich",
+        "departureTime": "2025-10-08T08:45:00",
+        "arrivalTime": "2025-10-08T11:05:00",
+        "fare": "44",
+        "availableSeats": 20
+      }
+    ],
+    [
+      {
+        "flightNumber": "KL316-EXP",
+        "airline": "KLM",
+        "departureAirport": "EIN",
+        "arrivalAirport": "AMS",
+        "departureAirportName": "Eindhoven",
+        "arrivalAirportName": "Amsterdam",
+        "departureTime": "2025-10-07T06:25:00",
+        "arrivalTime": "2025-10-07T08:10:00",
+        "fare": "88",
+        "availableSeats": 30
+      },
+      {
+        "flightNumber": "AF1445-EXP",
+        "airline": "Air France",
+        "departureAirport": "AMS",
+        "arrivalAirport": "CDG",
+        "departureAirportName": "Amsterdam",
+        "arrivalAirportName": "Paris",
+        "departureTime": "2025-10-07T11:35:00",
+        "arrivalTime": "2025-10-07T12:55:00",
+        "fare": "88",
+        "availableSeats": 30
+      },
+      {
+        "flightNumber": "AF1414-EXP",
+        "airline": "Air France",
+        "departureAirport": "CDG",
+        "arrivalAirport": "ZRH",
+        "departureAirportName": "Paris",
+        "arrivalAirportName": "Zürich",
+        "departureTime": "2025-10-07T21:10:00",
+        "arrivalTime": "2025-10-07T22:30:00",
+        "fare": "88",
+        "availableSeats": 30
+      }
+    ],
+    [
+      {
+        "flightNumber": "KL318-EXP",
+        "airline": "KLM",
+        "departureAirport": "EIN",
+        "arrivalAirport": "AMS",
+        "departureAirportName": "Eindhoven",
+        "arrivalAirportName": "Amsterdam",
+        "departureTime": "2025-10-07T16:00:00",
+        "arrivalTime": "2025-10-07T18:00:00",
+        "fare": "89",
+        "availableSeats": 40
+      },
+      {
+        "flightNumber": "AF1741-EXP",
+        "airline": "Air France",
+        "departureAirport": "AMS",
+        "arrivalAirport": "CDG",
+        "departureAirportName": "Amsterdam",
+        "arrivalAirportName": "Paris",
+        "departureTime": "2025-10-08T14:35:00",
+        "arrivalTime": "2025-10-08T15:55:00",
+        "fare": "89",
+        "availableSeats": 40
+      },
+      {
+        "flightNumber": "AF1114-EXP",
+        "airline": "Air France",
+        "departureAirport": "CDG",
+        "arrivalAirport": "ZRH",
+        "departureAirportName": "Paris",
+        "arrivalAirportName": "Zürich",
+        "departureTime": "2025-10-09T21:10:00",
+        "arrivalTime": "2025-10-09T22:25:00",
+        "fare": "89",
+        "availableSeats": 40
+      }
+    ],
+    [
+      {
+        "flightNumber": "KL318-EXP",
+        "airline": "KLM",
+        "departureAirport": "EIN",
+        "arrivalAirport": "AMS",
+        "departureAirportName": "Eindhoven",
+        "arrivalAirportName": "Amsterdam",
+        "departureTime": "2025-10-07T16:00:00",
+        "arrivalTime": "2025-10-07T18:00:00",
+        "fare": "95",
+        "availableSeats": 50
+      },
+      {
+        "flightNumber": "AF1437-EXP",
+        "airline": "Air France",
+        "departureAirport": "AMS",
+        "arrivalAirport": "CDG",
+        "departureAirportName": "Amsterdam",
+        "arrivalAirportName": "Paris",
+        "departureTime": "2025-10-08T15:50:00",
+        "arrivalTime": "2025-10-08T17:10:00",
+        "fare": "95",
+        "availableSeats": 50
+      },
+      {
+        "flightNumber": "AF1414-EXP",
+        "airline": "Air France",
+        "departureAirport": "CDG",
+        "arrivalAirport": "ZRH",
+        "departureAirportName": "Paris",
+        "arrivalAirportName": "Zürich",
+        "departureTime": "2025-10-09T21:10:00",
+        "arrivalTime": "2025-10-09T22:30:00",
+        "fare": "95",
+        "availableSeats": 50
+      }
+    ],
+    [
+      {
+        "flightNumber": "KL316-EXP",
+        "airline": "KLM",
+        "departureAirport": "EIN",
+        "arrivalAirport": "AMS",
+        "departureAirportName": "Eindhoven",
+        "arrivalAirportName": "Amsterdam",
+        "departureTime": "2025-10-07T06:25:00",
+        "arrivalTime": "2025-10-07T08:10:00",
+        "fare": "151",
+        "availableSeats": 60
+      },
+      {
+        "flightNumber": "KL1919-EXP",
+        "airline": "KLM",
+        "departureAirport": "AMS",
+        "arrivalAirport": "ZRH",
+        "departureAirportName": "Amsterdam",
+        "arrivalAirportName": "Zurich",
+        "departureTime": "2025-10-08T09:45:00",
+        "arrivalTime": "2025-10-08T11:05:00",
+        "fare": "151",
+        "availableSeats": 60
+      }
+      ]
+  ]
+}

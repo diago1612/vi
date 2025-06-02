@@ -154,7 +154,7 @@ public class VirtualInterlineImplementation2 implements VirtualInterlineService2
     }
 
     private List<List<Flight>> loadRoutesFromJson() throws Exception {
-        InputStream is = getClass().getClassLoader().getResourceAsStream("data/flights-EDI-YUL.json");
+        InputStream is = getClass().getClassLoader().getResourceAsStream("data/flights.json");
         Map<?, ?> map = mapper.readValue(is, Map.class);
         List<?> rawRoutes = (List<?>) map.get("flights");
 
