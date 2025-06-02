@@ -4,6 +4,7 @@ import com.ibs.vi.model.Flight;
 import com.ibs.vi.model.Flights;
 import com.ibs.vi.model.SearchRequest;
 import com.ibs.vi.service.VirtualInterlineService;
+import com.ibs.vi.service.VirtualInterlineService2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,10 +19,10 @@ import java.util.List;
 @RestController
 public class VirtualInterlineController {
 
-    public final VirtualInterlineService virtualInterlineService;
+    public final VirtualInterlineService2 virtualInterlineService;
 
     @Autowired
-    public VirtualInterlineController(VirtualInterlineService virtualInterlineService){
+    public VirtualInterlineController(VirtualInterlineService2 virtualInterlineService){
         this.virtualInterlineService = virtualInterlineService;
     }
 

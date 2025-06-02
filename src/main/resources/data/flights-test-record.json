@@ -1,0 +1,136 @@
+{
+  "flights": [
+    {
+      "flightNumber": "WS16",
+      "airline": "WestJet",
+      "departureAirport": "YYZ",
+      "arrivalAirport": "EDI",
+      "departureAirportName": "Toronto",
+      "arrivalAirportName": "Edinburgh",
+      "departureTime": "2025-09-16T22:15:00",
+      "arrivalTime": "2025-09-17T10:05:00",
+      "fare": "247",
+      "availableSeats": 13
+    },
+    {
+      "flightNumber": "FR9816",
+      "airline": "Ryanair",
+      "departureAirport": "EDI",
+      "arrivalAirport": "STN",
+      "departureAirportName": "Edinburgh",
+      "arrivalAirportName": "London",
+      "departureTime": "2025-09-17T13:35:00",
+      "arrivalTime": "2025-09-17T15:00:00",
+      "fare": "30",
+      "availableSeats": 13
+    },
+    {
+      "flightNumber": "FR8168",
+      "airline": "Ryanair",
+      "departureAirport": "STN",
+      "arrivalAirport": "AGP",
+      "departureAirportName": "London",
+      "arrivalAirportName": "Málaga",
+      "departureTime": "2025-09-17T18:25:00",
+      "arrivalTime": "2025-09-17T22:25:00",
+      "fare": "42",
+      "availableSeats": 13
+    },
+    {
+      "flightNumber": "S4322-EXP",
+      "airline": "SATA International-Azores Airlines SA",
+      "departureAirport": "YYZ",
+      "arrivalAirport": "PDL",
+      "departureAirportName": "Toronto",
+      "arrivalAirportName": "Ponta Delgada",
+      "departureTime": "2025-09-16T20:45:00",
+      "arrivalTime": "2025-09-17T06:40:00",
+      "fare": "153",
+      "availableSeats": 13
+    },
+    {
+      "flightNumber": "S4120-EXP",
+      "airline": "SATA International-Azores Airlines SA",
+      "departureAirport": "PDL",
+      "arrivalAirport": "LIS",
+      "departureAirportName": "Ponta Delgada",
+      "arrivalAirportName": "Lisbon",
+      "departureTime": "2025-09-17T08:25:00",
+      "arrivalTime": "2025-09-17T11:10:00",
+      "fare": "153",
+      "availableSeats": 13
+    },
+    {
+      "flightNumber": "S48756-EXP",
+      "airline": "SATA International-Azores Airlines SA",
+      "departureAirport": "LIS",
+      "arrivalAirport": "AGP",
+      "departureAirportName": "Lisbon",
+      "arrivalAirportName": "Málaga",
+      "departureTime": "2025-09-17T20:40:00",
+      "arrivalTime": "2025-09-17T22:55:00",
+      "fare": "153",
+      "availableSeats": 13
+    },
+    {
+      "flightNumber": "TP258-EXP",
+      "airline": "TAP Portugal",
+      "departureAirport": "YYZ",
+      "arrivalAirport": "AGP",
+      "departureAirportName": "Toronto",
+      "arrivalAirportName": "Malaga",
+      "departureTime": "2025-09-16T17:40:00",
+      "arrivalTime": "2025-09-17T05:55:00",
+      "fare": "289",
+      "availableSeats": 13
+    },
+    {
+      "flightNumber": "TP1136-EXP",
+      "airline": "TAP Portugal",
+      "departureAirport": "YYZ",
+      "arrivalAirport": "AGP",
+      "departureAirportName": "Toronto",
+      "arrivalAirportName": "Malaga",
+      "departureTime": "2025-09-16T12:25:00",
+      "arrivalTime": "2025-09-16T14:40:00",
+      "fare": "289",
+      "availableSeats": 13
+    },
+    {
+      "flightNumber": "TP1137-EXP",
+      "airline": "TAP Portugal",
+      "departureAirport": "YYZ",
+      "arrivalAirport": "AGP",
+      "departureAirportName": "Toronto",
+      "arrivalAirportName": "Malaga",
+      "departureTime": "2025-09-16T10:25:00",
+      "arrivalTime": "2025-09-17T22:00:00",
+      "fare": "300",
+      "availableSeats": 13
+    },
+    {
+      "flightNumber": "TP1138-EXP",
+      "airline": "TAP Portugal",
+      "departureAirport": "YYZ",
+      "arrivalAirport": "AGP",
+      "departureAirportName": "Toronto",
+      "arrivalAirportName": "Malaga",
+      "departureTime": "2025-09-16T11:25:00",
+      "arrivalTime": "2025-09-17T21:15:00",
+      "fare": "310",
+      "availableSeats": 13
+    },
+    {
+      "flightNumber": "TP1139-EXP",
+      "airline": "TAP Portugal",
+      "departureAirport": "YYZ",
+      "arrivalAirport": "AGP",
+      "departureAirportName": "Toronto",
+      "arrivalAirportName": "Malaga",
+      "departureTime": "2025-09-16T23:25:00",
+      "arrivalTime": "2025-09-18T12:00:00",
+      "fare": "287",
+      "availableSeats": 13
+    }
+  ]
+}
