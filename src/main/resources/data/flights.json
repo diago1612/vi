@@ -781,6 +781,382 @@
         "fare": "366",
         "availableSeats": 60
       }
+    ],
+    [
+      {
+        "flightNumber": "A3609-EXP",
+        "airline": "Aegean",
+        "departureAirport": "LHR",
+        "arrivalAirport": "ATH",
+        "departureAirportName": "London",
+        "arrivalAirportName": "Athens",
+        "departureTime": "2025-09-22T22:45:00",
+        "arrivalTime": "2025-09-23T03:50:00",
+        "fare": "186",
+        "availableSeats": 40
+      },
+      {
+        "flightNumber": "A3950-EXP",
+        "airline": "Aegean",
+        "departureAirport": "ATH",
+        "arrivalAirport": "JED",
+        "departureAirportName": "Athens",
+        "arrivalAirportName": "Jeddah",
+        "departureTime": "2025-09-23T23:00:00",
+        "arrivalTime": "2025-09-24T02:35:00",
+        "fare": "186",
+        "availableSeats": 40
+      }
+    ],
+    [
+      {
+        "flightNumber": "EY64-EXP",
+        "airline": "Etihad Airways",
+        "departureAirport": "LHR",
+        "arrivalAirport": "AUH",
+        "departureAirportName": "London",
+        "arrivalAirportName": "Abu Dhabi",
+        "departureTime": "2025-09-22T14:45:00",
+        "arrivalTime": "2025-09-23T00:45:00",
+        "fare": "203",
+        "availableSeats": 40
+      },
+      {
+        "flightNumber": "EY603-EXP",
+        "airline": "Etihad Airways",
+        "departureAirport": "AUH",
+        "arrivalAirport": "JED",
+        "departureAirportName": "Abu Dhabi",
+        "arrivalAirportName": "Jeddah",
+        "departureTime": "2025-09-23T01:55:00",
+        "arrivalTime": "2025-09-23T03:55:00",
+        "fare": "203",
+        "availableSeats": 40
+      }
+    ],
+    [
+      {
+        "flightNumber": "QR10-EXP",
+        "airline": "Qatar Airways",
+        "departureAirport": "LHR",
+        "arrivalAirport": "DOH",
+        "departureAirportName": "London",
+        "arrivalAirportName": "Doha",
+        "departureTime": "2025-09-22T10:50:00",
+        "arrivalTime": "2025-09-22T19:40:00",
+        "fare": "215",
+        "availableSeats": 50
+      },
+      {
+        "flightNumber": "QR1182-EXP",
+        "airline": "Qatar Airways",
+        "departureAirport": "DOH",
+        "arrivalAirport": "JED",
+        "departureAirportName": "Doha",
+        "arrivalAirportName": "Jeddah",
+        "departureTime": "2025-09-22T22:40:00",
+        "arrivalTime": "2025-09-23T01:10:00",
+        "fare": "215",
+        "availableSeats": 50
+      }
+    ],
+    [
+      {
+        "flightNumber": "EY68-EXP",
+        "airline": "Etihad Airways",
+        "departureAirport": "LHR",
+        "arrivalAirport": "AUH",
+        "departureAirportName": "London",
+        "arrivalAirportName": "Abu Dhabi",
+        "departureTime": "2025-09-22T21:45:00",
+        "arrivalTime": "2025-09-23T07:50:00",
+        "fare": "213",
+        "availableSeats": 60
+      },
+      {
+        "flightNumber": "EY611-EXP",
+        "airline": "Etihad Airways",
+        "departureAirport": "AUH",
+        "arrivalAirport": "JED",
+        "departureAirportName": "Abu Dhabi",
+        "arrivalAirportName": "Jeddah",
+        "departureTime": "2025-09-23T14:10:00",
+        "arrivalTime": "2025-09-23T16:10:00",
+        "fare": "213",
+        "availableSeats": 60
+      }
+    ],
+    [
+      {
+        "flightNumber": "QR6-EXP",
+        "airline": "Qatar Airways",
+        "departureAirport": "LHR",
+        "arrivalAirport": "DOH",
+        "departureAirportName": "London",
+        "arrivalAirportName": "Doha",
+        "departureTime": "2025-09-22T08:05:00",
+        "arrivalTime": "2025-09-22T16:55:00",
+        "fare": "215",
+        "availableSeats": 70
+      },
+      {
+        "flightNumber": "QR1182-EXP",
+        "airline": "Qatar Airways",
+        "departureAirport": "DOH",
+        "arrivalAirport": "JED",
+        "departureAirportName": "Doha",
+        "arrivalAirportName": "Jeddah",
+        "departureTime": "2025-09-22T22:40:00",
+        "arrivalTime": "2025-09-23T01:10:00",
+        "fare": "215",
+        "availableSeats": 70
+      }
+    ],
+    [
+      {
+        "flightNumber": "BA870",
+        "airline": "British Airways",
+        "departureAirport": "LHR",
+        "arrivalAirport": "BUD",
+        "departureAirportName": "London",
+        "arrivalAirportName": "Budapest",
+        "departureTime": "2025-09-22T21:45:00",
+        "arrivalTime": "2025-09-23T01:15:00",
+        "fare": "77",
+        "availableSeats": 10
+      },
+      {
+        "flightNumber": "W62301",
+        "airline": "Wizz Air",
+        "departureAirport": "BUD",
+        "arrivalAirport": "JED",
+        "departureAirportName": "Budapest",
+        "arrivalAirportName": "Jeddah",
+        "departureTime": "2025-09-23T12:20:00",
+        "arrivalTime": "2025-09-23T18:20:00",
+        "fare": "98",
+        "availableSeats": 10
+      }
+    ],
+    [
+      {
+        "flightNumber": "EW2461",
+        "airline": "Eurowings",
+        "departureAirport": "LHR",
+        "arrivalAirport": "STR",
+        "departureAirportName": "London",
+        "arrivalAirportName": "Stuttgart",
+        "departureTime": "2025-09-22T09:10:00",
+        "arrivalTime": "2025-09-22T11:45:00",
+        "fare": "96",
+        "availableSeats": 10
+      },
+      {
+        "flightNumber": "PC970",
+        "airline": "Pegasus Airlines",
+        "departureAirport": "STR",
+        "arrivalAirport": "SAW",
+        "departureAirportName": "Stuttgart",
+        "arrivalAirportName": "Istanbul",
+        "departureTime": "2025-09-22T14:20:00",
+        "arrivalTime": "2025-09-22T18:15:00",
+        "fare": "107",
+        "availableSeats": 10
+      },
+      {
+        "flightNumber": "PC694",
+        "airline": "Pegasus Airlines",
+        "departureAirport": "SAW",
+        "arrivalAirport": "JED",
+        "departureAirportName": "Istanbul",
+        "arrivalAirportName": "Jeddah",
+        "departureTime": "2025-09-22T21:20:00",
+        "arrivalTime": "2025-09-23T01:10:00",
+        "fare": "130",
+        "availableSeats": 10
+      }
+    ],
+    [
+      {
+        "flightNumber": "OS82-EXP",
+        "airline": "Austrian Airlines",
+        "departureAirport": "LAX",
+        "arrivalAirport": "VIE",
+        "departureAirportName": "Los Angeles",
+        "arrivalAirportName": "Vienna",
+        "departureTime": "2025-09-24T15:05:00",
+        "arrivalTime": "2025-09-25T11:30:00",
+        "fare": "236",
+        "availableSeats": 40
+      },
+      {
+        "flightNumber": "OS847-EXP",
+        "airline": "Austrian Airlines",
+        "departureAirport": "VIE",
+        "arrivalAirport": "TIA",
+        "departureAirportName": "Vienna",
+        "arrivalAirportName": "Tirana",
+        "departureTime": "2025-09-25T12:40:00",
+        "arrivalTime": "2025-09-25T14:10:00",
+        "fare": "236",
+        "availableSeats": 40
+      }
+    ],
+    [
+      {
+        "flightNumber": "LX41-EXP",
+        "airline": "Swiss International Air Lines",
+        "departureAirport": "LAX",
+        "arrivalAirport": "ZRH",
+        "departureAirportName": "Los Angeles",
+        "arrivalAirportName": "Zürich",
+        "departureTime": "2025-09-24T19:35:00",
+        "arrivalTime": "2025-09-25T15:45:00",
+        "fare": "238",
+        "availableSeats": 40
+      },
+      {
+        "flightNumber": "LX1442-EXP",
+        "airline": "Swiss International Air Lines",
+        "departureAirport": "ZRH",
+        "arrivalAirport": "TIA",
+        "departureAirportName": "Zürich",
+        "arrivalAirportName": "Tirana",
+        "departureTime": "2025-09-26T11:55:00",
+        "arrivalTime": "2025-09-26T13:55:00",
+        "fare": "238",
+        "availableSeats": 40
+      }
+    ],
+    [
+      {
+        "flightNumber": "LH457-EXP",
+        "airline": "Lufthansa",
+        "departureAirport": "LAX",
+        "arrivalAirport": "FRA",
+        "departureAirportName": "Los Angeles",
+        "arrivalAirportName": "Frankfurt",
+        "departureTime": "2025-09-24T14:55:00",
+        "arrivalTime": "2025-09-25T10:50:00",
+        "fare": "235",
+        "availableSeats": 50
+      },
+      {
+        "flightNumber": "LH1456-EXP",
+        "airline": "Lufthansa",
+        "departureAirport": "FRA",
+        "arrivalAirport": "TIA",
+        "departureAirportName": "Frankfurt",
+        "arrivalAirportName": "Tirana",
+        "departureTime": "2025-09-25T20:40:00",
+        "arrivalTime": "2025-09-25T22:50:00",
+        "fare": "235",
+        "availableSeats": 50
+      }
+    ],
+    [
+      {
+        "flightNumber": "LH453-EXP",
+        "airline": "Lufthansa",
+        "departureAirport": "LAX",
+        "arrivalAirport": "MUC",
+        "departureAirportName": "Los Angeles",
+        "arrivalAirportName": "Munich",
+        "departureTime": "2025-09-24T17:30:00",
+        "arrivalTime": "2025-09-25T13:40:00",
+        "fare": "239",
+        "availableSeats": 60
+      },
+      {
+        "flightNumber": "LH1714-EXP",
+        "airline": "Lufthansa",
+        "departureAirport": "MUC",
+        "arrivalAirport": "TIA",
+        "departureAirportName": "Munich",
+        "arrivalAirportName": "Tirana",
+        "departureTime": "2025-09-25T21:45:00",
+        "arrivalTime": "2025-09-25T23:30:00",
+        "fare": "239",
+        "availableSeats": 60
+      }
+    ],
+    [
+      {
+        "flightNumber": "LH451-EXP",
+        "airline": "Lufthansa",
+        "departureAirport": "LAX",
+        "arrivalAirport": "FRA",
+        "departureAirportName": "Los Angeles",
+        "arrivalAirportName": "Frankfurt",
+        "departureTime": "2025-09-24T18:40:00",
+        "arrivalTime": "2025-09-25T14:55:00",
+        "fare": "235",
+        "availableSeats": 70
+      },
+      {
+        "flightNumber": "LH1456-EXP",
+        "airline": "Lufthansa",
+        "departureAirport": "FRA",
+        "arrivalAirport": "TIA",
+        "departureAirportName": "Frankfurt",
+        "arrivalAirportName": "Tirana",
+        "departureTime": "2025-09-25T21:00:00",
+        "arrivalTime": "2025-09-25T23:10:00",
+        "fare": "235",
+        "availableSeats": 70
+      }
+    ],
+    [
+      {
+        "flightNumber": "N0512",
+        "airline": "Norse Atlantic Airways",
+        "departureAirport": "LAX",
+        "arrivalAirport": "ATH",
+        "departureAirportName": "Los Angeles",
+        "arrivalAirportName": "Athens",
+        "departureTime": "2025-09-24T22:20:00",
+        "arrivalTime": "2025-09-25T21:00:00",
+        "fare": "189",
+        "availableSeats": 10
+      },
+      {
+        "flightNumber": "GQ690",
+        "airline": "SKY express",
+        "departureAirport": "ATH",
+        "arrivalAirport": "TIA",
+        "departureAirportName": "Athens",
+        "arrivalAirportName": "Tirana",
+        "departureTime": "2025-09-26T16:55:00",
+        "arrivalTime": "2025-09-26T17:40:00",
+        "fare": "65",
+        "availableSeats": 10
+      }
+    ],
+    [
+      {
+        "flightNumber": "N0512",
+        "airline": "Norse Atlantic Airways",
+        "departureAirport": "LAX",
+        "arrivalAirport": "ATH",
+        "departureAirportName": "Los Angeles",
+        "arrivalAirportName": "Athens",
+        "departureTime": "2025-09-24T22:20:00",
+        "arrivalTime": "2025-09-25T21:00:00",
+        "fare": "189",
+        "availableSeats": 10
+      },
+      {
+        "flightNumber": "A3970",
+        "airline": "Aegean",
+        "departureAirport": "ATH",
+        "arrivalAirport": "TIA",
+        "departureAirportName": "Athens",
+        "arrivalAirportName": "Tirana",
+        "departureTime": "2025-09-26T09:00:00",
+        "arrivalTime": "2025-09-26T10:15:00",
+        "fare": "79",
+        "availableSeats": 10
+      }
     ]
   ]
 }
