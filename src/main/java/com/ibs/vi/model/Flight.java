@@ -20,6 +20,23 @@ public class Flight {
     public LocalDateTime arrivalTime;
     public Layover layover;
 
+    public Flight() {
+    }
+
+    public Flight(Flight other) {
+        this.flightNumber = other.flightNumber;
+        this.airline = other.airline;
+        this.departureAirport = other.departureAirport;
+        this.arrivalAirport = other.arrivalAirport;
+        this.departureAirportName = other.departureAirportName;
+        this.arrivalAirportName = other.arrivalAirportName;
+        this.departureTime = other.departureTime;
+        this.arrivalTime = other.arrivalTime;
+        this.fare = other.fare;
+        this.availableSeats = other.availableSeats;
+        this.layover = other.layover; // NOTE: shallow copy – deep copy if needed
+    }
+
     public Layover getLayover() {
         return layover;
     }

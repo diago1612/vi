@@ -116,7 +116,7 @@ public class VirtualInterlineImplementation2 implements VirtualInterlineService2
             double totalPrice = itinerary.stream().mapToDouble(Flight::getFare).sum();
             flight.setPrice(totalPrice);
             flight.setCurrency("USD");
-            flight.setSegments(itinerary);
+           // flight.setSegments(itinerary);
 
             for (int i = 1; i < itinerary.size(); i++) {
                 Flight prev = itinerary.get(i - 1);
@@ -132,6 +132,16 @@ public class VirtualInterlineImplementation2 implements VirtualInterlineService2
 
                 curr.setLayover(layover);
             }
+            // Remove "-EXP" suffix from flight numbers before returning
+            List<Flight> sanitizedItinerary = itinerary.stream()
+                    .map(flightSegment -> {
+                        Flight sanitized = new Flight(flightSegment);
+                        String sanitizedFlightNumber = sanitized.getFlightNumber().replace("-EXP", "");
+                        sanitized.setFlightNumber(sanitizedFlightNumber);
+                        return sanitized;
+                    })
+                    .collect(Collectors.toList());
+            flight.setSegments(sanitizedItinerary);
 
             List<String> airlineNames = itinerary.stream()
                     .map(Flight::getAirline)
