@@ -1,0 +1,198 @@
+{
+  "flights": [
+    [
+      {
+      "flightNumber": "A3609-EXP",
+      "airline": "Aegean",
+      "departureAirport": "LHR",
+      "arrivalAirport": "ATH",
+      "departureAirportName": "London",
+      "arrivalAirportName": "Athens",
+      "departureTime": "2025-09-22T22:45:00",
+      "arrivalTime": "2025-09-23T03:50:00",
+      "fare": "186",
+      "availableSeats": 40
+      },
+      {
+        "flightNumber": "A3950-EXP",
+        "airline": "Aegean",
+        "departureAirport": "ATH",
+        "arrivalAirport": "JED",
+        "departureAirportName": "Athens",
+        "arrivalAirportName": "Jeddah",
+        "departureTime": "2025-09-23T23:00:00",
+        "arrivalTime": "2025-09-24T02:35:00",
+        "fare": "186",
+        "availableSeats": 40
+      }
+    ],
+    [
+      {
+      "flightNumber": "EY64-EXP",
+      "airline": "Etihad Airways",
+      "departureAirport": "LHR",
+      "arrivalAirport": "AUH",
+      "departureAirportName": "London",
+      "arrivalAirportName": "Abu Dhabi",
+      "departureTime": "2025-09-22T14:45:00",
+      "arrivalTime": "2025-09-23T00:45:00",
+      "fare": "203",
+      "availableSeats": 40
+      },
+      {
+        "flightNumber": "EY603-EXP",
+        "airline": "Etihad Airways",
+        "departureAirport": "AUH",
+        "arrivalAirport": "JED",
+        "departureAirportName": "Abu Dhabi",
+        "arrivalAirportName": "Jeddah",
+        "departureTime": "2025-09-23T01:55:00",
+        "arrivalTime": "2025-09-23T03:55:00",
+        "fare": "203",
+        "availableSeats": 40
+      }
+    ],
+    [
+      {
+        "flightNumber": "QR10-EXP",
+        "airline": "Qatar Airways",
+        "departureAirport": "LHR",
+        "arrivalAirport": "DOH",
+        "departureAirportName": "London",
+        "arrivalAirportName": "Doha",
+        "departureTime": "2025-09-22T10:50:00",
+        "arrivalTime": "2025-09-22T19:40:00",
+        "fare": "215",
+        "availableSeats": 50
+      },
+      {
+        "flightNumber": "QR1182-EXP",
+        "airline": "Qatar Airways",
+        "departureAirport": "DOH",
+        "arrivalAirport": "JED",
+        "departureAirportName": "Doha",
+        "arrivalAirportName": "Jeddah",
+        "departureTime": "2025-09-22T22:40:00",
+        "arrivalTime": "2025-09-23T01:10:00",
+        "fare": "215",
+        "availableSeats": 50
+      }
+    ],
+    [
+      {
+        "flightNumber": "EY68-EXP",
+        "airline": "Etihad Airways",
+        "departureAirport": "LHR",
+        "arrivalAirport": "AUH",
+        "departureAirportName": "London",
+        "arrivalAirportName": "Abu Dhabi",
+        "departureTime": "2025-09-22T21:45:00",
+        "arrivalTime": "2025-09-23T07:50:00",
+        "fare": "213",
+        "availableSeats": 60
+      },
+      {
+        "flightNumber": "EY611-EXP",
+        "airline": "Etihad Airways",
+        "departureAirport": "AUH",
+        "arrivalAirport": "JED",
+        "departureAirportName": "Abu Dhabi",
+        "arrivalAirportName": "Jeddah",
+        "departureTime": "2025-09-23T14:10:00",
+        "arrivalTime": "2025-09-23T16:10:00",
+        "fare": "213",
+        "availableSeats": 60
+      }
+    ],
+    [
+      {
+        "flightNumber": "QR6-EXP",
+        "airline": "Qatar Airways",
+        "departureAirport": "LHR",
+        "arrivalAirport": "DOH",
+        "departureAirportName": "London",
+        "arrivalAirportName": "Doha",
+        "departureTime": "2025-09-22T08:05:00",
+        "arrivalTime": "2025-09-22T16:55:00",
+        "fare": "215",
+        "availableSeats": 70
+      },
+      {
+        "flightNumber": "QR1182-EXP",
+        "airline": "Qatar Airways",
+        "departureAirport": "DOH",
+        "arrivalAirport": "JED",
+        "departureAirportName": "Doha",
+        "arrivalAirportName": "Jeddah",
+        "departureTime": "2025-09-22T22:40:00",
+        "arrivalTime": "2025-09-23T01:10:00",
+        "fare": "215",
+        "availableSeats": 70
+      }
+    ],
+    [
+      {
+        "flightNumber": "BA870",
+        "airline": "British Airways",
+        "departureAirport": "LHR",
+        "arrivalAirport": "BUD",
+        "departureAirportName": "London",
+        "arrivalAirportName": "Budapest",
+        "departureTime": "2025-09-22T21:45:00",
+        "arrivalTime": "2025-09-23T01:15:00",
+        "fare": "77",
+        "availableSeats": 10
+      },
+      {
+        "flightNumber": "W62301",
+        "airline": "Wizz Air",
+        "departureAirport": "BUD",
+        "arrivalAirport": "JED",
+        "departureAirportName": "Budapest",
+        "arrivalAirportName": "Jeddah",
+        "departureTime": "2025-09-23T12:20:00",
+        "arrivalTime": "2025-09-23T18:20:00",
+        "fare": "98",
+        "availableSeats": 10
+      }
+    ],
+    [
+      {
+        "flightNumber": "EW2461",
+        "airline": "Eurowings",
+        "departureAirport": "LHR",
+        "arrivalAirport": "STR",
+        "departureAirportName": "London",
+        "arrivalAirportName": "Stuttgart",
+        "departureTime": "2025-09-22T09:10:00",
+        "arrivalTime": "2025-09-22T11:45:00",
+        "fare": "96",
+        "availableSeats": 10
+      },
+      {
+      "flightNumber": "PC970",
+      "airline": "Pegasus Airlines",
+      "departureAirport": "STR",
+      "arrivalAirport": "SAW",
+      "departureAirportName": "Stuttgart",
+      "arrivalAirportName": "Istanbul",
+      "departureTime": "2025-09-22T14:20:00",
+      "arrivalTime": "2025-09-22T18:15:00",
+      "fare": "107",
+      "availableSeats": 10
+    },
+      {
+        "flightNumber": "PC694",
+        "airline": "Pegasus Airlines",
+        "departureAirport": "SAW",
+        "arrivalAirport": "JED",
+        "departureAirportName": "Istanbul",
+        "arrivalAirportName": "Jeddah",
+        "departureTime": "2025-09-22T21:20:00",
+        "arrivalTime": "2025-09-23T01:10:00",
+        "fare": "130",
+        "availableSeats": 10
+      }
+    ]
+  ]
+}

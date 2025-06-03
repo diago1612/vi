@@ -1,0 +1,172 @@
+{
+  "flights": [
+    [
+      {
+        "flightNumber": "OS82-EXP",
+        "airline": "Austrian Airlines",
+        "departureAirport": "LAX",
+        "arrivalAirport": "VIE",
+        "departureAirportName": "Los Angeles",
+        "arrivalAirportName": "Vienna",
+        "departureTime": "2025-09-22T15:05:00",
+        "arrivalTime": "2025-09-23T11:30:00",
+        "fare": "236",
+        "availableSeats": 40
+      },
+      {
+        "flightNumber": "OS849-EXP",
+        "airline": "Austrian Airlines",
+        "departureAirport": "VIE",
+        "arrivalAirport": "TIA",
+        "departureAirportName": "Vienna",
+        "arrivalAirportName": "Tirana",
+        "departureTime": "2025-09-23T23:05:00",
+        "arrivalTime": "2025-09-24T12:35:00",
+        "fare": "236",
+        "availableSeats": 40
+      }
+    ],
+    [
+      {
+        "flightNumber": "LX41-EXP",
+        "airline": "Swiss International Air Lines",
+        "departureAirport": "LAX",
+        "arrivalAirport": "ZRH",
+        "departureAirportName": "Los Angeles",
+        "arrivalAirportName": "Zürich",
+        "departureTime": "2025-09-22T19:35:00",
+        "arrivalTime": "2025-09-23T15:45:00",
+        "fare": "238",
+        "availableSeats": 40
+      },
+      {
+        "flightNumber": "LX1442-EXP",
+        "airline": "Swiss International Air Lines",
+        "departureAirport": "ZRH",
+        "arrivalAirport": "TIA",
+        "departureAirportName": "Zürich",
+        "arrivalAirportName": "Tirana",
+        "departureTime": "2025-09-24T11:55:00",
+        "arrivalTime": "2025-09-24T13:55:00",
+        "fare": "203",
+        "availableSeats": 40
+      }
+    ],
+    [
+      {
+        "flightNumber": "LH453-EXP",
+        "airline": "Lufthansa",
+        "departureAirport": "LAX",
+        "arrivalAirport": "MUC",
+        "departureAirportName": "Los Angeles",
+        "arrivalAirportName": "Munich",
+        "departureTime": "2025-09-22T17:30:00",
+        "arrivalTime": "2025-09-23T13:40:00",
+        "fare": "239",
+        "availableSeats": 50
+      },
+      {
+        "flightNumber": "LH1712-EXP",
+        "airline": "Lufthansa",
+        "departureAirport": "MUC",
+        "arrivalAirport": "TIA",
+        "departureAirportName": "Munich",
+        "arrivalAirportName": "Tirana",
+        "departureTime": "2025-09-23T15:50:00",
+        "arrivalTime": "2025-09-23T17:35:00",
+        "fare": "239",
+        "availableSeats": 50
+      }
+    ],
+    [
+      {
+        "flightNumber": "LH453-EXP",
+        "airline": "Lufthansa",
+        "departureAirport": "LAX",
+        "arrivalAirport": "MUC",
+        "departureAirportName": "London",
+        "arrivalAirportName": "Abu Dhabi",
+        "departureTime": "2025-09-22T17:30:00",
+        "arrivalTime": "2025-09-23T13:40:00",
+        "fare": "239",
+        "availableSeats": 60
+      },
+      {
+        "flightNumber": "LH1714-EXP",
+        "airline": "Lufthansa",
+        "departureAirport": "MUC",
+        "arrivalAirport": "TIA",
+        "departureAirportName": "Munich",
+        "arrivalAirportName": "Tirana",
+        "departureTime": "2025-09-23T21:45:00",
+        "arrivalTime": "2025-09-23T23:30:00",
+        "fare": "239",
+        "availableSeats": 60
+      }
+    ],
+    [
+      {
+        "flightNumber": "LH451-EXP",
+        "airline": "Lufthansa",
+        "departureAirport": "LAX",
+        "arrivalAirport": "FRA",
+        "departureAirportName": "Los Angeles",
+        "arrivalAirportName": "Frankfurt",
+        "departureTime": "2025-09-22T18:40:00",
+        "arrivalTime": "2025-09-23T14:55:00",
+        "fare": "241",
+        "availableSeats": 70
+      },
+      {
+        "flightNumber": "LH1456-EXP",
+        "airline": "Lufthansa",
+        "departureAirport": "FRA",
+        "arrivalAirport": "TIA",
+        "departureAirportName": "Frankfurt",
+        "arrivalAirportName": "Tirana",
+        "departureTime": "2025-09-23T21:00:00",
+        "arrivalTime": "2025-09-23T23:10:00",
+        "fare": "241",
+        "availableSeats": 70
+      }
+    ],
+    [
+      {
+        "flightNumber": "A15954",
+        "airline": "APG Distribution System",
+        "departureAirport": "LAX",
+        "arrivalAirport": "LGW",
+        "departureAirportName": "Los Angeles",
+        "arrivalAirportName": "London",
+        "departureTime": "2025-09-22T15:05:00",
+        "arrivalTime": "2025-09-23T09:30:00",
+        "fare": "301",
+        "availableSeats": 10
+      },
+      {
+        "flightNumber": "W46004",
+        "airline": "Wizz Air Malta",
+        "departureAirport": "Gatwick",
+        "arrivalAirport": "FCO",
+        "departureAirportName": "London",
+        "arrivalAirportName": "Rome",
+        "departureTime": "2025-09-23T21:20:00",
+        "arrivalTime": "2025-09-24T00:55:00",
+        "fare": "31",
+        "availableSeats": 10
+      },
+      {
+        "flightNumber": "W45012",
+        "airline": "Wizz Air Malta",
+        "departureAirport": "FCO",
+        "arrivalAirport": "TIA",
+        "departureAirportName": "Rome",
+        "arrivalAirportName": "Tirana",
+        "departureTime": "2025-09-24T08:20:00",
+        "arrivalTime": "2025-09-24T09:55:00",
+        "fare": "28",
+        "availableSeats": 10
+      }
+    ]
+  ]
+}
