@@ -1372,7 +1372,7 @@
         "arrivalTime": "2025-09-11T19:35:00",
         "fare": "240",
         "availableSeats": 70
-      },
+      }],
       [
         {
           "flightNumber": "FR5078",
@@ -1464,5 +1464,4 @@
         }
       ]
     ]
-  ]
 }
