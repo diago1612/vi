@@ -1371,8 +1371,98 @@
         "departureTime": "2025-09-11T14:05:00",
         "arrivalTime": "2025-09-11T19:35:00",
         "fare": "240",
-        "availableSeats": 10
-      }
+        "availableSeats": 70
+      },
+      [
+        {
+          "flightNumber": "FR5078",
+          "airline": "Ryanair",
+          "departureAirport": "LDE",
+          "arrivalAirport": "DUB",
+          "departureAirportName": "Lourdes",
+          "arrivalAirportName": "Dublin",
+          "departureTime": "2025-10-07T17:00:00",
+          "arrivalTime": "2025-10-07T18:10:00",
+          "fare": "54",
+          "availableSeats": 10
+        },
+        {
+          "flightNumber": "EI3278",
+          "airline": "Aer Lingus",
+          "departureAirport": "DUB",
+          "arrivalAirport": "BHX",
+          "departureAirportName": "Dublin",
+          "arrivalAirportName": "Birmingham",
+          "departureTime": "2025-10-07T19:20:00",
+          "arrivalTime": "2025-10-07T20:35:00",
+          "fare": "55",
+          "availableSeats": 10
+        }
+      ],
+      [
+        {
+          "flightNumber": "FR5078",
+          "airline": "Ryanair",
+          "departureAirport": "LDE",
+          "arrivalAirport": "DUB",
+          "departureAirportName": "Lourdes",
+          "arrivalAirportName": "Dublin",
+          "departureTime": "2025-10-07T17:00:00",
+          "arrivalTime": "2025-10-07T18:10:00",
+          "fare": "54",
+          "availableSeats": 20
+        },
+        {
+          "flightNumber": "BA8858",
+          "airline": "British Airways",
+          "departureAirport": "DUB",
+          "arrivalAirport": "BHX",
+          "departureAirportName": "Dublin",
+          "arrivalAirportName": "Birmingham",
+          "departureTime": "2025-10-07T19:20:00",
+          "arrivalTime": "2025-10-07T20:35:00",
+          "fare": "101",
+          "availableSeats": 20
+        }
+      ],
+      [
+        {
+          "flightNumber": "D83221",
+          "airline": "Norwegian Air Sweden",
+          "departureAirport": "OSL",
+          "arrivalAirport": "CPH",
+          "departureAirportName": "Oslo",
+          "arrivalAirportName": "Copenhagen",
+          "departureTime": "2025-09-29T08:50:00",
+          "arrivalTime": "2025-09-29T10:00:00",
+          "fare": "88",
+          "availableSeats": 10
+        },
+        {
+          "flightNumber": "FR3026",
+          "airline": "Ryanair",
+          "departureAirport": "CPH",
+          "arrivalAirport": "ZAD",
+          "departureAirportName": "Copenhagen",
+          "arrivalAirportName": "Zadar",
+          "departureTime": "2025-09-29T12:20:00",
+          "arrivalTime": "2025-09-29T14:35:00",
+          "fare": "52",
+          "availableSeats": 10
+        },
+        {
+          "flightNumber": "FR6825",
+          "airline": "Ryanair",
+          "departureAirport": "ZAD",
+          "arrivalAirport": "BTS",
+          "departureAirportName": "Zadar",
+          "arrivalAirportName": "Bratislava",
+          "departureTime": "2025-09-29T15:45:00",
+          "arrivalTime": "2025-09-29T17:00:00",
+          "fare": "38",
+          "availableSeats": 10
+        }
+      ]
     ]
   ]
 }
