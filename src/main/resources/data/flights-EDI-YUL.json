@@ -171,7 +171,7 @@
         "departureAirportName": "Toronto",
         "arrivalAirportName": "Montreal",
         "departureTime": "2025-08-07T23:20:00",
-        "arrivalTime": "2025-08-08T12:41:00",
+        "arrivalTime": "2025-08-08T00:41:00",
         "fare": "164",
         "availableSeats": 10
       }
