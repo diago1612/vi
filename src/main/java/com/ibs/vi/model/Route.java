@@ -12,8 +12,26 @@ import lombok.NoArgsConstructor;
  * @author jithin123
  */
 @Data
-@NoArgsConstructor
+//@NoArgsConstructor
 public class Route {
     private String departureAirport;
     private String arrivalAirport;
+
+    public Route(){}
+
+    public String getDepartureAirport() {
+        return departureAirport;
+    }
+
+    public void setDepartureAirport(String departureAirport) {
+        this.departureAirport = departureAirport;
+    }
+
+    public String getArrivalAirport() {
+        return arrivalAirport;
+    }
+
+    public void setArrivalAirport(String arrivalAirport) {
+        this.arrivalAirport = arrivalAirport;
+    }
 }

@@ -19,7 +19,11 @@ import java.io.ByteArrayOutputStream;
 public class KryoRedisSerializer<T> implements RedisSerializer<T> {
 
     private final Class<T> type;
-    private final ThreadLocal<Kryo> kryoThreadLocal = ThreadLocal.withInitial(Kryo::new);
+    private final ThreadLocal<Kryo> kryoThreadLocal = ThreadLocal.withInitial(() ->{
+        Kryo kryo = new Kryo();
+        KryoRegistrar.registerClasses(kryo);
+        return kryo;
+    });
 
     public KryoRedisSerializer(Class<T> type) {
         this.type = type;
