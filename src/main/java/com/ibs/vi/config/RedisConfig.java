@@ -4,10 +4,12 @@
  */
 package com.ibs.vi.config;
 
+import com.ibs.vi.model.Route;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
  *
@@ -16,19 +18,25 @@ import org.springframework.data.redis.core.RedisTemplate;
 @Configuration
 public class RedisConfig {
     @Bean
-    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory connectionFactory) {
-        RedisTemplate<String, Object> template = new RedisTemplate<>();
+    public RedisTemplate<String, Route> redisTemplate(RedisConnectionFactory connectionFactory) {
+        RedisTemplate<String, Route> template = new RedisTemplate<>();
         template.setConnectionFactory(connectionFactory);
 
-        // Kryo for key and value serialization
-        KryoRedisSerializer<Object> kryoSerializer = new KryoRedisSerializer<>(Object.class);
-        template.setKeySerializer(kryoSerializer);
+        // Keys- Strings
+        StringRedisSerializer stringSerializer = new StringRedisSerializer();
+
+        // Values- Route objects, use Kryo for Route.class
+        KryoRedisSerializer<Route> kryoSerializer = new KryoRedisSerializer<>(Route.class);
+
+        template.setKeySerializer(stringSerializer);
+        template.setHashKeySerializer(stringSerializer);
         template.setValueSerializer(kryoSerializer);
-        template.setHashKeySerializer(kryoSerializer);
         template.setHashValueSerializer(kryoSerializer);
 
         template.afterPropertiesSet();
         return template;
     }
-    
+
+
 }
+
