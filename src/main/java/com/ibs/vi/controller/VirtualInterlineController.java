@@ -19,10 +19,12 @@ import java.util.List;
 @RestController
 public class VirtualInterlineController {
 
-    public final VirtualInterlineService2 virtualInterlineService;
+    //public final VirtualInterlineService2 virtualInterlineService;
+
+    public final VirtualInterlineService virtualInterlineService;
 
     @Autowired
-    public VirtualInterlineController(VirtualInterlineService2 virtualInterlineService){
+    public VirtualInterlineController(VirtualInterlineService virtualInterlineService){
         this.virtualInterlineService = virtualInterlineService;
     }
 

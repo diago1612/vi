@@ -1,12 +1,10 @@
 package com.ibs.vi.serviceImpl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ibs.vi.model.Flight;
-import com.ibs.vi.model.FlightPoint;
-import com.ibs.vi.model.Flights;
-import com.ibs.vi.model.Layover;
+import com.ibs.vi.model.*;
 import com.ibs.vi.service.VirtualInterlineService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
@@ -23,6 +21,9 @@ public class VirtualInterlineImplementation implements VirtualInterlineService {
     private static final Duration MIN_LAYOVER = Duration.ofHours(1);
 
     private final ObjectMapper mapper;
+
+    @Autowired
+    private RedisTemplate<String, Route> redisTemplate;
 
     @Autowired
     public VirtualInterlineImplementation(ObjectMapper mapper) {
@@ -86,8 +87,20 @@ public class VirtualInterlineImplementation implements VirtualInterlineService {
 
     @Override
     public List<Flights> generateNewItineraries(String origin, String destination, LocalDate departureDate, int pax) throws Exception {
+        String redisKey = getRedisKey(origin, destination);
+
+        Boolean exists = redisTemplate.opsForHash().hasKey("routes:index", redisKey);
+        if (Boolean.FALSE.equals(exists)) {
+            throw new RuntimeException("Route not found in Redis for: " + redisKey);
+        }
+
+
         List<List<Flight>> rawData = generateItineraries(origin, destination, departureDate, pax);
         return convertToNewFormat(rawData);
+    }
+
+    private String getRedisKey(String origin, String destination) {
+        return origin + "-" + destination ;
     }
 
     public List<Flights> convertToNewFormat(List<List<Flight>> rawItineraries) {
@@ -166,7 +179,7 @@ public class VirtualInterlineImplementation implements VirtualInterlineService {
     }
 
     private List<Flight> loadFlightsFromJson() throws Exception {
-        InputStream is = getClass().getClassLoader().getResourceAsStream("data/flights.json");
+        InputStream is = getClass().getClassLoader().getResourceAsStream("data/flights-dummy.json");
         Map<?, ?> map = mapper.readValue(is, Map.class);
         List<?> flightList = (List<?>) map.get("flights");
         return Arrays.asList(mapper.convertValue(flightList, Flight[].class));
