@@ -4,10 +4,11 @@ package com.ibs.vi.controller;
 import com.ibs.vi.model.Route;
 import com.ibs.vi.service.RouteService;
 import com.ibs.vi.view.BasicResponseView;
+import com.ibs.vi.view.RouteView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
+import java.util.List;
 
 /**
  *
@@ -26,18 +27,18 @@ public class RouteController {
     }
 
     @GetMapping("{key}")
-    public Route getRouteByKey(@PathVariable String key) {
-        return (Route) routeService.getByKey(key);
+    public RouteView getRouteByKey(@PathVariable String key) {
+        return (RouteView) routeService.getByKey(key);
     }
 
     @GetMapping
-    public Map<String, Route> getAllRoutes() {
+    public List<RouteView> getAllRoutes() {
         return routeService.getAll();
     }
 
-    @PutMapping
-    public Route updateRouteByKey(@RequestBody Route route) {
-        return (Route)routeService.update(route);
+    @PutMapping("{key}")
+    public RouteView updateRouteByKey(@PathVariable String key, @RequestBody Route route) {
+        return (RouteView)routeService.updateByKey(key, route);
     }
 
     @DeleteMapping("{key}")
@@ -46,7 +47,7 @@ public class RouteController {
     }
     @DeleteMapping("delete/all")
     public BasicResponseView deleteRoutes() {
-        return routeService.delete();
+        return routeService.deleteAll();
     }
     
 }

@@ -4,11 +4,13 @@ package com.ibs.vi.serviceImpl;
 import com.ibs.vi.Exception.RouteNotFoundException;
 import com.ibs.vi.model.Route;
 import com.ibs.vi.service.RouteService;
-import java.util.HashMap;
-import java.util.Map;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 import com.ibs.vi.util.RouteUtil;
 import com.ibs.vi.view.BasicResponseView;
+import com.ibs.vi.view.RouteView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +22,7 @@ import org.springframework.stereotype.Service;
  * @author jithin123
  */
 @Service
-public class RouteServiceImpl implements RouteService<Route>{
+public class RouteServiceImpl implements RouteService<Route, RouteView>{
     
     private static final String INDEX = "VI";
     private static final Logger log = LoggerFactory.getLogger(RouteServiceImpl.class);
@@ -41,35 +43,27 @@ public class RouteServiceImpl implements RouteService<Route>{
     }
 
     @Override
-    public Route getByKey(String key) {
+    public RouteView getByKey(String key) {
         if (!redisTemplate.opsForHash().hasKey(INDEX, key))
             throw new RouteNotFoundException("ROUTE_NOT_FOUND_FOR_"+key);
-        return (Route) redisTemplate.opsForHash().get(INDEX, key);
+        return new RouteView((Route) redisTemplate.opsForHash().get(INDEX, key));
     }
 
     @Override
-    public Map<String, Route> getAll() {
-        Map<Object, Object> entries = redisTemplate.opsForHash().entries(INDEX);
-        Map<String, Route> routeMap = new HashMap<>();
-
-    for (Map.Entry<Object, Object> entry : entries.entrySet()) {
-        Object key = entry.getKey();
-        Object value = entry.getValue();
-
-        if (key instanceof String && value instanceof Route) {
-            routeMap.put((String) key, (Route) value);
-        }
-    }
-    return routeMap;
+    public List<RouteView> getAll() {
+        return redisTemplate.opsForHash().values(INDEX).stream()
+                .filter(value -> value instanceof Route)
+                .map(v -> new RouteView((Route) v))
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Route update(Route route) {
-        String key = RouteUtil.generateKey(route);
+    public RouteView updateByKey(String key, Route route) {
         if (!redisTemplate.opsForHash().hasKey(INDEX, key))
             throw new RouteNotFoundException("ROUTE_NOT_FOUND_FOR_"+key);
-        redisTemplate.opsForHash().put(INDEX, key, route);
-        return route;
+        deleteByKey(key);
+        redisTemplate.opsForHash().put(INDEX, RouteUtil.generateKey(route), route);
+        return new RouteView(route);
     }
 
     @Override
@@ -82,7 +76,7 @@ public class RouteServiceImpl implements RouteService<Route>{
     }
 
     @Override
-    public BasicResponseView delete() {
+    public BasicResponseView deleteAll() {
         redisTemplate.delete(INDEX);
         return new BasicResponseView();
     }

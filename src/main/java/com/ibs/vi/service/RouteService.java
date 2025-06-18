@@ -3,19 +3,19 @@ package com.ibs.vi.service;
 
 import com.ibs.vi.view.BasicResponseView;
 
-import java.util.Map;
+import java.util.List;
 
 /**
  *
  * @author jithin123
  */
-public interface RouteService<T> {
+public interface RouteService<T, V> {
 
     BasicResponseView save(T input);
-    T getByKey(String key);
-    Map<String,T> getAll();
-    T update(T input);
+    V getByKey(String key);
+    List<V> getAll();
+    V updateByKey(String key, T input);
     BasicResponseView deleteByKey(String key);
-    BasicResponseView delete();
+    BasicResponseView deleteAll();
     
 }
