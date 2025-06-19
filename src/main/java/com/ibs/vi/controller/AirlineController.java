@@ -1,46 +1,42 @@
-
 package com.ibs.vi.controller;
 
-import com.ibs.vi.model.Route;
+
+import com.ibs.vi.model.Airline;
 import com.ibs.vi.service.RouteService;
+import com.ibs.vi.view.AirlineView;
 import com.ibs.vi.view.BasicResponseView;
-import com.ibs.vi.view.RouteView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- *
- * @author jithin123
- */
 @RestController
-@RequestMapping("routes")
-public class RouteController {
+@RequestMapping("airline")
+public class AirlineController {
 
     @Autowired
-    @Qualifier("routeManagementService")
+    @Qualifier("airlineManagementService")
     private RouteService routeService;
 
     @PostMapping
-    public BasicResponseView create(@RequestBody Route route) {
-        return routeService.save(route);
+    public BasicResponseView create(@RequestBody Airline airline) {
+        return routeService.save(airline);
     }
 
     @GetMapping("{key}")
-    public RouteView getRouteByKey(@PathVariable String key) {
-        return (RouteView) routeService.getByKey(key);
+    public AirlineView getRouteByKey(@PathVariable String key) {
+        return (AirlineView) routeService.getByKey(key);
     }
 
     @GetMapping
-    public List<RouteView> getAllRoutes() {
+    public List<AirlineView> getAllRoutes() {
         return routeService.getAll();
     }
 
     @PutMapping("{key}")
-    public RouteView updateRouteByKey(@PathVariable String key, @RequestBody Route route) {
-        return (RouteView)routeService.updateByKey(key, route);
+    public AirlineView updateRouteByKey(@PathVariable String key, @RequestBody Airline airline) {
+        return (AirlineView)routeService.updateByKey(key, airline);
     }
 
     @DeleteMapping("{key}")
@@ -51,5 +47,5 @@ public class RouteController {
     public BasicResponseView deleteRoutes() {
         return routeService.deleteAll();
     }
-    
+
 }
