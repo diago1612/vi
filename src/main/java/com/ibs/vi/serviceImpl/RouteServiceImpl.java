@@ -21,7 +21,7 @@ import org.springframework.stereotype.Service;
  *
  * @author jithin123
  */
-@Service
+@Service("routeManagementService")
 public class RouteServiceImpl implements RouteService<Route, RouteView>{
     
     private static final String INDEX = "VI";

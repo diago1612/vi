@@ -166,7 +166,7 @@ public class VirtualInterlineImplementation implements VirtualInterlineService {
     }
 
     private List<Flight> loadFlightsFromJson() throws Exception {
-        InputStream is = getClass().getClassLoader().getResourceAsStream("data/flights.json");
+        InputStream is = getClass().getClassLoader().getResourceAsStream("data/flights-dummy.json");
         Map<?, ?> map = mapper.readValue(is, Map.class);
         List<?> flightList = (List<?>) map.get("flights");
         return Arrays.asList(mapper.convertValue(flightList, Flight[].class));
