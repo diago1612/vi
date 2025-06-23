@@ -5,6 +5,8 @@ import com.ibs.vi.Exception.RouteNotFoundException;
 import com.ibs.vi.model.Route;
 import com.ibs.vi.service.RouteService;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,22 +45,26 @@ public class RouteServiceImpl implements RouteService<Route, RouteView>{
     }
 
     @Override
-    public RouteView getByKey(String key) {
+    public RouteView getByKey(String key, String... index) {
         if (!redisTemplate.opsForHash().hasKey(INDEX, key))
             throw new RouteNotFoundException("ROUTE_NOT_FOUND_FOR_"+key);
         return new RouteView((Route) redisTemplate.opsForHash().get(INDEX, key));
     }
 
     @Override
-    public List<RouteView> getAll() {
-        return redisTemplate.opsForHash().values(INDEX).stream()
+    public List<RouteView> getAll(String... keys) {
+        Collection<Object> values = (keys == null || keys.length == 0)
+                ? redisTemplate.opsForHash().values(INDEX)
+                : redisTemplate.opsForHash().multiGet(INDEX, Arrays.asList(keys));
+
+        return values.stream()
                 .filter(value -> value instanceof Route)
                 .map(v -> new RouteView((Route) v))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public RouteView updateByKey(String key, Route route) {
+    public RouteView updateByKey(String key, Route route, String... index) {
         if (!redisTemplate.opsForHash().hasKey(INDEX, key))
             throw new RouteNotFoundException("ROUTE_NOT_FOUND_FOR_"+key);
         deleteByKey(key);
@@ -67,7 +73,7 @@ public class RouteServiceImpl implements RouteService<Route, RouteView>{
     }
 
     @Override
-    public BasicResponseView deleteByKey(String key) {
+    public BasicResponseView deleteByKey(String key, String... index) {
         Long removed = redisTemplate.opsForHash().delete(INDEX, key);
         if (removed != null && removed > 0)
             return new BasicResponseView();
@@ -76,7 +82,7 @@ public class RouteServiceImpl implements RouteService<Route, RouteView>{
     }
 
     @Override
-    public BasicResponseView deleteAll() {
+    public BasicResponseView deleteAll(String... index) {
         redisTemplate.delete(INDEX);
         return new BasicResponseView();
     }

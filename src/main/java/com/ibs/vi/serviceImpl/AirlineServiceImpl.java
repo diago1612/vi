@@ -10,6 +10,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,7 +41,7 @@ public class AirlineServiceImpl implements RouteService<Airline, AirlineView> {
     }
 
     @Override
-    public AirlineView getByKey(String key) {
+    public AirlineView getByKey(String key, String... index) {
         Object airline = redisTemplate.opsForHash().get(INDEX, key);
         if (airline == null) {
             throw new RuntimeException("AIRLINE_NOT_FOUND_FOR_" + key);
@@ -47,15 +50,19 @@ public class AirlineServiceImpl implements RouteService<Airline, AirlineView> {
     }
 
     @Override
-    public List<AirlineView> getAll() {
-        return redisTemplate.opsForHash().values(INDEX).stream()
+    public List<AirlineView> getAll(String... keys) {
+        Collection<Object> values = (keys == null || keys.length == 0)
+                ? redisTemplate.opsForHash().values(INDEX)
+                : redisTemplate.opsForHash().multiGet(INDEX, Arrays.asList(keys));
+
+        return values.stream()
                 .filter(value -> value instanceof Airline)
                 .map(value -> new AirlineView((Airline) value))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public AirlineView updateByKey(String key, Airline airline) {
+    public AirlineView updateByKey(String key, Airline airline, String... index) {
         if (!redisTemplate.opsForHash().hasKey(INDEX, key)) {
             throw new RuntimeException("AIRLINE_NOT_FOUND_FOR_" + key);
         }
@@ -66,13 +73,13 @@ public class AirlineServiceImpl implements RouteService<Airline, AirlineView> {
     }
 
     @Override
-    public BasicResponseView deleteByKey(String key) {
+    public BasicResponseView deleteByKey(String key, String... index) {
         Long removed = redisTemplate.opsForHash().delete(INDEX, key);
         return removed != null && removed > 0 ? new BasicResponseView() : new BasicResponseView(false);
     }
 
     @Override
-    public BasicResponseView deleteAll() {
+    public BasicResponseView deleteAll(String... index) {
         redisTemplate.delete(INDEX);
         return new BasicResponseView();
     }
