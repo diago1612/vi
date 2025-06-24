@@ -1,109 +1,143 @@
-import java.util.*;
 import java.time.LocalDate;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class VirtualInterlineFinder {
 
     static class Leg {
-        String airine;
         String from;
         String to;
-        LocalDate date;
+        String date;
+        String airline;
 
-        Leg(String airline, String from, String to, LocalDate date) {
-            this.airine = airline;
+        Leg(String from, String to, String date, String airline) {
             this.from = from;
             this.to = to;
             this.date = date;
+            this.airline = airline;
         }
 
-        String getKey() {
-            return from + "|" + to + "|" + date + "|" + airine;
+        String key() {
+            return from + "|" + to + "|" + date + "|" + airline;
         }
 
         @Override
         public String toString() {
-            return getKey();
+            return from + "->" + to + "(" + date + "," + airline + ")";
         }
     }
 
     public static void main(String[] args) {
-        Map<String, List<String>> airlineKeys = new HashMap<>();
-
-        // Sample data (like Redis keys)
-        airlineKeys.put("Indigo", Arrays.asList(
-                "COK|BLR|2025-08-09",
-                "COK|BLR|2025-08-10",
-                "COK|HYD|2025-08-09",
-                "BLR|SRX|2025-08-09",
-                "COK|DXB|2025-08-09",
-                "LND|MAD|2025-08-09"
-        ));
-
-        airlineKeys.put("AirIndia", Arrays.asList(
-                "COK|BLR|2025-08-09",
-                "COK|BLR|2025-08-10",
-                "COK|HYD|2025-08-10",
-                "BLR|SRX|2025-08-09",
-                "HYD|BLR|2025-08-10"
-        ));
-
-        airlineKeys.put("RYANAIR", Arrays.asList(
-                "BLR|SRX|2025-08-11"
-        ));
-
         String source = "COK";
         String destination = "SRX";
 
-        Set<Leg> allLegs = new HashSet<>();
+        // Hardcoded keys similar to redi
+        Map<String, List<String>> airlineKeys = Map.of(
+                "Indigo", List.of(
+                        "COK|BLR|2025-08-09",
+                        "COK|BLR|2025-08-10",
+                        "COK|HYD|2025-08-09",
+                        "BLR|SRX|2025-08-09",
+                        "COK|DXB|2025-08-09",
+                        "LND|MAD|2025-08-09"
+                ),
+                "AirIndia", List.of(
+                        "COK|BLR|2025-08-09",
+                        "COK|BLR|2025-08-10",
+                        "COK|HYD|2025-08-10",
+                        "BLR|SRX|2025-08-09",
+                        "HYD|BLR|2025-08-10"
+                ),
+                "RYANAIR", List.of(
+                        "BLR|SRX|2025-08-11"
+                )
+        );
 
+        // Build legs from all keys
+        List<Leg> allLegs = new ArrayList<>();
         for (Map.Entry<String, List<String>> entry : airlineKeys.entrySet()) {
             String airline = entry.getKey();
             for (String key : entry.getValue()) {
                 String[] parts = key.split("\\|");
-                allLegs.add(new Leg(airline, parts[0], parts[1], LocalDate.parse(parts[2])));
+                if (parts.length == 3) {
+                    allLegs.add(new Leg(parts[0], parts[1], parts[2], airline));
+                }
             }
         }
 
+        // Build graph
         Map<String, List<Leg>> graph = new HashMap<>();
         for (Leg leg : allLegs) {
             graph.computeIfAbsent(leg.from, k -> new ArrayList<>()).add(leg);
         }
-        Set<Leg> validLegs = new HashSet<>();
-        Deque<Leg> path = new ArrayDeque<>();
+
+        // DFS to find all VI paths from source to destination
+        Set<String> visited = new HashSet<>();
+        List<Leg> path = new ArrayList<>();
+        List<Leg> validLegs = new ArrayList<>();
+        List<List<Leg>> validPaths = new ArrayList<>();
+
+        dfs(graph, source, destination, visited, path, validLegs, validPaths, null);
 
 
-        dfs(source, destination, LocalDate.MIN, graph, path, validLegs, new HashSet<>());
+        // Print possible full paths
+        System.out.println("Possible VI paths from " + source + " to " + destination + ":\n");
+        for (List<Leg> viPath : validPaths) {
+            String route = viPath.stream()
+                    .map(Leg::toString)
+                    .collect(Collectors.joining(" -> "));
+            System.out.println(route);
+        }
 
-        System.out.println("Valid VI Legs:");
-        validLegs.stream()
-                .sorted(Comparator.comparing(Leg::getKey))
-                .forEach(System.out::println);
+        // Print keys to retain
+        System.out.println(" Keys to retain in Redis:");
+        Set<String> finalKeys = validLegs.stream()
+                .map(Leg::key)
+                .collect(Collectors.toSet());
+        finalKeys.forEach(System.out::println);
     }
 
-    static void dfs(String current, String destination, LocalDate minDate,
-                    Map<String, List<Leg>> graph, Deque<Leg> path,
-                    Set<Leg> validLegs, Set<String> visited) {
+    private static void dfs(
+            Map<String, List<Leg>> graph,
+            String currentAirport,
+            String destination,
+            Set<String> visited,
+            List<Leg> path,
+            List<Leg> validLegs,
+            List<List<Leg>> validPaths,
+            LocalDate previousDate
+    ) {
+        if (visited.contains(currentAirport)) return;
 
-        if (!graph.containsKey(current)) return;
+        visited.add(currentAirport);
 
-        for (Leg leg : graph.get(current)) {
-            if (leg.date.isBefore(minDate)) continue;
+        if (graph.containsKey(currentAirport)) {
+            for (Leg leg : graph.get(currentAirport)) {
+                LocalDate legDate = LocalDate.parse(leg.date);
 
-            String uniqueId = leg.getKey();
-            if (visited.contains(uniqueId)) continue;
+                // chronological order of date
+                if (path.isEmpty() || !legDate.isBefore(previousDate)) {
 
-            visited.add(uniqueId);
-            path.addLast(leg);
+                    path.add(leg);
 
-            if (leg.to.equals(destination)) {
-                validLegs.addAll(new ArrayList<>(path));
-            } else {
-                dfs(leg.to, destination, leg.date, graph, path, validLegs, visited);
+                    // Skip paths with more than 3 legs (2 stops)
+                    if (path.size() > 3) {
+                        path.remove(path.size() - 1);
+                        continue;
+                    }
+
+                    if (leg.to.equals(destination)) {
+                        validPaths.add(new ArrayList<>(path));
+                        validLegs.addAll(path);
+                    } else {
+                        dfs(graph, leg.to, destination, visited, path, validLegs, validPaths, legDate);
+                    }
+
+                    path.remove(path.size() - 1); // backtrack
+                }
             }
-
-            path.removeLast();
-            visited.remove(uniqueId);
         }
+
+        visited.remove(currentAirport);
     }
 }
-
