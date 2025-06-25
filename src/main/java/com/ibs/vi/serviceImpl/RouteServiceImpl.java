@@ -3,10 +3,9 @@ package com.ibs.vi.serviceImpl;
 
 import com.ibs.vi.Exception.RouteNotFoundException;
 import com.ibs.vi.model.Route;
+import com.ibs.vi.repository.RedisRepository;
 import com.ibs.vi.service.RouteService;
 
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,14 +27,13 @@ public class RouteServiceImpl implements RouteService<Route, RouteView>{
     
     private static final String INDEX = "VI";
     private static final Logger log = LoggerFactory.getLogger(RouteServiceImpl.class);
-    
     @Autowired
-    private RedisTemplate<String, Object> redisTemplate;
+    private RedisRepository redisRepository;
 
     @Override
     public BasicResponseView save(Route route) {
         try{
-            redisTemplate.opsForHash().put(INDEX, RouteUtil.generateKey(route), route);
+            redisRepository.save(INDEX, RouteUtil.generateKey(route), route);
             return new BasicResponseView();
         }catch(Exception ex){
             log.error("DATA_SAVING_FAILED_TO_REDIS_{}", ex);
@@ -46,45 +44,45 @@ public class RouteServiceImpl implements RouteService<Route, RouteView>{
 
     @Override
     public RouteView getByKey(String key, String... index) {
-        if (!redisTemplate.opsForHash().hasKey(INDEX, key))
+        if (!redisRepository.hasKey(INDEX, key))
             throw new RouteNotFoundException("ROUTE_NOT_FOUND_FOR_"+key);
-        return new RouteView((Route) redisTemplate.opsForHash().get(INDEX, key));
+        return new RouteView(redisRepository.get(INDEX, key));
     }
 
     @Override
     public List<RouteView> getAll(String... keys) {
-        Collection<Object> values = (keys == null || keys.length == 0)
-                ? redisTemplate.opsForHash().values(INDEX)
-                : redisTemplate.opsForHash().multiGet(INDEX, Arrays.asList(keys));
-
-        return values.stream()
-                .filter(value -> value instanceof Route)
-                .map(v -> new RouteView((Route) v))
+        return redisRepository.values(Route.class, INDEX, keys).stream()
+                .map(v -> new RouteView(v))
                 .collect(Collectors.toList());
     }
 
     @Override
     public RouteView updateByKey(String key, Route route, String... index) {
-        if (!redisTemplate.opsForHash().hasKey(INDEX, key))
-            throw new RouteNotFoundException("ROUTE_NOT_FOUND_FOR_"+key);
-        deleteByKey(key);
-        redisTemplate.opsForHash().put(INDEX, RouteUtil.generateKey(route), route);
-        return new RouteView(route);
+        try{
+            if (!redisRepository.hasKey(INDEX, key))
+                throw new RouteNotFoundException("ROUTE_NOT_FOUND_FOR_"+key);
+            deleteByKey(key);
+            redisRepository.put(INDEX, RouteUtil.generateKey(route), route);
+            return new RouteView(route);
+        }catch(RouteNotFoundException ex){
+            log.error("ROUTE_NOT_FOUND_FOR_{}", key, ex);
+            throw ex;
+        }
+        catch(Exception ex){
+            log.error("DATA_UPDATE_FAILED_TO_REDIS_FOR_KEY_{}_{}", key, ex);
+            throw ex;
+        }
+
     }
 
     @Override
     public BasicResponseView deleteByKey(String key, String... index) {
-        Long removed = redisTemplate.opsForHash().delete(INDEX, key);
-        if (removed != null && removed > 0)
-            return new BasicResponseView();
-        log.warn("NO_DATA_FOUND_FOR_{}", key);
-        return new BasicResponseView(false);
+        return redisRepository.delete(INDEX, key) ? new BasicResponseView() : new BasicResponseView(false);
     }
 
     @Override
     public BasicResponseView deleteAll(String... index) {
-        redisTemplate.delete(INDEX);
-        return new BasicResponseView();
+        return redisRepository.delete(INDEX) ? new BasicResponseView() : new BasicResponseView(false);
     }
 
 }

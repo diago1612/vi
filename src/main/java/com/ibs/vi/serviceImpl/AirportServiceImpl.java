@@ -1,9 +1,14 @@
 package com.ibs.vi.serviceImpl;
 
+import com.ibs.vi.Exception.RouteNotFoundException;
 import com.ibs.vi.model.Airport;
+import com.ibs.vi.model.Route;
+import com.ibs.vi.repository.RedisRepository;
 import com.ibs.vi.service.RouteService;
+import com.ibs.vi.util.RouteUtil;
 import com.ibs.vi.view.AirportView;
 import com.ibs.vi.view.BasicResponseView;
+import com.ibs.vi.view.RouteView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +26,12 @@ public class AirportServiceImpl implements RouteService<Airport, AirportView> {
     private static final Logger log = LoggerFactory.getLogger(AirportServiceImpl.class);
 
     @Autowired
-    private RedisTemplate<String, Object> redisTemplate;
+    private RedisRepository redisRepository;
 
     @Override
     public BasicResponseView save(Airport airport) {
         try {
-            redisTemplate.opsForHash().put(INDEX, airport.getCode(), airport);
-
+            redisRepository.save(INDEX, airport.getCode(), airport);
             return new BasicResponseView();
         } catch (Exception ex) {
             log.error("AIRPORT_DATA_SAVING_FAILED_TO_REDIS_{}", ex);
@@ -37,40 +41,44 @@ public class AirportServiceImpl implements RouteService<Airport, AirportView> {
 
     @Override
     public AirportView getByKey(String key, String... index) {
-        Object airport = redisTemplate.opsForHash().get(INDEX, key);
-        if (airport == null) {
-            throw new RuntimeException("AIRPORT_NOT_FOUND_FOR_" + key);
-        }
-        return new AirportView((Airport) airport);
+        if (!redisRepository.hasKey(INDEX, key))
+            throw new RouteNotFoundException("AIRPORT_NOT_FOUND_FOR_"+key);
+        return new AirportView(redisRepository.get(INDEX, key));
     }
 
     @Override
     public List<AirportView> getAll(String... keys) {
-        return redisTemplate.opsForHash().values(INDEX).stream()
-                .filter(value -> value instanceof Airport)
-                .map(value -> new AirportView((Airport) value))
+        return redisRepository.values(Airport.class, INDEX, keys).stream()
+                .map(v -> new AirportView(v))
                 .collect(Collectors.toList());
     }
 
     @Override
     public AirportView updateByKey(String key, Airport airport, String... index) {
-        if (!redisTemplate.opsForHash().hasKey(INDEX, key)) {
-            throw new RuntimeException("AIRPORT_NOT_FOUND_FOR_" + key);
+
+        try{
+            if (!redisRepository.hasKey(INDEX, key))
+                throw new RouteNotFoundException("AIRPORT_NOT_FOUND_FOR_"+key);
+            deleteByKey(key);
+            redisRepository.put(INDEX, airport.getCode(), airport);
+            return new AirportView(airport);
+        }catch(RouteNotFoundException ex){
+            log.error("AIRPORT_NOT_FOUND_FOR_{}", key, ex);
+            throw ex;
         }
-        deleteByKey(key);
-        redisTemplate.opsForHash().put(INDEX, airport.getCode(), airport);
-        return new AirportView(airport);
+        catch(Exception ex){
+            log.error("DATA_UPDATE_FAILED_TO_REDIS_FOR_KEY_{}_{}", key, ex);
+            throw ex;
+        }
     }
 
     @Override
     public BasicResponseView deleteByKey(String key, String... index) {
-        Long removed = redisTemplate.opsForHash().delete(INDEX, key);
-        return removed != null && removed > 0 ? new BasicResponseView() : new BasicResponseView(false);
+        return redisRepository.delete(INDEX, key) ? new BasicResponseView() : new BasicResponseView(false);
     }
 
     @Override
     public BasicResponseView deleteAll(String... index) {
-        redisTemplate.delete(INDEX);
-        return new BasicResponseView();
+        return redisRepository.delete(INDEX) ? new BasicResponseView() : new BasicResponseView(false);
     }
 }
