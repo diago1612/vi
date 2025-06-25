@@ -1,10 +1,7 @@
 package com.ibs.vi.serviceImpl;
 
-import com.ibs.vi.model.Airline;
 import com.ibs.vi.model.Airport;
 import com.ibs.vi.service.RouteService;
-import com.ibs.vi.util.AirlineUtil;
-import com.ibs.vi.view.AirlineView;
 import com.ibs.vi.view.AirportView;
 import com.ibs.vi.view.BasicResponseView;
 import org.slf4j.Logger;
@@ -39,7 +36,7 @@ public class AirportServiceImpl implements RouteService<Airport, AirportView> {
     }
 
     @Override
-    public AirportView getByKey(String key) {
+    public AirportView getByKey(String key, String... index) {
         Object airport = redisTemplate.opsForHash().get(INDEX, key);
         if (airport == null) {
             throw new RuntimeException("AIRPORT_NOT_FOUND_FOR_" + key);
@@ -48,7 +45,7 @@ public class AirportServiceImpl implements RouteService<Airport, AirportView> {
     }
 
     @Override
-    public List<AirportView> getAll() {
+    public List<AirportView> getAll(String... keys) {
         return redisTemplate.opsForHash().values(INDEX).stream()
                 .filter(value -> value instanceof Airport)
                 .map(value -> new AirportView((Airport) value))
@@ -56,7 +53,7 @@ public class AirportServiceImpl implements RouteService<Airport, AirportView> {
     }
 
     @Override
-    public AirportView updateByKey(String key, Airport airport) {
+    public AirportView updateByKey(String key, Airport airport, String... index) {
         if (!redisTemplate.opsForHash().hasKey(INDEX, key)) {
             throw new RuntimeException("AIRPORT_NOT_FOUND_FOR_" + key);
         }
@@ -66,13 +63,13 @@ public class AirportServiceImpl implements RouteService<Airport, AirportView> {
     }
 
     @Override
-    public BasicResponseView deleteByKey(String key) {
+    public BasicResponseView deleteByKey(String key, String... index) {
         Long removed = redisTemplate.opsForHash().delete(INDEX, key);
         return removed != null && removed > 0 ? new BasicResponseView() : new BasicResponseView(false);
     }
 
     @Override
-    public BasicResponseView deleteAll() {
+    public BasicResponseView deleteAll(String... index) {
         redisTemplate.delete(INDEX);
         return new BasicResponseView();
     }
