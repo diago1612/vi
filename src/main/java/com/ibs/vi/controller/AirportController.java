@@ -42,8 +42,8 @@ public class AirportController {
     }
 
     @PutMapping("{key}")
-    public AirlineView updateAirportsByKey(@PathVariable String key, @RequestBody Airport airport) {
-        return (AirlineView)routeService.updateByKey(key, airport);
+    public AirportView updateAirportsByKey(@PathVariable String key, @RequestBody Airport airport) {
+        return (AirportView)routeService.updateByKey(key, airport);
     }
 
     @DeleteMapping("{key}")

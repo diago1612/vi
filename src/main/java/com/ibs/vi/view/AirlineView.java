@@ -4,8 +4,6 @@ import com.ibs.vi.model.Airline;
 
 public class AirlineView {
 
-    private String key;
-
     private String airlineCode;
 
     private String airlineName;
@@ -15,14 +13,6 @@ public class AirlineView {
         this.airlineCode = airline.getAirlineCode();
         this.airlineName = airline.getAirlineName();
         this.isValid = airline.isValid();
-    }
-
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
     }
 
     public String getAirlineCode() {

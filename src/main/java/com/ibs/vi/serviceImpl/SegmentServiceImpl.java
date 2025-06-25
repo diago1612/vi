@@ -1,10 +1,14 @@
 package com.ibs.vi.serviceImpl;
 
+import com.ibs.vi.model.Airline;
+import com.ibs.vi.model.Route;
 import com.ibs.vi.model.Segment;
+import com.ibs.vi.repository.RedisRepository;
 import com.ibs.vi.service.RouteService;
 import com.ibs.vi.service.VIRouteLogic;
 import com.ibs.vi.view.AirlineView;
 import com.ibs.vi.view.BasicResponseView;
+import com.ibs.vi.view.RouteView;
 import com.ibs.vi.view.SegmentView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,10 +26,10 @@ import java.util.stream.Stream;
 
 @Service("segmentManagementService")
 public class SegmentServiceImpl implements RouteService<Segment, SegmentView>, VIRouteLogic {
+    private static final String AIRLINE_INDEX = "AIRLINE_INDEX";
 
     @Autowired
-    @Qualifier("airlineManagementService")
-    private RouteService routeService;
+    private RedisRepository redisRepository;
 
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
@@ -39,7 +43,7 @@ public class SegmentServiceImpl implements RouteService<Segment, SegmentView>, V
 
     @Override
     public List<SegmentView> getAll(String... keys) {
-        List<Segment> segmentList = Optional.ofNullable(viSegmentDetails(Arrays.asList(keys))).orElse(Collections.emptyList());
+        List<Segment> segmentList = Optional.ofNullable(viSegmentDetails(keys)).orElse(Collections.emptyList());
         return segmentList.stream()
                 .map(s -> new SegmentView(s))
                 .collect(Collectors.toList());
@@ -57,17 +61,15 @@ public class SegmentServiceImpl implements RouteService<Segment, SegmentView>, V
 
     @Override
     public BasicResponseView deleteAll(String... index) {
-        redisTemplate.delete(Arrays.asList(index));
+        redisRepository.deleteByHashKeys(index);
         return new BasicResponseView();
     }
 
     @Override
-    public List<Segment> viSegmentDetails(List<String> keys, String... index) {
+    public List<Segment> viSegmentDetails(String[] keys, String... airportCodes) {
 
-        List<AirlineView> airlineList = Optional.ofNullable(index == null || index.length == 0 ?
-                routeService.getAll() : routeService.getAll(index)).orElse(Collections.emptyList());
-
-        List<String> activeAirlineCode = airlineList.stream()
+        List<String> activeAirlineCode = redisRepository.values(Airline.class, AIRLINE_INDEX, airportCodes)
+                .stream()
                 .filter(air -> air.isValid())
                 .map(air -> air.getAirlineCode())
                 .collect(Collectors.toList());
@@ -96,16 +98,8 @@ public class SegmentServiceImpl implements RouteService<Segment, SegmentView>, V
     }
 
     @Async("viSegmentExecutor")
-    private CompletableFuture<List<Segment>> getAllSegmentsByAirportCode(List<String> keys, String airportCode){
-
-        Collection<Object> values = (keys == null || keys.size() == 0)
-                ? redisTemplate.opsForHash().values(airportCode)
-                : redisTemplate.opsForHash().multiGet(airportCode, Arrays.asList(keys));
-
-        List<Segment> segmentList = values.stream()
-                .filter(value -> value instanceof Segment)
-                .map(s -> (Segment) s)
-                .collect(Collectors.toList());
+    private CompletableFuture<List<Segment>> getAllSegmentsByAirportCode(String[] keys, String airportCode){
+        List<Segment> segmentList = redisRepository.values(Segment.class, airportCode, keys);
         return CompletableFuture.completedFuture(segmentList);
     }
 }
