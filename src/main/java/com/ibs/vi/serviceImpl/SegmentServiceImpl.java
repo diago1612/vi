@@ -1,19 +1,15 @@
 package com.ibs.vi.serviceImpl;
 
 import com.ibs.vi.model.Airline;
-import com.ibs.vi.model.Route;
 import com.ibs.vi.model.Segment;
 import com.ibs.vi.repository.RedisRepository;
 import com.ibs.vi.service.RouteService;
 import com.ibs.vi.service.VIRouteLogic;
-import com.ibs.vi.view.AirlineView;
 import com.ibs.vi.view.BasicResponseView;
-import com.ibs.vi.view.RouteView;
 import com.ibs.vi.view.SegmentView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
