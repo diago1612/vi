@@ -8,7 +8,9 @@ services:
       - "6379:6379"
 
   app:
-    image: useribs4/virtual-interline:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: vi-search-app
     ports:
       - "8080:8080"
