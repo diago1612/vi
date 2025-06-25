@@ -1,3 +1,5 @@
+How to run application in local:
+
 For developers checkout the code in local machine and go to the project root path and enter :  
 `docker compose -f docker-compose-dev.yaml up --build`
 
