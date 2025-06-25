@@ -2,6 +2,7 @@ package com.ibs.vi.serviceImpl;
 
 import com.ibs.vi.model.Segment;
 import com.ibs.vi.service.RouteService;
+import com.ibs.vi.service.VIRouteLogic;
 import com.ibs.vi.view.AirlineView;
 import com.ibs.vi.view.BasicResponseView;
 import com.ibs.vi.view.SegmentView;
@@ -19,8 +20,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 
-@Service
-public class SegmentServiceImpl implements RouteService<Segment, SegmentView> {
+@Service("segmentManagementService")
+public class SegmentServiceImpl implements RouteService<Segment, SegmentView>, VIRouteLogic {
 
     @Autowired
     @Qualifier("airlineManagementService")
@@ -31,18 +32,17 @@ public class SegmentServiceImpl implements RouteService<Segment, SegmentView> {
 
     private static final Logger log = LoggerFactory.getLogger(SegmentServiceImpl.class);
     @Override
-    public BasicResponseView save(Segment input) {
-        return null;
-    }
+    public BasicResponseView save(Segment input) {return null;}
 
     @Override
-    public SegmentView getByKey(String key, String... index) {
-        return null;
-    }
+    public SegmentView getByKey(String key, String... index) {return null;}
 
     @Override
     public List<SegmentView> getAll(String... keys) {
-        return getSegmentDetails(keys);
+        List<Segment> segmentList = Optional.ofNullable(viSegmentDetails(Arrays.asList(keys))).orElse(Collections.emptyList());
+        return segmentList.stream()
+                .map(s -> new SegmentView(s))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -52,31 +52,36 @@ public class SegmentServiceImpl implements RouteService<Segment, SegmentView> {
 
     @Override
     public BasicResponseView deleteByKey(String key, String... index) {
-        return null;
+       return null;
     }
 
     @Override
     public BasicResponseView deleteAll(String... index) {
-        return null;
+        redisTemplate.delete(Arrays.asList(index));
+        return new BasicResponseView();
     }
 
-    private List<SegmentView>getSegmentDetails(String[] keys){
-        List<AirlineView> airlineList = Optional.ofNullable(routeService.getAll()).orElse(Collections.emptyList());
+    @Override
+    public List<Segment> viSegmentDetails(List<String> keys, String... index) {
+
+        List<AirlineView> airlineList = Optional.ofNullable(index == null || index.length == 0 ?
+                routeService.getAll() : routeService.getAll(index)).orElse(Collections.emptyList());
+
         List<String> activeAirlineCode = airlineList.stream()
                 .filter(air -> air.isValid())
-                .map(air -> air.getKey())
+                .map(air -> air.getAirlineCode())
                 .collect(Collectors.toList());
 
         if (activeAirlineCode.isEmpty()) {
             return Collections.emptyList();
         }
 
-        List<CompletableFuture<List<SegmentView>>> futures = new ArrayList<>();
+        List<CompletableFuture<List<Segment>>> futures = new ArrayList<>();
         activeAirlineCode.forEach(ac -> futures.add(getAllSegmentsByAirportCode(keys, ac)));
 
         CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
 
-        List<SegmentView> segmentViewList = futures.stream()
+        List<Segment> segmentList = futures.stream()
                 .flatMap(future -> {
                     try {
                         return future.join().stream();
@@ -87,20 +92,20 @@ public class SegmentServiceImpl implements RouteService<Segment, SegmentView> {
                 })
                 .collect(Collectors.toList());
 
-        return segmentViewList;
+        return segmentList;
     }
 
     @Async("viSegmentExecutor")
-    private CompletableFuture<List<SegmentView>> getAllSegmentsByAirportCode(String[] keys, String airportCode){
+    private CompletableFuture<List<Segment>> getAllSegmentsByAirportCode(List<String> keys, String airportCode){
 
-        Collection<Object> values = (keys == null || keys.length == 0)
+        Collection<Object> values = (keys == null || keys.size() == 0)
                 ? redisTemplate.opsForHash().values(airportCode)
                 : redisTemplate.opsForHash().multiGet(airportCode, Arrays.asList(keys));
 
-        List<SegmentView> segmentViewList = values.stream()
+        List<Segment> segmentList = values.stream()
                 .filter(value -> value instanceof Segment)
-                .map(s -> new SegmentView((Segment) s))
+                .map(s -> (Segment) s)
                 .collect(Collectors.toList());
-        return CompletableFuture.completedFuture(segmentViewList);
+        return CompletableFuture.completedFuture(segmentList);
     }
 }

@@ -2,7 +2,6 @@ package com.ibs.vi.serviceImpl;
 
 import com.ibs.vi.model.Airline;
 import com.ibs.vi.service.RouteService;
-import com.ibs.vi.util.AirlineUtil;
 import com.ibs.vi.view.AirlineView;
 import com.ibs.vi.view.BasicResponseView;
 import org.slf4j.Logger;
@@ -31,7 +30,7 @@ public class AirlineServiceImpl implements RouteService<Airline, AirlineView> {
     public BasicResponseView save(Airline airline) {
         try {
             airline.setValid(true);
-            redisTemplate.opsForHash().put(INDEX, AirlineUtil.generateKey(airline), airline);
+            redisTemplate.opsForHash().put(INDEX, airline.getAirlineCode(), airline);
 
             return new BasicResponseView();
         } catch (Exception ex) {
@@ -68,7 +67,7 @@ public class AirlineServiceImpl implements RouteService<Airline, AirlineView> {
         }
         deleteByKey(key);
         airline.setValid(true);
-        redisTemplate.opsForHash().put(INDEX, AirlineUtil.generateKey(airline), airline);
+        redisTemplate.opsForHash().put(INDEX, airline.getAirlineCode(), airline);
         return new AirlineView(airline);
     }
 
