@@ -1,7 +1,6 @@
 package com.ibs.vi.view;
 
 import com.ibs.vi.model.Airline;
-import com.ibs.vi.util.AirlineUtil;
 
 public class AirlineView {
 
@@ -13,7 +12,6 @@ public class AirlineView {
     private boolean isValid;
 
     public AirlineView(Airline airline) {
-        this.key = AirlineUtil.generateKey(airline);
         this.airlineCode = airline.getAirlineCode();
         this.airlineName = airline.getAirlineName();
         this.isValid = airline.isValid();
