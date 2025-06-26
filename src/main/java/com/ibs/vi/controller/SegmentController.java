@@ -46,6 +46,6 @@ public class SegmentController {
     }
     @DeleteMapping("delete/all")
     public BasicResponseView deleteSegments(@RequestParam String airline) {
-        return routeService.deleteAll();
+        return routeService.deleteAll(airline);
     }
 }

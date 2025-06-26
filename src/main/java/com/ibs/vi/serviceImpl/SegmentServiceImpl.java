@@ -39,7 +39,7 @@ public class SegmentServiceImpl implements RouteService<Segment, SegmentView>, V
     @Override
     public BasicResponseView save(Segment segment) {
         try {
-            // Save to Hash
+            //Save to Hash
             String airlineHash = segment.airlineCode;
             String segmentKey = RouteUtil.generateSegmentKey(segment);
             redisRepository.save(airlineHash, segmentKey, segment);
