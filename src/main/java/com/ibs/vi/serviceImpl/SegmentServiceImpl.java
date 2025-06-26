@@ -1,7 +1,10 @@
 package com.ibs.vi.serviceImpl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ibs.vi.model.Segment;
 import com.ibs.vi.service.RouteService;
+import com.ibs.vi.util.RouteUtil;
 import com.ibs.vi.view.AirlineView;
 import com.ibs.vi.view.BasicResponseView;
 import com.ibs.vi.view.SegmentView;
@@ -13,13 +16,15 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.ZoneOffset;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 
-@Service
+@Service("segmentManagementService")
 public class SegmentServiceImpl implements RouteService<Segment, SegmentView> {
 
     @Autowired
@@ -29,15 +34,73 @@ public class SegmentServiceImpl implements RouteService<Segment, SegmentView> {
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
 
+    @Autowired
+    private ObjectMapper objectMapper;
+
     private static final Logger log = LoggerFactory.getLogger(SegmentServiceImpl.class);
     @Override
-    public BasicResponseView save(Segment input) {
-        return null;
+    public BasicResponseView save(Segment segment) {
+        if (segment == null || segment.getAirline() == null) {
+            return new BasicResponseView("Invalid Segment");
+        }
+
+        String airline = segment.getAirline();
+        String flight = segment.getFlightNumber();
+        String key = RouteUtil.generateKeyForSegments(segment);
+        String hashName = airline;
+        String zaddMember = key + "|" + airline;
+
+        // Fetch existing list from airline-specific hash
+        List<Segment> existingSegments =
+                (List<Segment>) redisTemplate.opsForHash().get(hashName, key);
+
+        if (existingSegments == null) {
+            existingSegments = new ArrayList<>();
+        }
+        existingSegments.add(segment);
+
+        try {
+            log.info("Saving to Redis - hash: {}, key: {}, segments: {}",
+                    hashName, key, objectMapper.writeValueAsString(existingSegments));
+        } catch (JsonProcessingException e) {
+            log.error("Failed to log segments as JSON", e);
+        }
+
+        // Save to hash
+        redisTemplate.opsForHash().put(hashName, key, existingSegments);
+
+        // Convert date from key to epoch seconds
+        try {
+            String[] parts = key.split("\\|");
+            String dateStr = parts[2];
+            long epochSeconds = LocalDate.parse(dateStr)
+                    .atStartOfDay(ZoneOffset.UTC)
+                    .toEpochSecond();
+
+            // Add to sorted set (ZADD)
+            redisTemplate.opsForZSet().add("SortedSegmentKeys", zaddMember, epochSeconds);
+            log.info("ZADD -> set: {}, member: {}, score(epoch): {}", "AllSegmentKeys", zaddMember, epochSeconds);
+        } catch (Exception e) {
+            log.error("Failed to parse date and save to ZADD", e);
+        }
+        return new BasicResponseView("Segment Saved");
     }
+
 
     @Override
     public SegmentView getByKey(String key, String... index) {
-        return null;
+        if (index == null || index.length == 0) return null;
+        String airlineHash = index[0];
+        log.info("Fetching from Redis - hash: {}, key: {}", airlineHash, key);
+        List<Segment> segments = (List<Segment>) redisTemplate.opsForHash().get(airlineHash, key);
+
+        if (segments == null) {
+            log.warn("No data found for hash: {}, key: {}", airlineHash, key);
+            return null;
+        }
+
+        log.info("Retrieved segments: {}", segments);
+        return segments.isEmpty() ? null : new SegmentView(segments.get(0));
     }
 
     @Override
@@ -46,19 +109,60 @@ public class SegmentServiceImpl implements RouteService<Segment, SegmentView> {
     }
 
     @Override
-    public SegmentView updateByKey(String key, Segment input, String... index) {
+    public SegmentView updateByKey(String key, Segment updateSegment, String... index) {
+        if (index == null || index.length == 0 || updateSegment == null) return null;
+
+        String airlineHash = index[0];
+        List<Segment> segments = (List<Segment>) redisTemplate.opsForHash().get(airlineHash, key);
+
+        if (segments == null) return null;
+
+        for (int i = 0; i < segments.size(); i++) {
+            Segment s = segments.get(i);
+            if (s.getFlightNumber().equals(updateSegment.getFlightNumber())) {
+                segments.set(i, updateSegment);
+                redisTemplate.opsForHash().put(airlineHash, key, segments);
+                return new SegmentView(updateSegment);
+            }
+        }
         return null;
     }
 
     @Override
     public BasicResponseView deleteByKey(String key, String... index) {
-        return null;
+        if (index == null || index.length == 0) {
+            return new BasicResponseView("Airline not specified");
+        }
+
+        String airlineHash = index[0];
+        Boolean hasKey = redisTemplate.opsForHash().hasKey(airlineHash, key);
+
+        if (Boolean.TRUE.equals(hasKey)) {
+            redisTemplate.opsForHash().delete(airlineHash, key);
+            return new BasicResponseView("Deleted key: " + key + " from airlineHash: " + airlineHash);
+        } else {
+            return new BasicResponseView("Key: " + key + " not found in airlineHash: " + airlineHash);
+        }
     }
+
 
     @Override
     public BasicResponseView deleteAll(String... index) {
-        return null;
+        if (index == null || index.length == 0) {
+            return new BasicResponseView("Airline not specified");
+        }
+
+        String airlineHash = index[0];
+        Boolean exists = redisTemplate.hasKey(airlineHash);
+
+        if (Boolean.TRUE.equals(exists)) {
+            redisTemplate.delete(airlineHash);
+            return new BasicResponseView("Deleted all segments for airlineHash: " + airlineHash);
+        } else {
+            return new BasicResponseView("AirlineHash: " + airlineHash + " does not exist");
+        }
     }
+
 
     private List<SegmentView>getSegmentDetails(String[] keys){
         List<AirlineView> airlineList = Optional.ofNullable(routeService.getAll()).orElse(Collections.emptyList());
