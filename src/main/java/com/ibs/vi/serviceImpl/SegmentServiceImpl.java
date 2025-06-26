@@ -1,10 +1,12 @@
 package com.ibs.vi.serviceImpl;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ibs.vi.model.Airline;
 import com.ibs.vi.model.Segment;
 import com.ibs.vi.repository.RedisRepository;
 import com.ibs.vi.service.RouteService;
 import com.ibs.vi.service.VIRouteLogic;
+import com.ibs.vi.util.RouteUtil;
 import com.ibs.vi.view.BasicResponseView;
 import com.ibs.vi.view.SegmentView;
 import org.slf4j.Logger;
@@ -30,12 +32,52 @@ public class SegmentServiceImpl implements RouteService<Segment, SegmentView>, V
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
 
+    @Autowired
+    private ObjectMapper objectMapper;
+
     private static final Logger log = LoggerFactory.getLogger(SegmentServiceImpl.class);
     @Override
-    public BasicResponseView save(Segment input) {return null;}
+    public BasicResponseView save(Segment segment) {
+        try {
+            //Save to Hash
+            String airlineHash = segment.airlineCode;
+            String segmentKey = RouteUtil.generateSegmentKey(segment);
+            redisRepository.save(airlineHash, segmentKey, segment);
+
+            log.info("Saved to Redis Hash - HashKey: {}, SegmentKey: {}", airlineHash, segmentKey);
+            // Save to ZSET
+            String sortedSetKey = "SortedSegmentKeys";
+            String sortedKey = RouteUtil.generateSortedSegmentKey(segment);
+            double score = RouteUtil.parseDepartureTimeToEpoch(segment.getDepartureTime());
+            redisRepository.addToSortedSet(sortedSetKey, sortedKey, score);
+            log.info("Saved to Redis SortedSet - SortedSetKey: {}, MemberKey: {}, Score: {}", sortedSetKey, sortedKey, score);
+
+            return new BasicResponseView("Segment saved to hash and sorted set");
+
+        } catch (Exception ex) {
+            log.error("DATA_SAVING_FAILED_TO_REDIS_{}", ex.getMessage(), ex);
+            return new BasicResponseView("Failed to save segment");
+        }
+    }
+
 
     @Override
-    public SegmentView getByKey(String key, String... index) {return null;}
+    public SegmentView getByKey(String key, String... index) {
+        if (index == null || index.length == 0) return null;
+
+        String airlineHash = index[0];
+        log.info("Fetching from Redis - hash: {}, key: {}", airlineHash, key);
+
+        Segment segment = redisRepository.get(airlineHash, key);
+
+        if (segment == null) {
+            log.warn("No data found for hash: {}, key: {}", airlineHash, key);
+            return null;
+        }
+
+        log.info("Retrieved segment: {}", segment);
+        return new SegmentView(segment);
+    }
 
     @Override
     public List<SegmentView> getAll(String... keys) {
@@ -52,14 +94,37 @@ public class SegmentServiceImpl implements RouteService<Segment, SegmentView>, V
 
     @Override
     public BasicResponseView deleteByKey(String key, String... index) {
-       return null;
+        if (index == null || index.length == 0) {
+            return new BasicResponseView("Airline not specified");
+        }
+
+        String airlineHash = index[0];
+        boolean exists = redisRepository.hasKey(airlineHash, key);
+
+        if (exists) {
+            redisRepository.delete(airlineHash, key);
+            return new BasicResponseView("Deleted key: " + key + " from airlineHash: " + airlineHash);
+        } else {
+            return new BasicResponseView("Key: " + key + " not found in airlineHash: " + airlineHash);
+        }
     }
 
     @Override
     public BasicResponseView deleteAll(String... index) {
-        redisRepository.deleteByHashKeys(index);
-        return new BasicResponseView();
+        if (index == null || index.length == 0) {
+            return new BasicResponseView("Airline not specified");
+        }
+
+        String airlineHash = index[0];
+        boolean deleted = redisRepository.deleteByHashKeys(airlineHash);
+
+        if (deleted) {
+            return new BasicResponseView("Deleted all segments for airlineHash: " + airlineHash);
+        } else {
+            return new BasicResponseView("AirlineHash: " + airlineHash + " does not exist or is already empty");
+        }
     }
+
 
     @Override
     public List<Segment> viSegmentDetails(String[] keys, String... airportCodes) {

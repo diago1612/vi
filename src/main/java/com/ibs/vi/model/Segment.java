@@ -1,13 +1,34 @@
 package com.ibs.vi.model;
 
 public class Segment {
-    private String departureAirportCode;
-    private String arrivalAirportCode;
-    private String date;
+    public String flightNumber;
 
-    private String airportCode;
+    public String airlineCode;
+    public String departureAirportCode;
+    public String arrivalAirportCode;
+    public String departureAirportName;
+    public String arrivalAirportName;
+    public String departureTime;
+    public String arrivalTime;
+    public String fare;
+    public String availableSeats;
 
-    public Segment(){}
+    public String getAirlineCode() {
+        return airlineCode;
+    }
+
+    public void setAirlineCode(String airlineCode) {
+        this.airlineCode = airlineCode;
+    }
+
+    public String getFlightNumber() {
+        return flightNumber;
+    }
+
+    public void setFlightNumber(String flightNumber) {
+        this.flightNumber = flightNumber;
+    }
+
 
     public String getDepartureAirportCode() {
         return departureAirportCode;
@@ -25,19 +46,64 @@ public class Segment {
         this.arrivalAirportCode = arrivalAirportCode;
     }
 
-    public String getDate() {
-        return date;
+    public String getDepartureAirportName() {
+        return departureAirportName;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setDepartureAirportName(String departureAirportName) {
+        this.departureAirportName = departureAirportName;
     }
 
-    public String getAirportCode() {
-        return airportCode;
+    public String getArrivalAirportName() {
+        return arrivalAirportName;
     }
 
-    public void setAirportCode(String airportCode) {
-        this.airportCode = airportCode;
+    public void setArrivalAirportName(String arrivalAirportName) {
+        this.arrivalAirportName = arrivalAirportName;
+    }
+
+    public String getDepartureTime() {
+        return departureTime;
+    }
+
+    public void setDepartureTime(String departureTime) {
+        this.departureTime = departureTime;
+    }
+
+    public String getArrivalTime() {
+        return arrivalTime;
+    }
+
+    public void setArrivalTime(String arrivalTime) {
+        this.arrivalTime = arrivalTime;
+    }
+
+    public String getFare() {
+        return fare;
+    }
+
+    public void setFare(String fare) {
+        this.fare = fare;
+    }
+
+    public String getAvailableSeats() {
+        return availableSeats;
+    }
+
+    public void setAvailableSeats(String availableSeats) {
+        this.availableSeats = availableSeats;
+    }
+
+    @Override
+    public String toString() {
+        return "Segment{" +
+                "flightNumber='" + flightNumber + '\'' +
+                ", departure='" + departureAirportCode + '\'' +
+                ", arrival='" + arrivalAirportCode + '\'' +
+                ", departureDate='" + departureTime + '\'' +
+                ", airline='" + airlineCode + '\'' +
+                ", fare=" + fare +
+                ", seats=" + availableSeats +
+                '}';
     }
 }

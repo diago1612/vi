@@ -53,4 +53,9 @@ public class RedisRepository {
         return (deletedCount != null && deletedCount > 0);
     }
 
+    public void addToSortedSet(String zsetKey, String value, double score) {
+        redisTemplate.opsForZSet().add(zsetKey, value, score);
+    }
+
+
 }
