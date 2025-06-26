@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneOffset;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -57,5 +60,26 @@ public class RedisRepository {
         redisTemplate.opsForZSet().add(zsetKey, value, score);
     }
 
+    public boolean isRoutePresentInVI(String hashKey, String route) {
+        return Boolean.TRUE.equals(redisTemplate.opsForHash().hasKey(hashKey, route));
+    }
+
+    public List<String> fetchSegmentKeysForDates(LocalDate departureDate) {
+        String sortedSetKey = "SortedSegmentKeys";
+
+        long fromEpoch = departureDate.atStartOfDay(ZoneOffset.UTC).toEpochSecond();
+        long toEpoch = departureDate.plusDays(2).atTime(LocalTime.MAX).toEpochSecond(ZoneOffset.UTC);
+
+        Set<Object> hashKeys = redisTemplate.opsForZSet()
+                .rangeByScore(sortedSetKey, fromEpoch, toEpoch);
+
+        if (hashKeys == null) {
+            return Collections.emptyList();
+        }
+
+        return hashKeys.stream()
+                .map(Object::toString)
+                .collect(Collectors.toList());
+    }
 
 }
