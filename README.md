@@ -4,7 +4,7 @@
 3. Run the following command :
    <pre> mvn clean install  
     docker compose -f docker-compose-dev.yaml up --build</pre>
-4. For detached Mode :
+4. For detached mode :
    <pre> mvn clean install  
     docker compose -f docker-compose-dev.yaml up -d --build</pre>
 
@@ -14,7 +14,7 @@
 2. Navigate to the project root directory.
 3. Run the following command :
    <pre> docker compose up --pull always </pre>
-4. For detached Mode :
+4. For detached mode :
    <pre> docker compose up -d --pull always </pre>
    
    
