@@ -13,21 +13,17 @@ import java.util.stream.Collectors;
 
 public class VIUtil {
 
-    public static List<RouteLeg> buildAllLegs(Map<String, List<String>> airlineKeys) {
+    public static List<RouteLeg> buildAllLegs(List<String> rawKeys) {
         List<RouteLeg> allLegs = new ArrayList<>();
-        for (Map.Entry<String, List<String>> entry : airlineKeys.entrySet()) {
-            String airline = entry.getKey();
-            for (String key : entry.getValue()) {
-                String[] parts = key.split("\\|");
-                if (parts.length == 3) {
-                    allLegs.add(new RouteLeg(parts[0], parts[1], parts[2], airline));
-                }
+        for (String entry : rawKeys) {
+            String[] parts = entry.split("\\|");
+            if (parts.length == 5) {
+                allLegs.add(new RouteLeg(parts[0], parts[1], parts[2], parts[3], parts[4]));
             }
         }
         return allLegs;
     }
 
-    // Step 2: Build graph from legs
     public static Map<String, List<RouteLeg>> buildGraph(List<RouteLeg> legs) {
         Map<String, List<RouteLeg>> graph = new HashMap<>();
         for (RouteLeg leg : legs) {
@@ -36,49 +32,52 @@ public class VIUtil {
         return graph;
     }
 
-    public static List<RouteLeg> findValidPaths(Map<String, List<RouteLeg>> graph, String source, String destination, List<List<RouteLeg>> validPaths) {
+    public static void findValidPaths(
+            Map<String, List<RouteLeg>> graph,
+            String source,
+            String destination,
+            List<List<RouteLeg>> validPaths
+    ) {
         Set<String> visited = new HashSet<>();
-        List<RouteLeg> path = new ArrayList<>();
-        List<RouteLeg> validLegs = new ArrayList<>();
-
-        dfs(graph, source, destination, visited, path, validLegs, validPaths, null);
-        return validLegs;
+        dfs(graph, source, destination, visited, new ArrayList<>(), validPaths, null, null);
     }
 
-    // Step 4: DFS logic with constraints
-    public static void dfs(
+    private static void dfs(
             Map<String, List<RouteLeg>> graph,
-            String currentAirport,
+            String current,
             String destination,
             Set<String> visited,
             List<RouteLeg> path,
-            List<RouteLeg> validLegs,
             List<List<RouteLeg>> validPaths,
-            LocalDate previousDate
+            LocalDate firstDate,
+            LocalDate prevDate
     ) {
-        if (visited.contains(currentAirport)) return;
+        if (visited.contains(current)) return;
 
-        visited.add(currentAirport);
+        visited.add(current);
 
-        if (graph.containsKey(currentAirport)) {
-            for (RouteLeg leg : graph.get(currentAirport)) {
+        if (graph.containsKey(current)) {
+            for (RouteLeg leg : graph.get(current)) {
                 LocalDate legDate = LocalDate.parse(leg.getDate());
 
-                // Check chronological order
-                if (path.isEmpty() || !legDate.isBefore(previousDate)) {
+                if (path.isEmpty()) {
+                    firstDate = legDate;
+                }
+
+                if (path.isEmpty() || (!legDate.isBefore(prevDate))) {
+                    if (firstDate != null && legDate.isAfter(firstDate.plusDays(2))) continue;
+
                     path.add(leg);
 
-                    // Limit: max 3 legs (i.e., max 2 stops)
-                    if (path.size() > 3) {
+                    if (path.size() > 4) {
                         path.remove(path.size() - 1);
                         continue;
                     }
 
                     if (leg.getTo().equals(destination)) {
                         validPaths.add(new ArrayList<>(path));
-                        validLegs.addAll(path);
                     } else {
-                        dfs(graph, leg.getTo(), destination, visited, path, validLegs, validPaths, legDate);
+                        dfs(graph, leg.getTo(), destination, visited, path, validPaths, firstDate, legDate);
                     }
 
                     path.remove(path.size() - 1); // backtrack
@@ -86,7 +85,7 @@ public class VIUtil {
             }
         }
 
-        visited.remove(currentAirport);
+        visited.remove(current);
     }
 
     // Step 5: Print results
