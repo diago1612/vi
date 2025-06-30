@@ -22,7 +22,7 @@ public class VIController {
 
 
     @PostMapping("/flights/search-vi")
-    public List<Segment> getVIItineraries(@RequestBody SearchRequest request) throws Exception {
+    public List<List<Segment>> getVIItineraries(@RequestBody SearchRequest request) throws Exception {
         return viService.generateVIItineraries(
                 request.getOrigin(),
                 request.getDestination(),
@@ -30,4 +30,5 @@ public class VIController {
                 request.getPax()
         );
     }
+
 }

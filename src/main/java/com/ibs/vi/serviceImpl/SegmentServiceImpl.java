@@ -127,9 +127,9 @@ public class SegmentServiceImpl implements RouteService<Segment, SegmentView>, V
 
 
     @Override
-    public List<Segment> viSegmentDetails(String[] keys, String... airportCodes) {
+    public List<Segment> viSegmentDetails(String[] keys, String... airlineCodes) {
 
-        List<String> activeAirlineCode = redisRepository.values(Airline.class, AIRLINE_INDEX, airportCodes)
+        List<String> activeAirlineCode = redisRepository.values(Airline.class, AIRLINE_INDEX, airlineCodes)
                 .stream()
                 .filter(air -> air.isValid())
                 .map(air -> air.getAirlineCode())

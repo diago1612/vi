@@ -1,5 +1,8 @@
 package com.ibs.vi.repository;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
@@ -15,6 +18,10 @@ public class RedisRepository {
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
 
+    @Autowired
+    private ObjectMapper objectMapper;
+
+    private static final Logger log = LoggerFactory.getLogger(RedisRepository.class);
     public <T> void save(String hashKey, String key, T value) throws Exception{
         redisTemplate.opsForHash().put(hashKey, key, value);
     }
@@ -28,10 +35,11 @@ public class RedisRepository {
     }
 
     public <T> List<T> values(Class<T> clazz, String hashKey, String... keys){
+        log.info("Fetching Redis values from hash: {} with keys: {}", hashKey, Arrays.toString(keys));
         Collection<Object> values = (keys == null || keys.length == 0)
                 ? Optional.ofNullable(redisTemplate.opsForHash().values(hashKey)).orElse(Collections.emptyList())
                 : Optional.ofNullable((redisTemplate.opsForHash().multiGet(hashKey, Arrays.asList(keys)))).orElse(Collections.emptyList());
-
+        log.info("Fetched {} records for hash {}", values.size(), hashKey);
         return values.stream()
                 .filter(clazz::isInstance)
                 .map(clazz::cast)
@@ -81,5 +89,4 @@ public class RedisRepository {
                 .map(Object::toString)
                 .collect(Collectors.toList());
     }
-
 }

@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface VIService {
 
-    List<Segment> generateVIItineraries(String origin, String destination, LocalDate departureDate, int pax) throws Exception;
+    List<List<Segment>> generateVIItineraries(String origin, String destination, LocalDate departureDate, int pax) throws Exception;
 
 }
