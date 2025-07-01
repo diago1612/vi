@@ -83,6 +83,7 @@ public class RedisRepository {
         long fromEpoch = departureDate.atStartOfDay(ZoneOffset.UTC).toEpochSecond();
         long toEpoch = departureDate.plusDays(pathConfig.getDepartureWindowDays()).atTime(LocalTime.MAX).toEpochSecond(ZoneOffset.UTC);
 
+
         Set<Object> hashKeys = redisTemplate.opsForZSet()
                 .rangeByScore(sortedSetKey, fromEpoch, toEpoch);
 
