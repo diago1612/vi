@@ -3,6 +3,7 @@ package com.ibs.vi.repository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.ibs.vi.model.PathConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
@@ -21,7 +22,11 @@ public class RedisRepository {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private PathConfig pathConfig;
+
     private static final Logger log = LoggerFactory.getLogger(RedisRepository.class);
+
     public <T> void save(String hashKey, String key, T value) throws Exception{
         redisTemplate.opsForHash().put(hashKey, key, value);
     }
@@ -76,7 +81,7 @@ public class RedisRepository {
         String sortedSetKey = "SortedSegmentKeys";
 
         long fromEpoch = departureDate.atStartOfDay(ZoneOffset.UTC).toEpochSecond();
-        long toEpoch = departureDate.plusDays(2).atTime(LocalTime.MAX).toEpochSecond(ZoneOffset.UTC);
+        long toEpoch = departureDate.plusDays(pathConfig.getDepartureWindowDays()).atTime(LocalTime.MAX).toEpochSecond(ZoneOffset.UTC);
 
         Set<Object> hashKeys = redisTemplate.opsForZSet()
                 .rangeByScore(sortedSetKey, fromEpoch, toEpoch);

@@ -1,6 +1,7 @@
 package com.ibs.vi.serviceImpl;
 
 import com.ibs.vi.model.Airline;
+import com.ibs.vi.model.PathConfig;
 import com.ibs.vi.model.RouteLeg;
 import com.ibs.vi.model.Segment;
 import com.ibs.vi.repository.RedisRepository;
@@ -23,6 +24,9 @@ public class VIImplementation implements VIService {
 
     @Autowired
     private RedisRepository redisRepository;
+
+    @Autowired
+    private PathConfig pathConfig;
 
     private static final Logger log = LoggerFactory.getLogger(VIImplementation.class);
     private static final String AIRLINE_INDEX = "AIRLINE_INDEX";
@@ -95,7 +99,7 @@ public class VIImplementation implements VIService {
 
     private List<List<RouteLeg>> findValidPaths(String origin, String destination, Map<String, List<RouteLeg>> graph) {
         List<List<RouteLeg>> validPaths = new ArrayList<>();
-        VIUtil.findValidPaths(graph, origin, destination, validPaths);
+        VIUtil.findValidPaths(graph, origin, destination, validPaths, pathConfig.getMaxLegs());
         log.info("Found {} valid VI path combinations", validPaths.size());
         return validPaths; //build paths
     }
