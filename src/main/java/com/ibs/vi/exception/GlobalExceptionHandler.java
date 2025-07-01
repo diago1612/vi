@@ -1,4 +1,4 @@
-package com.ibs.vi.Exception;
+package com.ibs.vi.exception;
 
 import com.ibs.vi.view.RouteErrorResponseView;
 import jakarta.servlet.http.HttpServletRequest;
