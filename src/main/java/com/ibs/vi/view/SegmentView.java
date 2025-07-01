@@ -16,6 +16,7 @@ public class SegmentView {
         this.departureTime = segment.getDepartureTime();
         this.arrivalTime = segment.getArrivalTime();
         this.fare = segment.getFare();
+        this.currency = segment.getCurrency();
         this.availableSeats = segment.getAvailableSeats();
     }
 
@@ -30,6 +31,7 @@ public class SegmentView {
     public String departureTime;
     public String arrivalTime;
     public String fare;
+    public String currency;
     public String availableSeats;
 
     public String getKey() {
@@ -110,6 +112,14 @@ public class SegmentView {
 
     public void setFare(String fare) {
         this.fare = fare;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 
     public String getAvailableSeats() {
