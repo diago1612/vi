@@ -1,19 +1,22 @@
 package com.ibs.vi.serviceImpl;
 
+import com.ibs.vi.model.Airline;
 import com.ibs.vi.model.RouteLeg;
 import com.ibs.vi.model.Segment;
 import com.ibs.vi.repository.RedisRepository;
-import com.ibs.vi.service.VIRouteLogic;
 import com.ibs.vi.service.VIService;
 import com.ibs.vi.util.VIUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class VIImplementation implements VIService {
@@ -21,10 +24,46 @@ public class VIImplementation implements VIService {
     @Autowired
     private RedisRepository redisRepository;
 
-    @Autowired
-    private VIRouteLogic viRouteLogic;
-
     private static final Logger log = LoggerFactory.getLogger(VIImplementation.class);
+    private static final String AIRLINE_INDEX = "AIRLINE_INDEX";
+
+    @Override
+    public List<Segment> viSegmentDetails(String[] keys, String... airlineCodes) {
+
+        List<String> activeAirlineCode = redisRepository.values(Airline.class, AIRLINE_INDEX, airlineCodes)
+                .stream()
+                .filter(air -> air.isValid())
+                .map(air -> air.getAirlineCode())
+                .collect(Collectors.toList());
+
+        if (activeAirlineCode.isEmpty()) {
+            return Collections.emptyList();
+        }
+
+        List<CompletableFuture<List<Segment>>> futures = new ArrayList<>();
+        activeAirlineCode.forEach(ac -> futures.add(getAllSegmentsByAirportCode(keys, ac)));
+
+        CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
+
+        List<Segment> segmentList = futures.stream()
+                .flatMap(future -> {
+                    try {
+                        return future.join().stream();
+                    } catch (Exception e) {
+                        log.error("ERROR_FETCHING_AIRLINE", e);
+                        return Stream.empty();  // Skip failed ones
+                    }
+                })
+                .collect(Collectors.toList());
+
+        return segmentList;
+    }
+
+    @Async("viSegmentExecutor")
+    private CompletableFuture<List<Segment>> getAllSegmentsByAirportCode(String[] keys, String airportCode){
+        List<Segment> segmentList = redisRepository.values(Segment.class, airportCode, keys);
+        return CompletableFuture.completedFuture(segmentList);
+    }
 
     @Override
     public List<List<Segment>> generateVIItineraries(String origin, String destination, LocalDate departureDate, int pax) throws Exception {
@@ -77,7 +116,7 @@ public class VIImplementation implements VIService {
                 .collect(Collectors.toSet()); // to know hashes
 
         log.info("Fetching {} segments for {} airlines", segmentKeys.size(), airlineCodes.size());
-        return viRouteLogic.viSegmentDetails(segmentKeys.toArray(new String[0]), airlineCodes.toArray(new String[0])); //pick details
+        return viSegmentDetails(segmentKeys.toArray(new String[0]), airlineCodes.toArray(new String[0])); //pick details
     }
 
     private List<List<Segment>> filterValidCombinations(List<List<Segment>> combinations) {

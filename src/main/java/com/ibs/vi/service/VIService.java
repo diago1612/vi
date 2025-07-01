@@ -9,5 +9,6 @@ import java.util.List;
 public interface VIService {
 
     List<List<Segment>> generateVIItineraries(String origin, String destination, LocalDate departureDate, int pax) throws Exception;
+    List<Segment> viSegmentDetails(String[] keys, String... airlineCodes);
 
 }
