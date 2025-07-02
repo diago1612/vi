@@ -25,7 +25,7 @@ public class VIImplementation implements VIService {
     private RedisRepository redisRepository;
 
     private static final Logger log = LoggerFactory.getLogger(VIImplementation.class);
-    private static final String AIRLINE_INDEX = "AIRLINE_INDEX";
+    private static final String AIRLINE_INDEX = "AIRLINE";
 
     @Override
     public List<Segment> viSegmentDetails(String[] keys, String... airlineCodes) {

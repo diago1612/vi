@@ -1,6 +1,8 @@
 package com.ibs.vi.serviceImpl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ibs.vi.model.Airline;
+import com.ibs.vi.model.Airport;
 import com.ibs.vi.model.Segment;
 import com.ibs.vi.repository.RedisRepository;
 import com.ibs.vi.service.RouteService;
@@ -34,15 +36,46 @@ public class SegmentServiceImpl implements RouteService<Segment, SegmentView> {
     private VIService viService;
 
     private static final Logger log = LoggerFactory.getLogger(SegmentServiceImpl.class);
+    private static final String AIRLINE_INDEX = "AIRLINE";
+    private static final String AIRPORT_INDEX = "AIRPORT";
+
     @Override
     public BasicResponseView save(Segment segment) {
         try {
+
+            //Save Airline if not present
+            Airline airline = Airline.fromSegment(segment);
+            if (!redisRepository.hasKey(AIRLINE_INDEX, airline.getAirlineCode())) {
+                redisRepository.save(AIRLINE_INDEX, airline.getAirlineCode(), airline);
+                log.info("Saved to AIRLINE hash - HashKey: {}, AirlineKey: {}", AIRLINE_INDEX, airline.getAirlineCode());
+            } else {
+                log.info("Airline already exists in Redis - Skipping save for AirlineKey: {}", airline.getAirlineCode());
+            }
+
+            //Save Airport if not present
+            Airport departureAirport = Airport.fromDepartureSegment(segment);
+            if (!redisRepository.hasKey(AIRPORT_INDEX, departureAirport.getCode())) {
+                redisRepository.save(AIRPORT_INDEX, departureAirport.getCode(), departureAirport);
+                log.info("Saved to AIRPORT hash - HashKey: {}, AirportKey: {}", AIRPORT_INDEX, departureAirport.getCode());
+            } else {
+                log.info("Airport already exists in Redis - Skipping save for AirportKey: {}", departureAirport.getCode());
+            }
+
+            Airport arrivalAirport = Airport.fromArrivalSegment(segment);
+            if (!redisRepository.hasKey(AIRPORT_INDEX, arrivalAirport.getCode())) {
+                redisRepository.save(AIRPORT_INDEX, arrivalAirport.getCode(), arrivalAirport);
+                log.info("Saved to AIRPORT hash - HashKey: {}, AirportKey: {}", AIRPORT_INDEX, arrivalAirport.getCode());
+            } else {
+                log.info("Airport already exists in Redis - Skipping save for AirportKey: {}", arrivalAirport.getCode());
+            }
+
             //Save to Hash
             String airlineHash = segment.airlineCode;
             String segmentKey = RouteUtil.generateSegmentKey(segment);
             redisRepository.save(airlineHash, segmentKey, segment);
-
             log.info("Saved to Redis Hash - HashKey: {}, SegmentKey: {}", airlineHash, segmentKey);
+
+
             // Save to ZSET
             String sortedSetKey = "SortedSegmentKeys";
             String sortedKey = RouteUtil.generateSortedSegmentKey(segment);
