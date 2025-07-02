@@ -57,4 +57,23 @@ public class Airport {
                 ", country='" + country + '\'' +
                 '}';
     }
+
+    public static Airport fromDepartureSegment(Segment segment) {
+        Airport airport = new Airport();
+        airport.setCode(segment.getDepartureAirportCode());
+        airport.setName(segment.getDepartureAirportName()); // if available
+        airport.setCity(null);   // or set it if available
+        airport.setCountry(null);
+        return airport;
+    }
+
+    public static Airport fromArrivalSegment(Segment segment) {
+        Airport airport = new Airport();
+        airport.setCode(segment.getArrivalAirportCode());
+        airport.setName(segment.getArrivalAirportName()); // if available
+        airport.setCity(null);   // or set it if available
+        airport.setCountry(null);
+        return airport;
+    }
+
 }

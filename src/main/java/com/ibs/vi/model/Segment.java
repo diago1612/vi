@@ -11,6 +11,7 @@ public class Segment {
     public String departureTime;
     public String arrivalTime;
     public String fare;
+    public String currency;
     public String availableSeats;
 
     public String getAirlineCode() {
@@ -86,6 +87,14 @@ public class Segment {
         this.fare = fare;
     }
 
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
     public String getAvailableSeats() {
         return availableSeats;
     }
@@ -103,6 +112,7 @@ public class Segment {
                 ", departureDate='" + departureTime + '\'' +
                 ", airline='" + airlineCode + '\'' +
                 ", fare=" + fare +
+                ", currency=" + currency +
                 ", seats=" + availableSeats +
                 '}';
     }

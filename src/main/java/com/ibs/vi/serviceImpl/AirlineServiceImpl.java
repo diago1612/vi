@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @Service("airlineManagementService")
 public class AirlineServiceImpl implements RouteService<Airline, AirlineView> {
 
-    private static final String INDEX = "AIRLINE_INDEX";
+    private static final String INDEX = "AIRLINE";
 
     private static final Logger log = LoggerFactory.getLogger(AirlineServiceImpl.class);
 
