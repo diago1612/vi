@@ -1,0 +1,24 @@
+name: Pull Requests
+
+on: pull_request
+
+concurrency:
+  group: pull-request-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      IMAGE_NAME: useribs4/virtual-interline
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: 17
+          distribution: 'temurin'
+          cache: maven
+      - name: Test with Maven
+        run: mvn clean install
+        ##run: mvn -B clean verify --file pom.xml (enable this once checkstyle is fixed)

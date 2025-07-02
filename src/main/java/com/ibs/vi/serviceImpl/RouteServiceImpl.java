@@ -1,7 +1,7 @@
 
 package com.ibs.vi.serviceImpl;
 
-import com.ibs.vi.Exception.RouteNotFoundException;
+import com.ibs.vi.exception.RouteNotFoundException;
 import com.ibs.vi.model.Route;
 import com.ibs.vi.repository.RedisRepository;
 import com.ibs.vi.service.RouteService;
@@ -15,7 +15,6 @@ import com.ibs.vi.view.RouteView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 /**
