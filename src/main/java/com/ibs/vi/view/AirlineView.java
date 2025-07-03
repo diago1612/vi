@@ -4,12 +4,13 @@ import com.ibs.vi.model.Airline;
 
 public class AirlineView {
 
+    public String key;
     private String airlineCode;
-
     private String airlineName;
     private boolean isValid;
 
     public AirlineView(Airline airline) {
+        this.key = airline.getAirlineCode();
         this.airlineCode = airline.getAirlineCode();
         this.airlineName = airline.getAirlineName();
         this.isValid = airline.isValid();
@@ -37,5 +38,13 @@ public class AirlineView {
 
     public void setValid(boolean valid) {
         isValid = valid;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 }
