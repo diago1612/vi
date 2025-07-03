@@ -1,8 +1,8 @@
 package com.ibs.vi.controller;
 
 import com.ibs.vi.serviceImpl.VIConfigService;
+import com.ibs.vi.view.BasicResponseView;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,40 +13,22 @@ public class ConfigController {
     private VIConfigService viConfigService;
 
     @GetMapping("/max-legs")
-    public ResponseEntity<Integer> getMaxLegs() {
-        return ResponseEntity.ok(viConfigService.getMaxLegs());
+    public BasicResponseView getMaxLegs() {
+        return viConfigService.getMaxLegs();
     }
 
-    @PostMapping("/max-legs")
-    public ResponseEntity<String> setMaxLegs(@RequestParam int value) {
-        if (value < 1) {
-            return ResponseEntity.badRequest().body("Value must be >= 1");
-        }
-
-        try {
-            viConfigService.updateMaxLegs(value);
-            return ResponseEntity.ok("Max legs updated to " + value);
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError().body("Failed to update max legs: " + e.getMessage());
-        }
+    @PostMapping("/maxLegs")
+    public BasicResponseView setMaxLegs(@RequestParam int value) {
+        return viConfigService.setMaxLegs(value);
     }
 
-    @GetMapping("/departure-window-days")
-    public ResponseEntity<Integer> getDepartureWindowDays() {
-        return ResponseEntity.ok(viConfigService.getDepartureWindowDays());
+    @GetMapping("/departureWindowDays")
+    public BasicResponseView getDepartureWindowDays() {
+        return viConfigService.getDepartureWindowDays();
     }
 
-    @PostMapping("/departure-window-days")
-    public ResponseEntity<String> setDepartureWindowDays(@RequestParam int value) {
-        if (value < 0) {
-            return ResponseEntity.badRequest().body("Value must be >= 0");
-        }
-
-        try {
-            viConfigService.updateDepartureWindowDays(value);
-            return ResponseEntity.ok("Departure window days updated to " + value);
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError().body("Failed to update departure window: " + e.getMessage());
-        }
+    @PostMapping("/departureWindowDays")
+    public BasicResponseView setDepartureWindowDays(@RequestParam int value) {
+        return viConfigService.setDepartureWindowDays(value);
     }
 }
