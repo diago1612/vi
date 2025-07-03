@@ -1,11 +1,19 @@
 package com.ibs.vi.service;
 
 import com.ibs.vi.config.AmadeusConfig;
+import com.ibs.vi.mapper.FlightOfferMapper;
+import com.ibs.vi.model.Segment;
+import com.ibs.vi.view.BasicResponseView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Collections;
+import java.util.List;
 
 @Service
 public class AmadeusApiService {
@@ -15,6 +23,10 @@ public class AmadeusApiService {
     private final RestTemplate restTemplate;
     private final AmadeusAuthService authService;
     private final AmadeusConfig config;
+
+    @Autowired
+    @Qualifier("segmentManagementService")
+    private RouteService routeService;
 
     public AmadeusApiService(RestTemplate restTemplate, AmadeusAuthService authService, AmadeusConfig config) {
         this.restTemplate = restTemplate;
@@ -38,6 +50,7 @@ public class AmadeusApiService {
             ResponseEntity<String> response = restTemplate.exchange(
                     config.getFlightOffersUrl(), HttpMethod.GET, entity, String.class);
             if (response.getStatusCode() == HttpStatus.OK) {
+                System.out.println(response);
                 return response.getBody();
             } else {
                 logger.error("Failed to get flight offers: {}", response.getStatusCode());
@@ -48,4 +61,17 @@ public class AmadeusApiService {
             return null;
         }
     }
+
+    public BasicResponseView fetchAndSaveSegments() {
+        String json = getFlightOffers();
+        if (json == null) {
+            return new BasicResponseView("No flight data available.");
+        }
+
+        List<Segment> flightDetails = FlightOfferMapper.parseFlightOffers(json);
+        flightDetails.forEach(routeService::save);
+
+        return new BasicResponseView(flightDetails.size() + " segments added successfully.");
+    }
+
 }

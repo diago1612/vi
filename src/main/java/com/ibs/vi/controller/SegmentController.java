@@ -1,9 +1,7 @@
 package com.ibs.vi.controller;
 
-import com.ibs.vi.model.Route;
 import com.ibs.vi.model.Segment;
 import com.ibs.vi.service.RouteService;
-import com.ibs.vi.view.AirlineView;
 import com.ibs.vi.view.BasicResponseView;
 import com.ibs.vi.view.SegmentView;
 import org.springframework.beans.factory.annotation.Autowired;
