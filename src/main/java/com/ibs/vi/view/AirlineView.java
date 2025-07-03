@@ -5,7 +5,6 @@ import com.ibs.vi.model.Airline;
 public class AirlineView {
 
     private String airlineCode;
-
     private String airlineName;
     private boolean isValid;
 

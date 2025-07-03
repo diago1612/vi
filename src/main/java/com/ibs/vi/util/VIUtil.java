@@ -57,8 +57,8 @@ public class VIUtil {
         return graph;
     }
 
-    public static void findValidPaths(Map<String, List<RouteLeg>> graph, String source, String destination, List<List<RouteLeg>> validPaths) {
-        dfs(graph, source, destination, new HashSet<>(), new ArrayList<>(), validPaths, null);
+    public static void findValidPaths(Map<String, List<RouteLeg>> graph, String source, String destination, List<List<RouteLeg>> validPaths, int maxLeg) {
+        dfs(graph, source, destination, new HashSet<>(), new ArrayList<>(), validPaths, null, maxLeg);
     }
 
     private static void dfs(
@@ -68,7 +68,8 @@ public class VIUtil {
             Set<String> visited,
             List<RouteLeg> path,
             List<List<RouteLeg>> validPaths,
-            LocalDate previousDate
+            LocalDate previousDate,
+            int maxLeg
     ) {
         if (visited.contains(currentAirport)) return;
 
@@ -80,7 +81,7 @@ public class VIUtil {
             if (path.isEmpty() || !legDate.isBefore(previousDate)) {
                 path.add(leg);
 
-                if (path.size() > 3) {
+                if (path.size() > maxLeg) {              // No of legs possible
                     path.remove(path.size() - 1);
                     continue;
                 }
@@ -88,7 +89,7 @@ public class VIUtil {
                 if (leg.getTo().equals(destination)) {
                     validPaths.add(new ArrayList<>(path));
                 } else {
-                    dfs(graph, leg.getTo(), destination, visited, path, validPaths, legDate);
+                    dfs(graph, leg.getTo(), destination, visited, path, validPaths, legDate, maxLeg);
                 }
 
                 path.remove(path.size() - 1);
