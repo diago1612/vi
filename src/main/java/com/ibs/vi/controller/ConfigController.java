@@ -12,7 +12,7 @@ public class ConfigController {
     @Autowired
     private VIConfigService viConfigService;
 
-    @GetMapping("/max-legs")
+    @GetMapping("/maxLegs")
     public BasicResponseView getMaxLegs() {
         return viConfigService.getMaxLegs();
     }
