@@ -1,18 +1,15 @@
-version: '3.8'
-
+# Before starting this docker-compose make sure to run the docker-compose-tool.yaml
 services:
-  redis:
-    image: redis
-    container_name: redis
-    ports:
-      - "6379:6379"
-
   app:
     image: useribs4/virtual-interline:latest
     container_name: vi-search-app
     ports:
       - "8080:8080"
-    depends_on:
-      - redis
     environment:
       - SPRING_DATA_REDIS_HOST=redis
+    networks:
+      - vi-app-network
+networks:
+  vi-app-network:
+    name: vi-app-network
+    driver: bridge
