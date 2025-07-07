@@ -32,8 +32,12 @@ public class VIImplementation implements VIService {
     private static final String AIRLINE_INDEX = "AIRLINE";
 
     @Override
-    public List<Segment> viSegmentDetails(String[] keys, String... airlineCodes) {
-
+    public List<Segment> viSegmentDetails(Map<String, List<String>> keyMap) {
+        String[] airlineCodes ={};
+        boolean isKeyMapEmpty = keyMap == null || keyMap.isEmpty();
+        if(!isKeyMapEmpty){
+            airlineCodes = keyMap.keySet().toArray(new String[0]);
+        }
         List<String> activeAirlineCode = redisRepository.values(Airline.class, AIRLINE_INDEX, airlineCodes)
                 .stream()
                 .filter(air -> air.isValid())
@@ -45,7 +49,7 @@ public class VIImplementation implements VIService {
         }
 
         List<CompletableFuture<List<Segment>>> futures = new ArrayList<>();
-        activeAirlineCode.forEach(ac -> futures.add(getAllSegmentsByAirportCode(keys, ac)));
+        activeAirlineCode.forEach(ac -> futures.add(getAllSegmentsByAirportCode(ac, isKeyMapEmpty ? new String[0] : keyMap.get(ac).toArray(new String[0]))));
 
         CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
 
@@ -64,9 +68,9 @@ public class VIImplementation implements VIService {
     }
 
     @Async("viSegmentExecutor")
-    private CompletableFuture<List<Segment>> getAllSegmentsByAirportCode(String[] keys, String airportCode){
-        List<Segment> segmentList = redisRepository.values(Segment.class, airportCode, keys);
-        return CompletableFuture.completedFuture(segmentList);
+    private CompletableFuture<List<Segment>> getAllSegmentsByAirportCode(String airportCode, String... keys){
+        redisRepository.segmentValues(Segment.class, airportCode, keys);
+        return CompletableFuture.completedFuture(redisRepository.segmentValues(Segment.class, airportCode, keys));
     }
 
     @Override

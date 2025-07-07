@@ -1,13 +1,17 @@
 package com.ibs.vi.repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ibs.vi.model.Segment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.ibs.vi.model.PathConfig;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.Cursor;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ScanOptions;
 import org.springframework.stereotype.Repository;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneOffset;
@@ -40,11 +44,56 @@ public class RedisRepository {
     }
 
     public <T> List<T> values(Class<T> clazz, String hashKey, String... keys){
-        log.info("Fetching Redis values from hash: {} with keys: {}", hashKey, Arrays.toString(keys));
         Collection<Object> values = (keys == null || keys.length == 0)
                 ? Optional.ofNullable(redisTemplate.opsForHash().values(hashKey)).orElse(Collections.emptyList())
                 : Optional.ofNullable((redisTemplate.opsForHash().multiGet(hashKey, Arrays.asList(keys)))).orElse(Collections.emptyList());
-        log.info("Fetched {} records for hash {}", values.size(), hashKey);
+        return values.stream()
+                .filter(clazz::isInstance)
+                .map(clazz::cast)
+                .collect(Collectors.toList());
+    }
+
+    public <T> List<T> segmentValues(Class<T> clazz, String airportCode, String... keys){
+        List<T> values = (keys == null || keys.length == 0)
+                ? Optional.ofNullable(valuesByQuery(clazz, "*|"+airportCode)).orElse(Collections.emptyList())
+                : Optional.ofNullable(valuesByKeys(clazz, keys)).orElse(Collections.emptyList());
+        return values;
+    }
+
+
+    public <T> List<T> valuesByQuery(Class<T> clazz, String query){
+        List<Object> results = new ArrayList<>();
+
+        ScanOptions options = ScanOptions.scanOptions()
+                .match(query)
+                .count(1000)
+                .build();
+
+        try (Cursor<byte[]> cursor = redisTemplate.getConnectionFactory()
+                .getConnection()
+                .scan(options)) {
+
+            while (cursor.hasNext()) {
+                String key = new String(cursor.next()); // convert raw byte[] to String
+                Object value = redisTemplate.opsForValue().get(key);
+                results.add(value);
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return results.stream()
+                .filter(clazz::isInstance)
+                .map(clazz::cast)
+                .collect(Collectors.toList());
+    }
+
+    public <T> List<T> valuesByKeys(Class<T> clazz, String... keys){
+        if((keys == null || keys.length == 0)){
+            return Collections.emptyList();
+        }
+        Collection<Object> values =  redisTemplate.opsForValue().multiGet(Arrays.asList(keys));
         return values.stream()
                 .filter(clazz::isInstance)
                 .map(clazz::cast)

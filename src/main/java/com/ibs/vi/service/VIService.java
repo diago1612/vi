@@ -4,11 +4,12 @@ import com.ibs.vi.model.Segment;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 
 public interface VIService {
 
     List<List<Segment>> generateVIItineraries(String origin, String destination, LocalDate departureDate, int pax) throws Exception;
-    List<Segment> viSegmentDetails(String[] keys, String... airlineCodes);
+    List<Segment> viSegmentDetails(Map<String, List<String>> keyMap);
 
 }
