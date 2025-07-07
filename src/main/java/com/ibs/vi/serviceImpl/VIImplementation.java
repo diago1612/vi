@@ -6,6 +6,7 @@ import com.ibs.vi.model.RouteLeg;
 import com.ibs.vi.model.Segment;
 import com.ibs.vi.repository.RedisRepository;
 import com.ibs.vi.service.VIService;
+import com.ibs.vi.util.RouteUtil;
 import com.ibs.vi.util.VIUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -114,17 +115,25 @@ public class VIImplementation implements VIService {
                 .distinct()
                 .collect(Collectors.toList());
 
+        // Build list of 5-part keys: origin|dest|flightNumber|date|airlineCode
         List<String> segmentKeys = uniqueLegs.stream()
-                .map(leg -> leg.getFrom() + "|" + leg.getTo() + "|" + leg.getFlightNumber() + "|" + leg.getDate())
+                .map(leg -> String.join("|",
+                        leg.getFrom(),
+                        leg.getTo(),
+                        leg.getFlightNumber(),
+                        leg.getDate(),
+                        leg.getAirlineCode()))
                 .distinct()
                 .collect(Collectors.toList());
 
-        Set<String> airlineCodes = uniqueLegs.stream()
-                .map(RouteLeg::getAirlineCode)
-                .collect(Collectors.toSet()); // to know hashes
+        // Use your helper to group by airline code
+        Map<String, List<String>> segmentKeyMap = RouteUtil.generateSegmentKeyMap(segmentKeys.toArray(new String[0]));
 
-        log.info("Fetching {} segments for {} airlines", segmentKeys.size(), airlineCodes.size());
-        return viSegmentDetails(segmentKeys.toArray(new String[0]), airlineCodes.toArray(new String[0])); //pick details
+        log.info("Fetching {} segment keys for {} airlines",
+                segmentKeys.size(),
+                segmentKeyMap.keySet().size());
+
+        return viSegmentDetails(segmentKeyMap);
     }
 
     private List<List<Segment>> filterValidCombinations(List<List<Segment>> combinations) {
