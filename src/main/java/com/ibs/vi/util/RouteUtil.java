@@ -33,6 +33,8 @@ public class RouteUtil {
         key.append(segment.getFlightNumber());
         key.append(SEGMENT_DELIMITER);
         key.append(departureDateOnly);
+        key.append(SEGMENT_DELIMITER);
+        key.append(segment.getAirlineCode());
         return key.toString();
     }
 

@@ -34,6 +34,9 @@ public class RedisRepository {
     public <T> void save(String hashKey, String key, T value) throws Exception{
         redisTemplate.opsForHash().put(hashKey, key, value);
     }
+    public <T> void save(String key, T value, long ttl) throws Exception{
+        redisTemplate.opsForValue().set(key, value, ttl);
+    }
 
     public boolean hasKey(String hashKey, String key){
         return redisTemplate.opsForHash().hasKey(hashKey, key);

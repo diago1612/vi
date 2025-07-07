@@ -70,10 +70,9 @@ public class SegmentServiceImpl implements RouteService<Segment, SegmentView> {
             }
 
             //Save to Hash
-            String airlineHash = segment.airlineCode;
             String segmentKey = RouteUtil.generateSegmentKey(segment);
-            redisRepository.save(airlineHash, segmentKey, segment);
-            log.info("Saved to Redis Hash - HashKey: {}, SegmentKey: {}", airlineHash, segmentKey);
+            redisRepository.save(segmentKey,segment, 30L);
+            log.info("Saved to Redis Hash - SegmentKey: {}", segmentKey);
 
 
             // Save to ZSET
