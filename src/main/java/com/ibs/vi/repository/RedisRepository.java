@@ -1,7 +1,6 @@
 package com.ibs.vi.repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ibs.vi.model.Segment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.ibs.vi.model.PathConfig;
@@ -11,12 +10,12 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ScanOptions;
 import org.springframework.stereotype.Repository;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneOffset;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.concurrent.TimeUnit;
 
 @Repository
 public class RedisRepository {
@@ -35,7 +34,7 @@ public class RedisRepository {
         redisTemplate.opsForHash().put(hashKey, key, value);
     }
     public <T> void save(String key, T value, long ttl) throws Exception{
-        redisTemplate.opsForValue().set(key, value, ttl);
+        redisTemplate.opsForValue().set(key, value, ttl, TimeUnit.MINUTES);
     }
 
     public boolean hasKey(String hashKey, String key){
