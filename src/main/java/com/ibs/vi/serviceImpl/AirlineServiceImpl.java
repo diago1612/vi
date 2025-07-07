@@ -1,6 +1,6 @@
 package com.ibs.vi.serviceImpl;
 
-import com.ibs.vi.Exception.RouteNotFoundException;
+import com.ibs.vi.exception.RouteNotFoundException;
 import com.ibs.vi.model.Airline;
 import com.ibs.vi.repository.RedisRepository;
 import com.ibs.vi.service.RouteService;

@@ -1,4 +1,4 @@
-package com.ibs.vi.Exception;
+package com.ibs.vi.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
