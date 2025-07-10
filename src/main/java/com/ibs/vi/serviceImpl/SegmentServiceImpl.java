@@ -111,11 +111,11 @@ public class SegmentServiceImpl implements RouteService<Segment, SegmentView> {
 
     @Override
     public List<SegmentView> getAll(String... keys) {
-        List<Segment> segmentList = Optional.ofNullable(viService.viSegmentDetails(RouteUtil.generateSegmentKeyMap(keys))).orElse(Collections.emptyList());
-        return segmentList.stream()
-                .map(s -> new SegmentView(s))
-                .collect(Collectors.toList());
+        Map<String, List<String>> keyMap = RouteUtil.generateSegmentKeyMap(keys);
+        return Optional.ofNullable(viService.viSegmentDetails(keyMap, SegmentView::new))
+                .orElse(Collections.emptyList());
     }
+
 
     @Override
     public SegmentView updateByKey(String key, Segment input, String... index) {

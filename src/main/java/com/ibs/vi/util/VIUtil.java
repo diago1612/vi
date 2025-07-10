@@ -2,6 +2,7 @@ package com.ibs.vi.util;
 
 import com.ibs.vi.model.RouteLeg;
 import com.ibs.vi.model.Segment;
+import com.ibs.vi.model.SegmentWithLayover;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -108,17 +109,17 @@ public class VIUtil {
                 ));
     }
 
-    public static List<List<Segment>> generateItineraries(String origin, String destination, LocalDate departureDate, int pax, List<Segment> segments) {
-        List<List<Segment>> itineraries = new ArrayList<>();
+    public static List<List<SegmentWithLayover>> generateItineraries(String origin, String destination, LocalDate departureDate, int pax, List<SegmentWithLayover> segments) {
+        List<List<SegmentWithLayover>> itineraries = new ArrayList<>();
 
-        for (Segment segment : segments) {
+        for (SegmentWithLayover segment : segments) {
             LocalDateTime departureDateTime = LocalDateTime.parse(segment.getDepartureTime());
 
-            if (segment.getDepartureAirportCode().equalsIgnoreCase(origin)
+            if (segment.getDepartureAirport().equalsIgnoreCase(origin)
                     && departureDateTime.toLocalDate().equals(departureDate)
                     && Integer.parseInt(segment.getAvailableSeats()) >= pax) {
 
-                List<Segment> path = new ArrayList<>();
+                List<SegmentWithLayover> path = new ArrayList<>();
                 path.add(segment);
                 buildItineraries(path, segments, itineraries, destination, pax);
             }
@@ -127,19 +128,19 @@ public class VIUtil {
         return itineraries;
     }
 
-    private static void buildItineraries(List<Segment> currentPath, List<Segment> allSegments,
-                                         List<List<Segment>> allItineraries, String destination, int pax) {
+    private static void buildItineraries(List<SegmentWithLayover> currentPath, List<SegmentWithLayover> allSegments,
+                                         List<List<SegmentWithLayover>> allItineraries, String destination, int pax) {
 
-        Segment lastSegment = currentPath.get(currentPath.size() - 1);
+        SegmentWithLayover lastSegment = currentPath.get(currentPath.size() - 1);
 
-        if (lastSegment.getArrivalAirportCode().equalsIgnoreCase(destination)) {
+        if (lastSegment.getArrivalAirport().equalsIgnoreCase(destination)) {
             allItineraries.add(new ArrayList<>(currentPath));
             return;
         }
 
-        for (Segment nextSegment : allSegments) {
+        for (SegmentWithLayover nextSegment : allSegments) {
             if (currentPath.contains(nextSegment)) continue;
-            if (!lastSegment.getArrivalAirportCode().equalsIgnoreCase(nextSegment.getDepartureAirportCode())) continue;
+            if (!lastSegment.getArrivalAirport().equalsIgnoreCase(nextSegment.getDepartureAirport())) continue;
 
             LocalDateTime lastArrivalTime = LocalDateTime.parse(lastSegment.getArrivalTime());
             LocalDateTime nextDepartureTime = LocalDateTime.parse(nextSegment.getDepartureTime());
@@ -148,7 +149,7 @@ public class VIUtil {
             if (layover.compareTo(MIN_LAYOVER) < 0) continue;
             if (Integer.parseInt(nextSegment.getAvailableSeats()) < pax) continue;
 
-            List<Segment> newPath = new ArrayList<>(currentPath);
+            List<SegmentWithLayover> newPath = new ArrayList<>(currentPath);
             newPath.add(nextSegment);
             buildItineraries(newPath, allSegments, allItineraries, destination, pax);
         }

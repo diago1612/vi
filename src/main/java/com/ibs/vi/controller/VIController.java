@@ -1,15 +1,19 @@
 package com.ibs.vi.controller;
 
+import com.ibs.vi.model.Flights;
 import com.ibs.vi.model.SearchRequest;
 import com.ibs.vi.model.Segment;
 import com.ibs.vi.service.VIService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+
+@CrossOrigin(origins = "*")
 @RestController
 public class VIController {
 
@@ -22,7 +26,7 @@ public class VIController {
 
 
     @PostMapping("/flights/search-vi")
-    public List<List<Segment>> getVIItineraries(@RequestBody SearchRequest request) throws Exception {
+    public List<Flights> getVIItineraries(@RequestBody SearchRequest request) throws Exception {
         return viService.generateVIItineraries(
                 request.getOrigin(),
                 request.getDestination(),

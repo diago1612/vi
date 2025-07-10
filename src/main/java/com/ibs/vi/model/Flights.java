@@ -10,7 +10,8 @@ public class Flights {
     private String duration;
     private String fareType;
     private String currency;
-    private List<Flight> segments;
+   // private List<SegmentWithLayover> segments;
+    private List<SegmentWithLayover> segments;
     private Double price;
     private List<String> airlines;
 
@@ -70,11 +71,11 @@ public class Flights {
         this.currency = currency;
     }
 
-    public List<Flight> getSegments() {
+    public List<SegmentWithLayover> getSegments() {
         return segments;
     }
 
-    public void setSegments(List<Flight> segments) {
+    public void setSegments(List<SegmentWithLayover> segments) {
         this.segments = segments;
     }
 

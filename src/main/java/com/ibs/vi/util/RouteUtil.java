@@ -26,30 +26,30 @@ public class RouteUtil {
     public static String generateSegmentKey(Segment segment){
         StringBuilder key = new StringBuilder();
         String departureDateOnly = segment.getDepartureTime().split("T")[0];
-        key.append(segment.getDepartureAirportCode());
+        key.append(segment.getDepartureAirport());
         key.append(SEGMENT_DELIMITER);
-        key.append(segment.getArrivalAirportCode());
+        key.append(segment.getArrivalAirport());
         key.append(SEGMENT_DELIMITER);
         key.append(segment.getFlightNumber());
         key.append(SEGMENT_DELIMITER);
         key.append(departureDateOnly);
         key.append(SEGMENT_DELIMITER);
-        key.append(segment.getAirlineCode());
+        key.append(segment.getAirline());
         return key.toString();
     }
 
     public static String generateSortedSegmentKey(Segment segment){
         StringBuilder key = new StringBuilder();
         String departureDateOnly = segment.getDepartureTime().split("T")[0];
-        key.append(segment.getDepartureAirportCode());
+        key.append(segment.getDepartureAirport());
         key.append(SEGMENT_DELIMITER);
-        key.append(segment.getArrivalAirportCode());
+        key.append(segment.getArrivalAirport());
         key.append(SEGMENT_DELIMITER);
         key.append(segment.getFlightNumber());
         key.append(SEGMENT_DELIMITER);
         key.append(departureDateOnly);
         key.append(SEGMENT_DELIMITER);
-        key.append(segment.getAirlineCode());
+        key.append(segment.getAirline());
         return key.toString();
     }
 
