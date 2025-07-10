@@ -7,6 +7,7 @@ import com.ibs.vi.model.Route;
 import com.ibs.vi.model.Segment;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class KryoRegistrar {
@@ -18,5 +19,8 @@ public class KryoRegistrar {
         kryo.register(Segment.class);
         kryo.register(ArrayList.class);
         kryo.register(HashMap.class);
+        kryo.register(Collections.emptyList().getClass());
+        kryo.register(Collections.emptyMap().getClass());
+        kryo.register(Collections.emptySet().getClass());
     }
 }

@@ -2,6 +2,7 @@ package com.ibs.vi.serviceImpl;
 
 import com.ibs.vi.model.PathConfig;
 import com.ibs.vi.repository.RedisRepository;
+import com.ibs.vi.scheduler.DynamicVIScheduler;
 import com.ibs.vi.view.BasicResponseView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,9 @@ public class VIConfigService {
 
     @Autowired
     private PathConfig pathConfig;
+
+    @Autowired
+    private DynamicVIScheduler dynamicScheduler;
 
     public BasicResponseView getMaxLegs() {
         try {
@@ -61,5 +65,18 @@ public class VIConfigService {
         } catch (Exception e) {
             return new BasicResponseView("Failed to update departure window: " + e.getMessage());
         }
+    }
+
+    public BasicResponseView updateInterval(long minutes) {
+        if (minutes < 1) {
+            return new BasicResponseView("Interval must be at least 1 minute");
+        }
+
+        dynamicScheduler.scheduleTask(minutes);
+        return new BasicResponseView("Updated VI scheduler to run every " + minutes + " minutes");
+    }
+
+    public BasicResponseView getCurrentInterval() {
+        return new BasicResponseView("Current interval: " + dynamicScheduler.getCurrentInterval() + " minutes");
     }
 }

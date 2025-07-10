@@ -28,6 +28,9 @@ public class VIImplementation implements VIService {
     @Autowired
     private PathConfig pathConfig;
 
+    private static final String VI_CACHE_INDEX = "VI_ITINERARIES";
+
+
     private static final Logger log = LoggerFactory.getLogger(VIImplementation.class);
     private static final String AIRLINE_INDEX = "AIRLINE";
 
@@ -95,6 +98,12 @@ public class VIImplementation implements VIService {
 
         logCombinations(filteredCombinations); //remove later
         return filteredCombinations;
+    }
+
+    public List<List<Segment>> fetchVIResult(String dep, String arr, LocalDate date, int pax) {
+        String key = dep + "|" + arr + "|" + date;
+        List<List<Segment>> itineraries = redisRepository.get(VI_CACHE_INDEX, key);
+        return itineraries;
     }
 
     private List<List<RouteLeg>> findValidPaths(String origin, String destination, Map<String, List<RouteLeg>> graph) {

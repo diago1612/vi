@@ -6,6 +6,7 @@ import com.ibs.vi.service.VIService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -29,6 +30,11 @@ public class VIController {
                 request.getDepartureDate(),
                 request.getPax()
         );
+    }
+
+    @PostMapping("/flights/vi-cache/result")
+    public List<List<Segment>> getVIResult(@RequestBody SearchRequest request) throws Exception {
+        return viService.fetchVIResult(request.getOrigin(), request.getDestination(), request.getDepartureDate(), request.getPax());
     }
 
 }
