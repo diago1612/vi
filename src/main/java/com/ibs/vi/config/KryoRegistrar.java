@@ -16,5 +16,6 @@ public class KryoRegistrar {
         kryo.register(ArrayList.class);
         kryo.register(HashMap.class);
         kryo.register(Layover.class);
+        kryo.register(SegmentWithLayover.class);
     }
 }

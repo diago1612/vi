@@ -16,6 +16,16 @@ public class SegmentWithLayover {
     public Layover layover;
 
     public SegmentWithLayover(Segment segment) {
+        this.flightNumber = segment.getFlightNumber();
+        this.airline = segment.getAirline();
+        this.departureAirport = segment.getDepartureAirport();
+        this.arrivalAirport = segment.getArrivalAirport();
+        this.departureAirportName = segment.getDepartureAirportName();
+        this.arrivalAirportName = segment.getArrivalAirportName();
+        this.departureTime = segment.getDepartureTime();
+        this.arrivalTime = segment.getArrivalTime();
+        this.fare = segment.getFare();
+        this.availableSeats = segment.getAvailableSeats();
     }
 
     public Layover getLayover() {
