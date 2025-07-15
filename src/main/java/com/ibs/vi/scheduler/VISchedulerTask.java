@@ -37,15 +37,16 @@ public class VISchedulerTask implements Runnable {
                 System.out.println("No routes found to process.");
                 return;
             }
-
-            LocalDate today = LocalDate.now();
+            // Specify your fixed date range
+            LocalDate startDate = LocalDate.of(2025, 8, 5);
+            LocalDate endDate = LocalDate.of(2025, 8, 18); // inclusive
 
             for (RouteView route : routes) {
                 String origin = route.getDepartureAirport();
                 String destination = route.getArrivalAirport();
 
-                for (int i = 0; i <= 10; i++) {
-                    LocalDate travelDate = today.plusDays(i);
+                // Loop through date range instead of i = 0 to 10
+                for (LocalDate travelDate = startDate; !travelDate.isAfter(endDate); travelDate = travelDate.plusDays(1)) {
                     int pax = 1;
 
                     try {
@@ -57,7 +58,7 @@ public class VISchedulerTask implements Runnable {
                                 "Generated %d itineraries for %s -> %s on %s%n",
                                 itineraries.size(), origin, destination, travelDate
                         );
-                        String key = origin + "|" + destination + "|" + travelDate.toString();
+                        String key = origin + "|" + destination + "|" + travelDate;
                         redisRepository.save("VI_ITINERARIES", key, itineraries);
 
                     } catch (Exception e) {
@@ -67,6 +68,9 @@ public class VISchedulerTask implements Runnable {
                     }
                 }
             }
+
+
+
 
         } catch (Exception ex) {
             System.err.println("Scheduler failed: " + ex.getMessage());

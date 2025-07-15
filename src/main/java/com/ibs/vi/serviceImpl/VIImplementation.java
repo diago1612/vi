@@ -83,11 +83,11 @@ public class VIImplementation implements VIService {
     public List<List<SegmentWithLayover>> buildFilteredSegmentCombinations(
             String origin, String destination, LocalDate departureDate, int pax) throws Exception {
 
-       /* if (!redisRepository.isRoutePresentInVI("VI", origin + "-" + destination)) {
+        if (!redisRepository.isRoutePresentInVI("VI", origin + "-" + destination)) {
             log.warn("No VI route found in Redis for {} -> {}", origin, destination);
             return Collections.emptyList();
         }
-        log.info("Found VI route for {} -> {}", origin, destination);*/ //commented due to cache
+        log.info("Found VI route for {} -> {}", origin, destination);
 
         List<String> segmentKeys = redisRepository.fetchSegmentKeysForDates(departureDate);
         Map<String, List<String>> airlineKeyMap = VIUtil.groupByAirline(segmentKeys); // group by airline
