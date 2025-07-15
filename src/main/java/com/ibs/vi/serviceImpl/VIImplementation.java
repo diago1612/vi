@@ -1,11 +1,9 @@
 package com.ibs.vi.serviceImpl;
 
-import com.ibs.vi.model.Airline;
-import com.ibs.vi.model.PathConfig;
-import com.ibs.vi.model.RouteLeg;
-import com.ibs.vi.model.Segment;
+import com.ibs.vi.model.*;
 import com.ibs.vi.repository.RedisRepository;
 import com.ibs.vi.service.VIService;
+import com.ibs.vi.util.RouteUtil;
 import com.ibs.vi.util.VIUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,9 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -32,12 +34,18 @@ public class VIImplementation implements VIService {
     private static final String AIRLINE_INDEX = "AIRLINE";
 
     @Override
-    public List<Segment> viSegmentDetails(String[] keys, String... airlineCodes) {
+    public <T> List<T> viSegmentDetails(Map<String, List<String>> keyMap, Function<Segment, T> segmentMapper) {
+        String[] airlineCodes = {};
+        boolean isKeyMapEmpty = keyMap == null || keyMap.isEmpty();
+
+        if (!isKeyMapEmpty) {
+            airlineCodes = keyMap.keySet().toArray(new String[0]);
+        }
 
         List<String> activeAirlineCode = redisRepository.values(Airline.class, AIRLINE_INDEX, airlineCodes)
                 .stream()
-                .filter(air -> air.isValid())
-                .map(air -> air.getAirlineCode())
+                .filter(Airline::isValid)
+                .map(Airline::getAirlineCode)
                 .collect(Collectors.toList());
 
         if (activeAirlineCode.isEmpty()) {
@@ -45,32 +53,33 @@ public class VIImplementation implements VIService {
         }
 
         List<CompletableFuture<List<Segment>>> futures = new ArrayList<>();
-        activeAirlineCode.forEach(ac -> futures.add(getAllSegmentsByAirportCode(keys, ac)));
+        activeAirlineCode.forEach(ac ->
+                futures.add(getAllSegmentsByAirportCode(ac, isKeyMapEmpty ? new String[0] : keyMap.get(ac).toArray(new String[0])))
+        );
 
         CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
 
-        List<Segment> segmentList = futures.stream()
+        return futures.stream()
                 .flatMap(future -> {
                     try {
                         return future.join().stream();
                     } catch (Exception e) {
                         log.error("ERROR_FETCHING_AIRLINE", e);
-                        return Stream.empty();  // Skip failed ones
+                        return Stream.empty();
                     }
                 })
+                .map(segmentMapper)
                 .collect(Collectors.toList());
-
-        return segmentList;
     }
 
     @Async("viSegmentExecutor")
-    private CompletableFuture<List<Segment>> getAllSegmentsByAirportCode(String[] keys, String airportCode){
-        List<Segment> segmentList = redisRepository.values(Segment.class, airportCode, keys);
-        return CompletableFuture.completedFuture(segmentList);
+    private CompletableFuture<List<Segment>> getAllSegmentsByAirportCode(String airportCode, String... keys){
+        redisRepository.segmentValues(Segment.class, airportCode, keys);
+        return CompletableFuture.completedFuture(redisRepository.segmentValues(Segment.class, airportCode, keys));
     }
 
     @Override
-    public List<List<Segment>> generateVIItineraries(String origin, String destination, LocalDate departureDate, int pax) throws Exception {
+    public List<Flights> generateVIItineraries(String origin, String destination, LocalDate departureDate, int pax) throws Exception {
         if (!redisRepository.isRoutePresentInVI("VI", origin + "-" + destination)) {
             log.warn("No VI route found in Redis for {} -> {}", origin, destination);
             return Collections.emptyList();
@@ -89,12 +98,13 @@ public class VIImplementation implements VIService {
             return Collections.emptyList();
         }
 
-        List<Segment> allSegments = fetchSegmentsFromValidPaths(validPaths); //split path into legs avoid duplicates + create segment keys
-        List<List<Segment>> finalCombinations = VIUtil.generateItineraries(origin, destination, departureDate, pax, allSegments); //apply layover, date checks
-        List<List<Segment>> filteredCombinations = filterValidCombinations(finalCombinations); //filtering 2/3 stops
+        List<SegmentWithLayover> allSegments = fetchSegmentsFromValidPaths(validPaths); //split path into legs avoid duplicates + create segment keys
+        List<List<SegmentWithLayover>> finalCombinations = VIUtil.generateItineraries(origin, destination, departureDate, pax, allSegments); //apply layover, date checks
+        List<List<SegmentWithLayover>> filteredCombinations = filterValidCombinations(finalCombinations); //filtering 2/3 stops
 
-        logCombinations(filteredCombinations); //remove later
-        return filteredCombinations;
+        VIUtil.logCombinations(filteredCombinations); // remove later
+        List<Flights> result = VIUtil.convertToNewFormat(filteredCombinations);
+        return result;
     }
 
     private List<List<RouteLeg>> findValidPaths(String origin, String destination, Map<String, List<RouteLeg>> graph) {
@@ -104,49 +114,42 @@ public class VIImplementation implements VIService {
         return validPaths; //build paths
     }
 
-    private List<Segment> fetchSegmentsFromValidPaths(List<List<RouteLeg>> validPaths) {
+    private List<SegmentWithLayover> fetchSegmentsFromValidPaths(List<List<RouteLeg>> validPaths) {
         List<RouteLeg> uniqueLegs = validPaths.stream()
                 .flatMap(List::stream)
                 .distinct()
                 .collect(Collectors.toList());
 
         List<String> segmentKeys = uniqueLegs.stream()
-                .map(leg -> leg.getFrom() + "|" + leg.getTo() + "|" + leg.getFlightNumber() + "|" + leg.getDate())
+                .map(leg -> String.join("|",
+                        leg.getFrom(),
+                        leg.getTo(),
+                        leg.getFlightNumber(),
+                        leg.getDate(),
+                        leg.getAirlineCode()))
                 .distinct()
                 .collect(Collectors.toList());
 
-        Set<String> airlineCodes = uniqueLegs.stream()
-                .map(RouteLeg::getAirlineCode)
-                .collect(Collectors.toSet()); // to know hashes
+        Map<String, List<String>> segmentKeyMap = RouteUtil.generateSegmentKeyMap(segmentKeys.toArray(new String[0]));
 
-        log.info("Fetching {} segments for {} airlines", segmentKeys.size(), airlineCodes.size());
-        return viSegmentDetails(segmentKeys.toArray(new String[0]), airlineCodes.toArray(new String[0])); //pick details
+        log.info("Fetching {} segment keys for {} airlines",
+                segmentKeys.size(),
+                segmentKeyMap.keySet().size());
+
+        return viSegmentDetails(segmentKeyMap, SegmentWithLayover::new);
     }
 
-    private List<List<Segment>> filterValidCombinations(List<List<Segment>> combinations) {
+
+    private List<List<SegmentWithLayover>> filterValidCombinations(List<List<SegmentWithLayover>> combinations) {
         return combinations.stream()
                 .filter(itinerary -> {
                     int size = itinerary.size();
                     if (size == 2 || size == 3) {
-                        Set<String> airlines = itinerary.stream().map(Segment::getAirlineCode).collect(Collectors.toSet());
+                        Set<String> airlines = itinerary.stream().map(SegmentWithLayover::getAirline).collect(Collectors.toSet());
                         return airlines.size() > 1;
                     }
                     return false;
                 })
                 .collect(Collectors.toList());
     }
-
-    private void logCombinations(List<List<Segment>> combinations) { //can be removed after testing
-        log.info("Filtered to {} valid combinations", combinations.size());
-        for (int i = 0; i < combinations.size(); i++) {
-            List<Segment> itinerary = combinations.get(i);
-            String path = itinerary.stream()
-                    .map(s -> String.format("%s(%s:%s→%s)",
-                            s.getFlightNumber(), s.getAirlineCode(),
-                            s.getDepartureAirportCode(), s.getArrivalAirportCode()))
-                    .collect(Collectors.joining(" -> "));
-            log.info("Itinerary {}: {}", i + 1, path);
-        }
-    }
-
 }

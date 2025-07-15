@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
  *
@@ -20,11 +21,16 @@ public class RedisConfig {
         RedisTemplate<String, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(connectionFactory);
 
+        StringRedisSerializer stringSerializer = new StringRedisSerializer();
+
         // Kryo for key and value serialization
         KryoRedisSerializer<Object> kryoSerializer = new KryoRedisSerializer<>(Object.class);
-        template.setKeySerializer(kryoSerializer);
+        // Key serializers
+        template.setKeySerializer(stringSerializer);
+        template.setHashKeySerializer(stringSerializer);
+
+        // Value serializers
         template.setValueSerializer(kryoSerializer);
-        template.setHashKeySerializer(kryoSerializer);
         template.setHashValueSerializer(kryoSerializer);
 
         template.afterPropertiesSet();

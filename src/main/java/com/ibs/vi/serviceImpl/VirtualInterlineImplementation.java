@@ -1,3 +1,4 @@
+/*
 package com.ibs.vi.serviceImpl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -172,3 +173,4 @@ public class VirtualInterlineImplementation implements VirtualInterlineService {
         return Arrays.asList(mapper.convertValue(flightList, Flight[].class));
     }
 }
+*/

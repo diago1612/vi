@@ -1,3 +1,4 @@
+/*
 package com.ibs.vi.controller;
 
 import com.ibs.vi.model.Flight;
@@ -31,14 +32,16 @@ public class VirtualInterlineController {
         return virtualInterlineService.getHealthStatus();
     }
 
-   /* @GetMapping("/flights/search")
+   */
+/* @GetMapping("/flights/search")
     public List<List<Flight>> getItineraries(
             @RequestParam String origin,
             @RequestParam String destination,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate departureDate) throws Exception {
 
         return virtualInterlineService.generateItineraries(origin, destination, departureDate);
-    }*/
+    }*//*
+
 
     @PostMapping("/flights/search2")
     public List<List<Flight>> getItineraries(@RequestBody SearchRequest request) throws Exception {
@@ -61,3 +64,4 @@ public class VirtualInterlineController {
     }
 
 }
+*/
