@@ -28,7 +28,11 @@ public class ConfigController {
     }
 
     @PostMapping("/departureWindowDays")
-    public BasicResponseView setDepartureWindowDays(@RequestParam int value) {
-        return viConfigService.setDepartureWindowDays(value);
-    }
+    public BasicResponseView setDepartureWindowDays(@RequestParam int value) { return viConfigService.setDepartureWindowDays(value); }
+
+    @PostMapping("/update-interval")
+    public BasicResponseView updateInterval(@RequestParam long minutes) { return viConfigService.updateInterval(minutes); }
+
+    @GetMapping("/current-interval")
+    public BasicResponseView getCurrentInterval() { return viConfigService.getCurrentInterval(); }
 }

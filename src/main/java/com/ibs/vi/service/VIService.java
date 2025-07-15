@@ -11,9 +11,8 @@ import java.util.function.Function;
 
 public interface VIService {
 
+    List<List<Segment>> fetchVIResult(String origin, String destination, LocalDate departureDate, int pax) throws Exception;
     List<Flights> generateVIItineraries(String origin, String destination, LocalDate departureDate, int pax) throws Exception;
    // List<Segment> viSegmentDetails(Map<String, List<String>> keyMap);
    <T> List<T> viSegmentDetails(Map<String, List<String>> keyMap, Function<Segment, T> segmentMapper);
-
-
 }

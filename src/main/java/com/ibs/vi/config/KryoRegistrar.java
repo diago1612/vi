@@ -4,6 +4,7 @@ import com.esotericsoftware.kryo.Kryo;
 import com.ibs.vi.model.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class KryoRegistrar {
@@ -17,5 +18,9 @@ public class KryoRegistrar {
         kryo.register(HashMap.class);
         kryo.register(Layover.class);
         kryo.register(SegmentWithLayover.class);
+
+        kryo.register(Collections.emptyList().getClass());
+        kryo.register(Collections.emptyMap().getClass());
+        kryo.register(Collections.emptySet().getClass());
     }
 }
