@@ -215,7 +215,7 @@ public class VIUtil {
                     })
                     .sum();
             flight.setPrice(totalPrice);
-            flight.setCurrency("EURO");
+            flight.setCurrency("EUR");
             flight.setSegments(itinerary);
 
             for (int i = 1; i < itinerary.size(); i++) {

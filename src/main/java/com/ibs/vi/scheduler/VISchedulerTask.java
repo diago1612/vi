@@ -1,6 +1,7 @@
 package com.ibs.vi.scheduler;
 
 import com.ibs.vi.model.Segment;
+import com.ibs.vi.model.SegmentWithLayover;
 import com.ibs.vi.repository.RedisRepository;
 import com.ibs.vi.service.RouteService;
 import com.ibs.vi.service.VIService;
@@ -48,7 +49,7 @@ public class VISchedulerTask implements Runnable {
                     int pax = 1;
 
                     try {
-                        List<List<Segment>> itineraries = viService.generateVIItineraries(
+                        List<List<SegmentWithLayover>> itineraries = viService.buildFilteredSegmentCombinations(
                                 origin, destination, travelDate, pax
                         );
 
@@ -71,7 +72,6 @@ public class VISchedulerTask implements Runnable {
             System.err.println("Scheduler failed: " + ex.getMessage());
             ex.printStackTrace();
         }
-
         System.out.println("Completed VI itinerary generation.");
     }
 }

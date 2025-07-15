@@ -21,24 +21,18 @@ public class VIController {
     public VIService viService;
 
     @Autowired
-    public VIController(VIService viService){
+    public VIController(VIService viService) {
         this.viService = viService;
     }
 
-
+    //returns cached results from redis
     @PostMapping("/flights/search-vi")
     public List<Flights> getVIItineraries(@RequestBody SearchRequest request) throws Exception {
-        return viService.generateVIItineraries(
+        return viService.fetchVIResult(
                 request.getOrigin(),
                 request.getDestination(),
                 request.getDepartureDate(),
                 request.getPax()
         );
     }
-
-    @PostMapping("/flights/vi-cache/result")
-    public List<List<Segment>> getVIResult(@RequestBody SearchRequest request) throws Exception {
-        return viService.fetchVIResult(request.getOrigin(), request.getDestination(), request.getDepartureDate(), request.getPax());
-    }
-
 }
