@@ -15,6 +15,9 @@ public class SegmentWithLayover {
     public String availableSeats;
     public Layover layover;
 
+    public SegmentWithLayover() {
+        // required for Kryo deserialization
+    }
     public SegmentWithLayover(Segment segment) {
         this.flightNumber = segment.getFlightNumber();
         this.airline = segment.getAirline();

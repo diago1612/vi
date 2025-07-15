@@ -32,7 +32,6 @@ public class VIImplementation implements VIService {
 
     private static final String VI_CACHE_INDEX = "VI_ITINERARIES";
 
-
     private static final Logger log = LoggerFactory.getLogger(VIImplementation.class);
     private static final String AIRLINE_INDEX = "AIRLINE";
 
@@ -76,44 +75,48 @@ public class VIImplementation implements VIService {
     }
 
     @Async("viSegmentExecutor")
-    private CompletableFuture<List<Segment>> getAllSegmentsByAirportCode(String airportCode, String... keys){
+    private CompletableFuture<List<Segment>> getAllSegmentsByAirportCode(String airportCode, String... keys) {
         redisRepository.segmentValues(Segment.class, airportCode, keys);
         return CompletableFuture.completedFuture(redisRepository.segmentValues(Segment.class, airportCode, keys));
     }
 
-    @Override
-    public List<Flights> generateVIItineraries(String origin, String destination, LocalDate departureDate, int pax) throws Exception {
+    public List<List<SegmentWithLayover>> buildFilteredSegmentCombinations(
+            String origin, String destination, LocalDate departureDate, int pax) throws Exception {
+
         if (!redisRepository.isRoutePresentInVI("VI", origin + "-" + destination)) {
             log.warn("No VI route found in Redis for {} -> {}", origin, destination);
             return Collections.emptyList();
         }
-
         log.info("Found VI route for {} -> {}", origin, destination);
 
         List<String> segmentKeys = redisRepository.fetchSegmentKeysForDates(departureDate);
-        Map<String, List<String>> airlineKeyMap = VIUtil.groupByAirline(segmentKeys); //splitting 5 parts into 4 and group by airinecode
-        List<RouteLeg> allLegs = VIUtil.buildAllLegs(airlineKeyMap); // remove | from keys and map into object class
+        Map<String, List<String>> airlineKeyMap = VIUtil.groupByAirline(segmentKeys); // group by airline
+        List<RouteLeg> allLegs = VIUtil.buildAllLegs(airlineKeyMap);
         Map<String, List<RouteLeg>> graph = VIUtil.buildgraph(allLegs);
 
-        List<List<RouteLeg>> validPaths = findValidPaths(origin, destination, graph); // build separate paths
+        List<List<RouteLeg>> validPaths = findValidPaths(origin, destination, graph);
         if (validPaths.isEmpty()) {
             log.info("No valid paths found for {} -> {}", origin, destination);
             return Collections.emptyList();
         }
 
-        List<SegmentWithLayover> allSegments = fetchSegmentsFromValidPaths(validPaths); //split path into legs avoid duplicates + create segment keys
-        List<List<SegmentWithLayover>> finalCombinations = VIUtil.generateItineraries(origin, destination, departureDate, pax, allSegments); //apply layover, date checks
-        List<List<SegmentWithLayover>> filteredCombinations = filterValidCombinations(finalCombinations); //filtering 2/3 stops
+        List<SegmentWithLayover> allSegments = fetchSegmentsFromValidPaths(validPaths);
+        List<List<SegmentWithLayover>> finalCombinations = VIUtil.generateItineraries(origin, destination, departureDate, pax, allSegments);
+        List<List<SegmentWithLayover>> filteredCombinations = filterValidCombinations(finalCombinations);
 
-        VIUtil.logCombinations(filteredCombinations); // remove later
-        List<Flights> result = VIUtil.convertToNewFormat(filteredCombinations);
-        return result;
+        VIUtil.logCombinations(filteredCombinations); // keep or remove based on needs
+        return filteredCombinations;
     }
 
-    public List<List<Segment>> fetchVIResult(String dep, String arr, LocalDate date, int pax) {
+    public List<Flights> convertSegmentCombinationsToFlights(List<List<SegmentWithLayover>> filteredCombinations) {
+        return VIUtil.convertToNewFormat(filteredCombinations);
+    }
+
+    public List<Flights> fetchVIResult(String dep, String arr, LocalDate date, int pax) {
         String key = dep + "|" + arr + "|" + date;
-        List<List<Segment>> itineraries = redisRepository.get(VI_CACHE_INDEX, key);
-        return itineraries;
+        List<List<SegmentWithLayover>> itineraries = redisRepository.get(VI_CACHE_INDEX, key);
+        List<Flights> result = convertSegmentCombinationsToFlights(itineraries);
+        return result;
     }
 
     private List<List<RouteLeg>> findValidPaths(String origin, String destination, Map<String, List<RouteLeg>> graph) {
