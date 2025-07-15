@@ -70,10 +70,9 @@ public class SegmentServiceImpl implements RouteService<Segment, SegmentView> {
             }
 
             //Save to Hash
-            String airlineHash = segment.airlineCode;
             String segmentKey = RouteUtil.generateSegmentKey(segment);
-            redisRepository.save(airlineHash, segmentKey, segment);
-            log.info("Saved to Redis Hash - HashKey: {}, SegmentKey: {}", airlineHash, segmentKey);
+            redisRepository.save(segmentKey,segment, 30L);
+            log.info("Saved to Redis Hash - SegmentKey: {}", segmentKey);
 
 
             // Save to ZSET
@@ -112,11 +111,11 @@ public class SegmentServiceImpl implements RouteService<Segment, SegmentView> {
 
     @Override
     public List<SegmentView> getAll(String... keys) {
-        List<Segment> segmentList = Optional.ofNullable(viService.viSegmentDetails(keys)).orElse(Collections.emptyList());
-        return segmentList.stream()
-                .map(s -> new SegmentView(s))
-                .collect(Collectors.toList());
+        Map<String, List<String>> keyMap = RouteUtil.generateSegmentKeyMap(keys);
+        return Optional.ofNullable(viService.viSegmentDetails(keyMap, SegmentView::new))
+                .orElse(Collections.emptyList());
     }
+
 
     @Override
     public SegmentView updateByKey(String key, Segment input, String... index) {

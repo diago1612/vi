@@ -1,10 +1,7 @@
 package com.ibs.vi.config;
 
 import com.esotericsoftware.kryo.Kryo;
-import com.ibs.vi.model.Airline;
-import com.ibs.vi.model.Airport;
-import com.ibs.vi.model.Route;
-import com.ibs.vi.model.Segment;
+import com.ibs.vi.model.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,6 +16,9 @@ public class KryoRegistrar {
         kryo.register(Segment.class);
         kryo.register(ArrayList.class);
         kryo.register(HashMap.class);
+        kryo.register(Layover.class);
+        kryo.register(SegmentWithLayover.class);
+
         kryo.register(Collections.emptyList().getClass());
         kryo.register(Collections.emptyMap().getClass());
         kryo.register(Collections.emptySet().getClass());

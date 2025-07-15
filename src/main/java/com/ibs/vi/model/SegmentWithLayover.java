@@ -1,8 +1,6 @@
 package com.ibs.vi.model;
 
-import javax.swing.plaf.PanelUI;
-
-public class Segment {
+public class SegmentWithLayover {
     public String flightNumber;
 
     public String airline;
@@ -13,8 +11,30 @@ public class Segment {
     public String departureTime;
     public String arrivalTime;
     public String fare;
-    public String currency;
+   // public String currency;
     public String availableSeats;
+    public Layover layover;
+
+    public SegmentWithLayover(Segment segment) {
+        this.flightNumber = segment.getFlightNumber();
+        this.airline = segment.getAirline();
+        this.departureAirport = segment.getDepartureAirport();
+        this.arrivalAirport = segment.getArrivalAirport();
+        this.departureAirportName = segment.getDepartureAirportName();
+        this.arrivalAirportName = segment.getArrivalAirportName();
+        this.departureTime = segment.getDepartureTime();
+        this.arrivalTime = segment.getArrivalTime();
+        this.fare = segment.getFare();
+        this.availableSeats = segment.getAvailableSeats();
+    }
+
+    public Layover getLayover() {
+        return layover;
+    }
+
+    public void setLayover(Layover layover) {
+        this.layover = layover;
+    }
 
     public String getAirline() {
         return airline;
@@ -89,13 +109,13 @@ public class Segment {
         this.fare = fare;
     }
 
-    public String getCurrency() {
+   /* public String getCurrency() {
         return currency;
     }
 
     public void setCurrency(String currency) {
         this.currency = currency;
-    }
+    }*/
 
     public String getAvailableSeats() {
         return availableSeats;
@@ -114,7 +134,7 @@ public class Segment {
                 ", departureDate='" + departureTime + '\'' +
                 ", airline='" + airline + '\'' +
                 ", fare=" + fare +
-                ", currency=" + currency +
+               // ", currency=" + currency +
                 ", seats=" + availableSeats +
                 '}';
     }

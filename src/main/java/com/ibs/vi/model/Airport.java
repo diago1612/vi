@@ -60,7 +60,7 @@ public class Airport {
 
     public static Airport fromDepartureSegment(Segment segment) {
         Airport airport = new Airport();
-        airport.setCode(segment.getDepartureAirportCode());
+        airport.setCode(segment.getDepartureAirport());
         airport.setName(segment.getDepartureAirportName()); // if available
         airport.setCity(null);   // or set it if available
         airport.setCountry(null);
@@ -69,7 +69,7 @@ public class Airport {
 
     public static Airport fromArrivalSegment(Segment segment) {
         Airport airport = new Airport();
-        airport.setCode(segment.getArrivalAirportCode());
+        airport.setCode(segment.getArrivalAirport());
         airport.setName(segment.getArrivalAirportName()); // if available
         airport.setCity(null);   // or set it if available
         airport.setCountry(null);

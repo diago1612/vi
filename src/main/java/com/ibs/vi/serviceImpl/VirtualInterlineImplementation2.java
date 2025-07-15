@@ -1,3 +1,4 @@
+/*
 package com.ibs.vi.serviceImpl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -177,3 +178,4 @@ public class VirtualInterlineImplementation2 implements VirtualInterlineService2
         return routes;
     }
 }
+*/

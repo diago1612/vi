@@ -8,9 +8,9 @@ public class SegmentView {
     public SegmentView(Segment segment) {
         this.key = RouteUtil.generateSegmentKey(segment);
         this.flightNumber = segment.getFlightNumber();
-        this.airlineCode = segment.getAirlineCode();
-        this.departureAirport = segment.getDepartureAirportCode();
-        this.arrivalAirport = segment.getArrivalAirportCode();
+        this.airlineCode = segment.getAirline();
+        this.departureAirport = segment.getDepartureAirport();
+        this.arrivalAirport = segment.getArrivalAirport();
         this.departureAirportName = segment.getDepartureAirportName();
         this.arrivalAirportName = segment.getArrivalAirportName();
         this.departureTime = segment.getDepartureTime();

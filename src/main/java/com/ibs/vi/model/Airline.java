@@ -36,8 +36,8 @@ public class Airline {
 
     public static Airline fromSegment(Segment segment) {
         Airline airline = new Airline();
-        airline.setAirlineCode(segment.getAirlineCode());
-        airline.setAirlineName(segment.getAirlineCode()); // need to change
+        airline.setAirlineCode(segment.getAirline());
+        airline.setAirlineName(segment.getAirline()); // need to change
         airline.setValid(true);
         return airline;
     }
