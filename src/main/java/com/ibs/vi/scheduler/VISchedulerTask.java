@@ -37,7 +37,7 @@ public class VISchedulerTask implements Runnable {
                 System.out.println("No routes found to process.");
                 return;
             }
-            // Specify your fixed date range
+
             LocalDate startDate = LocalDate.of(2025, 8, 5);
             LocalDate endDate = LocalDate.of(2025, 8, 18); // inclusive
 
@@ -45,7 +45,6 @@ public class VISchedulerTask implements Runnable {
                 String origin = route.getDepartureAirport();
                 String destination = route.getArrivalAirport();
 
-                // Loop through date range instead of i = 0 to 10
                 for (LocalDate travelDate = startDate; !travelDate.isAfter(endDate); travelDate = travelDate.plusDays(1)) {
                     int pax = 1;
 
@@ -54,12 +53,39 @@ public class VISchedulerTask implements Runnable {
                                 origin, destination, travelDate, pax
                         );
 
-                        System.out.printf(
-                                "Generated %d itineraries for %s -> %s on %s%n",
-                                itineraries.size(), origin, destination, travelDate
-                        );
-                        String key = origin + "|" + destination + "|" + travelDate;
-                        redisRepository.save("VI_ITINERARIES", key, itineraries);
+                        String itineraryKey = origin + "|" + destination + "|" + travelDate;
+
+                        if (!itineraries.isEmpty()) {
+                            for (List<SegmentWithLayover> itinerary : itineraries) {
+                                for (SegmentWithLayover segment : itinerary) {
+                                    String segmentKey = String.format(
+                                            "%s|%s|%s|%s|%s|VISegments",
+                                            segment.departureAirport,
+                                            segment.arrivalAirport,
+                                            segment.flightNumber,
+                                            travelDate.toString(),
+                                            segment.airline
+                                    );
+
+                                    segment.setSegmentKey(segmentKey);
+
+                                    // Save in Redis hash: VI_SEGMENT_LOOKUP
+                                    redisRepository.save("VI_SEGMENT_LOOKUP", segmentKey, itineraryKey);
+                                }
+                            }
+
+                            // Save the full itinerary list
+                            redisRepository.save("VI_ITINERARIES", itineraryKey, itineraries);
+
+                            System.out.printf(
+                                    "Generated %d itineraries for %s -> %s on %s%n",
+                                    itineraries.size(), origin, destination, travelDate
+                            );
+                        } else {
+                            System.out.printf("No itineraries found for %s -> %s on %s%n",
+                                    origin, destination, travelDate);
+                        }
+
 
                     } catch (Exception e) {
                         System.err.printf("Error for %s -> %s on %s: %s%n",
@@ -68,9 +94,6 @@ public class VISchedulerTask implements Runnable {
                     }
                 }
             }
-
-
-
 
         } catch (Exception ex) {
             System.err.println("Scheduler failed: " + ex.getMessage());
