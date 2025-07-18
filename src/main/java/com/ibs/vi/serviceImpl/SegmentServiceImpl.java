@@ -69,7 +69,6 @@ public class SegmentServiceImpl implements RouteService<Segment, SegmentView> {
                 log.info("Airport already exists in Redis - Skipping save for AirportKey: {}", arrivalAirport.getCode());
             }
 
-            //Save to Hash
             String segmentKey = RouteUtil.generateSegmentKey(segment);
             redisRepository.save(segmentKey,segment, 30L);
             log.info("Saved to Redis Hash - SegmentKey: {}", segmentKey);

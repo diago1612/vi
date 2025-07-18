@@ -11,9 +11,10 @@ public class SegmentWithLayover {
     public String departureTime;
     public String arrivalTime;
     public String fare;
-   // public String currency;
     public String availableSeats;
     public Layover layover;
+
+    public String segmentKey;
 
     public SegmentWithLayover() {
         // required for Kryo deserialization
@@ -112,20 +113,20 @@ public class SegmentWithLayover {
         this.fare = fare;
     }
 
-   /* public String getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }*/
-
     public String getAvailableSeats() {
         return availableSeats;
     }
 
     public void setAvailableSeats(String availableSeats) {
         this.availableSeats = availableSeats;
+    }
+
+    public String getSegmentKey() {
+        return segmentKey;
+    }
+
+    public void setSegmentKey(String segmentKey) {
+        this.segmentKey = segmentKey;
     }
 
     @Override
@@ -137,7 +138,6 @@ public class SegmentWithLayover {
                 ", departureDate='" + departureTime + '\'' +
                 ", airline='" + airline + '\'' +
                 ", fare=" + fare +
-               // ", currency=" + currency +
                 ", seats=" + availableSeats +
                 '}';
     }
